@@ -1,0 +1,15 @@
+entrypoint = "src/app/page.jsx"
+hidden = [
+  ".config",
+  ".next",
+  ".swc",
+  "package-lock.json"
+]
+run = "npm run dev"
+
+[nix]
+channel = "stable-23_05"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
