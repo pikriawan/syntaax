@@ -1,8 +1,14 @@
-function RootPage () {
+import { fetchUser } from '@/lib/fetchers'
+
+async function RootPage () {
+  const user = await fetchUser()
+
   return (
-    <h1>
-      Hello, world!
-    </h1>
+    <>
+      <h1>
+        Hello, {user.name || 'Stranger'}!
+      </h1>
+    </>
   )
 }
 

@@ -1,0 +1,16 @@
+import { NextResponse } from 'next/server'
+import { fetchUser } from '@/lib/fetchers'
+
+async function GET () {
+  const user = await fetchUser()
+
+  if (!user) {
+    return NextResponse.json(null, {
+      status: 401
+    })
+  } else {
+    return NextResponse.json(user)
+  }
+}
+
+export { GET }
