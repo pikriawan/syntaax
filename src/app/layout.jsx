@@ -1,17 +1,29 @@
-const metadata = {
+import Content from '@/components/content/content'
+import { fetchUser } from '@/lib/fetcher'
+import style from './layout.module.css'
+
+export const metadata = {
   title: 'Syntaax',
   description: ''
 }
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  minimumScale: 1,
+  userScalable: 'no'
+}
 
-function RootLayout ({ children }) {
+export default async function RootLayout ({ home, landing }) {
+  const user = await fetchUser()
+
   return (
-    <html>
-      <body>
-        {children}
+    <html className={style.html} lang='en'>
+      <body className={style.body}>
+        <Content>
+          {user ? home : landing}
+        </Content>
       </body>
     </html>
   )
 }
-
-export { metadata }
-export default RootLayout

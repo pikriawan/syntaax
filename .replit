@@ -1,4 +1,3 @@
-entrypoint = "src/app/page.jsx"
 hidden = [
   ".config",
   ".next",

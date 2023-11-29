@@ -1,12 +1,12 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
-import authOptions from '@/lib/auth-options'
+import authOption from '@/lib/auth-option'
 import client from '@/lib/client'
 
-async function createProject (name) {
-  const session = await getServerSession(authOptions)
-  const user = session?.user || {}
+export async function createProject (name) {
+  const session = await getServerSession(authOption)
+  const user = session?.user || null
 
   if (!user) {
     return {
@@ -40,12 +40,12 @@ async function createProject (name) {
   }
 }
 
-async function updateProject (name, {
+export async function updateProject (name, {
   name: newName,
   data
 }) {
-  const session = await getServerSession(authOptions)
-  const user = session?.user || {}
+  const session = await getServerSession(authOption)
+  const user = session?.user || null
 
   if (!user) {
     return {
@@ -103,9 +103,9 @@ async function updateProject (name, {
   }
 }
 
-async function deleteProject (name) {
-  const session = await getServerSession(authOptions)
-  const user = session?.user || {}
+export async function deleteProject (name) {
+  const session = await getServerSession(authOption)
+  const user = session?.user || null
 
   if (!user) {
     return {
@@ -137,10 +137,4 @@ async function deleteProject (name) {
     success: true,
     message: 'Project deleted'
   }
-}
-
-export {
-  createProject,
-  updateProject,
-  deleteProject
 }

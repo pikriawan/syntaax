@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { fetchUser, fetchProject } from '@/lib/fetchers'
+import { fetchUser, fetchProject } from '@/lib/fetcher'
 
-async function GET (req, { params }) {
+export async function GET (req, { params }) {
   const user = await fetchUser()
 
   if (!user) {
@@ -20,5 +20,3 @@ async function GET (req, { params }) {
     }
   }
 }
-
-export { GET }

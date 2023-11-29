@@ -1,21 +1,16 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
-import authOptions from '@/lib/auth-options'
+import authOption from '@/lib/auth-option'
 import client from '@/lib/client'
 
-async function fetchUser () {
-  const session = await getServerSession(authOptions)
-  const user = session?.user || {}
-  return user ? {
-    name: user.name,
-    email: user.email,
-    image: user.image
-  } : null
+export async function fetchUser () {
+  const session = await getServerSession(authOption)
+  return session?.user || null
 }
 
-async function fetchProjects () {
-  const session = await getServerSession(authOptions)
+export async function fetchProjects () {
+  const session = await getServerSession(authOption)
   const user = session?.user || {}
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
@@ -32,8 +27,8 @@ async function fetchProjects () {
   })) : []
 }
 
-async function fetchProject (name) {
-  const session = await getServerSession(authOptions)
+export async function fetchProject (name) {
+  const session = await getServerSession(authOption)
   const user = session?.user || {}
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
@@ -46,10 +41,4 @@ async function fetchProject (name) {
     name: project.name,
     data: project.data
   } : null
-}
-
-export {
-  fetchUser,
-  fetchProjects,
-  fetchProject
 }
