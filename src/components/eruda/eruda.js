@@ -4,7 +4,7 @@ import eruda from 'eruda'
 import { useEffect } from 'react'
 import './eruda.module.css'
 
-export default function Eruda ({ children }) {
+export default function Eruda () {
   useEffect(() => {
     eruda.init()
 
@@ -12,6 +12,4 @@ export default function Eruda ({ children }) {
       eruda.destroy()
     }
   }, [])
-
-  return children
 }

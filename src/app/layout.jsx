@@ -24,13 +24,8 @@ export default async function RootLayout ({ home, landing }) {
     <html lang='en'>
       <body className={inter.className}>
         <VKResponsive>
-          {process.env.NODE_ENV === 'production' ? (
-            user ? home : loading
-          ) : (
-            <Eruda>
-              {user ? home : landing}
-            </Eruda>
-          )}
+          {user ? home : landing}
+          {process.env.NODE_ENV === 'development' && <Eruda />}
         </VKResponsive>
       </body>
     </html>
