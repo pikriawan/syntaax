@@ -11,7 +11,7 @@ export async function fetchUser () {
 
 export async function fetchProjects () {
   const session = await getServerSession(authOption)
-  const user = session?.user || {}
+  const user = session?.user
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
   const projectCollection = db.collection('projects')
@@ -29,7 +29,7 @@ export async function fetchProjects () {
 
 export async function fetchProject (name) {
   const session = await getServerSession(authOption)
-  const user = session?.user || {}
+  const user = session?.user
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
   const projectCollection = db.collection('projects')

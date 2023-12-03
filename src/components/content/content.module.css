@@ -1,8 +1,0 @@
-.content {
-  display: grid;
-  grid-template: 'content__children' auto 'keyboard' env(keyboard-inset-height, 0);
-  height: 100%;
-  margin: 0;
-}
-
-.content__children {}

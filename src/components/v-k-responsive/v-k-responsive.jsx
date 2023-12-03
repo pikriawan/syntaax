@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import style from './content.module.css'
+import style from './v-k-responsive.module.css'
 
-export default function Content ({ children }) {
+export default function VKResponsive ({ children }) {
   useEffect(() => {
     if ('virtualKeyboard' in navigator) {
       navigator.virtualKeyboard.overlaysContent = true
@@ -11,8 +11,8 @@ export default function Content ({ children }) {
   }, [])
 
   return (
-    <div className={style.content}>
-      <div className={style.content__children}>
+    <div className={style['v-k-responsive']}>
+      <div className={style['v-k-responsive__children']}>
         {children}
       </div>
     </div>

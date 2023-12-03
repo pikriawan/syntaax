@@ -1,4 +1,7 @@
-import Content from '@/components/content/content'
+import { inter } from '@/app/font'
+import '@/app/global.css'
+import Eruda from '@/components/eruda'
+import VKResponsive from '@/components/v-k-responsive'
 import { fetchUser } from '@/lib/fetcher'
 import style from './layout.module.css'
 
@@ -18,11 +21,17 @@ export default async function RootLayout ({ home, landing }) {
   const user = await fetchUser()
 
   return (
-    <html className={style.html} lang='en'>
-      <body className={style.body}>
-        <Content>
-          {user ? home : landing}
-        </Content>
+    <html lang='en'>
+      <body className={inter.className}>
+        <VKResponsive>
+          {process.env.NODE_ENV === 'production' ? (
+            user ? home : loading
+          ) : (
+            <Eruda>
+              {user ? home : landing}
+            </Eruda>
+          )}
+        </VKResponsive>
       </body>
     </html>
   )

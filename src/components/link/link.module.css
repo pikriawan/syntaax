@@ -1,0 +1,13 @@
+.link {
+  color: var(--link-main);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.link:hover {
+  color: var(--link-dark);
+}
+
+.link:active {
+  color: var(--link-light);
+}

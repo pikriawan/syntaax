@@ -6,7 +6,7 @@ import client from '@/lib/client'
 
 export async function createProject (name) {
   const session = await getServerSession(authOption)
-  const user = session?.user || null
+  const user = session?.user
 
   if (!user) {
     return {
@@ -45,7 +45,7 @@ export async function updateProject (name, {
   data
 }) {
   const session = await getServerSession(authOption)
-  const user = session?.user || null
+  const user = session?.user
 
   if (!user) {
     return {
@@ -105,7 +105,7 @@ export async function updateProject (name, {
 
 export async function deleteProject (name) {
   const session = await getServerSession(authOption)
-  const user = session?.user || null
+  const user = session?.user
 
   if (!user) {
     return {
