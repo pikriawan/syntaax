@@ -1,7 +1,7 @@
-import classNames from 'classnames'
-import style from './text-field.module.css'
+import cn from 'classnames'
+import style from './style.module.css'
 
-function TextField ({
+export default function TextField ({
   className,
   color,
   ...props
@@ -40,14 +40,12 @@ function TextField ({
   return (
     <input
       {...props}
-      className={classNames(
+      className={cn(
+        className,
         style['text-field'],
-        style[textFieldColor],
-        className
+        style[`text-field--${textFieldColor}`]
       )}
       type='text'
     />
   )
 }
-
-export default TextField

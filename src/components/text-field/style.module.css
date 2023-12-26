@@ -1,0 +1,47 @@
+.text-field {
+  background-color: var(--body-color);
+  border: 0.125rem solid var(--dark-main);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  height: 2rem;
+  outline: 0;
+  padding: 0 8px;
+  transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+.text-field:disabled {
+  background-color: var(--dark-light);
+  opacity: 0.8;
+}
+
+.text-field--primary:focus {
+  border: 0.125rem solid var(--primary-main);
+}
+
+.text-field--secondary:focus {
+  border: 0.125rem solid var(--secondary-main);
+}
+
+.text-field--error:focus {
+  border: 0.125rem solid var(--error-main);
+}
+
+.text-field--warning:focus {
+  border: 0.125rem solid var(--warning-main);
+}
+
+.text-field--info:focus {
+  border: 0.125rem solid var(--info-main);
+}
+
+.text-field--success:focus {
+  border: 0.125rem solid var(--success-main);
+}
+
+.text-field--light:focus {
+  border: 0.125rem solid var(--light-main);
+}
+
+.text-field--dark:focus {
+  border: 0.125rem solid var(--dark-main);
+}

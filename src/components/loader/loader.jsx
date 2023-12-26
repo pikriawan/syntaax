@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import style from './loader.module.css'
+import cn from 'classnames'
+import style from './style.module.css'
 
 export default function Loader ({
   className,
@@ -11,7 +11,7 @@ export default function Loader ({
   return (
     <svg
       {...props}
-      className={classNames(style.loader, className)}
+      className={cn(className, style.loader)}
       fill='transparent'
       height={height}
       stroke={color}

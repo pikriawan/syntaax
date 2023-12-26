@@ -1,17 +1,15 @@
-import classNames from 'classnames'
+import cn from 'classnames'
 import NextLink from 'next/link'
-import style from './link.module.css'
+import style from './style.module.css'
 
-function Link ({
+export default function Link ({
   children,
   className,
   ...props
 }) {
   return (
-    <NextLink {...props} className={classNames(style.link, className)}>
+    <NextLink {...props} className={cn(className, style.link)}>
       {children}
     </NextLink>
   )
 }
-
-export default Link

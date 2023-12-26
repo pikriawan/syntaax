@@ -1,7 +1,6 @@
 import { inter } from '@/app/font'
 import '@/app/global.css'
 import Eruda from '@/components/eruda'
-import VKResponsive from '@/components/v-k-responsive'
 import { fetchUser } from '@/lib/fetcher'
 import style from './layout.module.css'
 
@@ -23,10 +22,8 @@ export default async function RootLayout ({ home, landing }) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <VKResponsive>
-          {user ? home : landing}
-          {process.env.NODE_ENV === 'development' && <Eruda />}
-        </VKResponsive>
+        {user ? home : landing}
+        {process.env.NODE_ENV === 'development' && <Eruda />}
       </body>
     </html>
   )

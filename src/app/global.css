@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --primary-light: #7761f3;
   --primary-main: #6944e7;
@@ -46,6 +54,8 @@ html {
 body {
   background-color: var(--body-bg);
   color: var(--body-color);
+  display: grid;
+  grid-template: 'v-k-responsive__children' auto 'keyboard' env(keyboard-inset-height, 0);
   height: 100%;
   margin: 0;
   padding: 0;

@@ -1,0 +1,23 @@
+.dropdown {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+}
+
+.chatbox {
+  padding: 16px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.text-field {
+  display: block;
+  width: 100%;
+}
+
+.create-button {
+  display: block;
+  width: 100%;
+}

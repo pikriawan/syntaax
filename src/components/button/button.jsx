@@ -1,10 +1,10 @@
 'use client'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import { useEffect, useState } from 'react'
 import { inter } from '@/app/font'
 import Loader from '@/components/loader/loader'
-import style from './button.module.css'
+import style from './style.module.css'
 
 export default function Button ({
   children,
@@ -55,15 +55,15 @@ export default function Button ({
   return (
     <button
       {...props}
-      className={classNames(
+      className={cn(
+        className,
         style.button,
-        style[`button--${buttonColor}`],
-        className
+        style[`button--${buttonColor}`]
       )}
       disabled={disabled || (!isMounted && type === 'submit')}
       type={type}
     >
-      <span className={classNames(
+      <span className={cn(
         style.button__children,
         inter.className,
         {
@@ -73,7 +73,7 @@ export default function Button ({
         {children}
       </span>
       <Loader
-        className={classNames(style.button__loader, {
+        className={cn(style.button__loader, {
           [style['button__loader--hidden']]: !loading
         })}
         height={14}
