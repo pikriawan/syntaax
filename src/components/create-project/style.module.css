@@ -1,0 +1,23 @@
+.create-project__button--plus {
+  grid-area: create-project__button--plus;
+  height: 2rem;
+  padding: 0;
+  width: 2rem;
+}
+
+.modal__text-field {
+  width: 100%;
+}
+
+.modal__footer {
+  display: flex;
+  gap: 1rem;
+}
+
+.modal__button--cancel {
+  width: 100%;
+}
+
+.modal__button--submit {
+  width: 100%;
+}

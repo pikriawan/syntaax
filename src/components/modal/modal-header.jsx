@@ -3,6 +3,7 @@
 import cn from 'classnames'
 import Image from 'next/image'
 import { useContext } from 'react'
+
 import ModalContext from './modal-context'
 import style from './style.module.css'
 

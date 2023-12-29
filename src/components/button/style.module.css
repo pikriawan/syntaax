@@ -127,7 +127,11 @@
   background-color: var(--dark-light);
 }
 
-.button__children {}
+.button__children {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 .button__children--invisible {
   visibility: hidden;

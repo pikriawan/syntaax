@@ -1,8 +1,8 @@
+import style from './layout.module.css'
 import { inter } from '@/app/font'
 import '@/app/global.css'
 import Eruda from '@/components/eruda'
 import { fetchUser } from '@/lib/fetcher'
-import style from './layout.module.css'
 
 export const metadata = {
   title: 'Syntaax',

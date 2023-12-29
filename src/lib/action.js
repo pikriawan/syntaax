@@ -1,6 +1,7 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
+
 import authOption from '@/lib/auth-option'
 import client from '@/lib/client'
 
@@ -30,7 +31,7 @@ export async function createProject (name) {
     }
   }
 
-  await db.collection.insertOne({
+  await projectCollection.insertOne({
     name,
     owner: user.email
   })
@@ -92,7 +93,7 @@ export async function updateProject (name, {
   }
 
   if (Object.keys(updateField).length > 0) {
-    await db.projectCollection.updateOne({ name }, {
+    await projectCollection.updateOne({ name }, {
       $set: { updateField }
     })
   }
@@ -129,7 +130,7 @@ export async function deleteProject (name) {
     }
   }
 
-  await db.collection.deleteOne({
+  await projectCollection.deleteOne({
     name,
     owner: user.email
   })

@@ -2,9 +2,10 @@
 
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
+
+import style from './style.module.css'
 import { inter } from '@/app/font'
 import Loader from '@/components/loader/loader'
-import style from './style.module.css'
 
 export default function Button ({
   children,

@@ -3,8 +3,8 @@
 }
 
 .dropdown__menu {
-  background-color: var(--dark-dark);
-  border: 1px solid var(--dark-light);
+  background-color: var(--body-bg);
+  border: 1px solid var(--dark-main);
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;

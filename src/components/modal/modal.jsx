@@ -3,6 +3,7 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+
 import ModalContext from './modal-context'
 import style from './style.module.css'
 
