@@ -9,7 +9,7 @@ export default function Link ({
   ...props
 }) {
   return (
-    <NextLink {...props} className={cn(className, style.link)}>
+    <NextLink {...props} className={cn(style.link, className)}>
       {children}
     </NextLink>
   )

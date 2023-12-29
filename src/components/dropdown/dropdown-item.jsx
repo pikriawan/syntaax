@@ -45,9 +45,9 @@ export default function DropdownItem ({
 
   return (
     <div className={cn(
-      className,
       style.dropdown__item,
-      style[`dropdown__item--${dropdownItemBackgroundColor}`]
+      style[`dropdown__item--${dropdownItemBackgroundColor}`],
+      className
     )} onClick={onClick}>
       {children}
     </div>

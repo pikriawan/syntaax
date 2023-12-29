@@ -42,9 +42,9 @@ export default function TextField ({
     <input
       {...props}
       className={cn(
-        className,
         style['text-field'],
-        style[`text-field--${textFieldColor}`]
+        style[`text-field--${textFieldColor}`],
+        className
       )}
       type='text'
     />

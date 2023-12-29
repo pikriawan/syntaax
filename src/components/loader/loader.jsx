@@ -12,7 +12,7 @@ export default function Loader ({
   return (
     <svg
       {...props}
-      className={cn(className, style.loader)}
+      className={cn(style.loader, className)}
       fill='transparent'
       height={height}
       stroke={color}

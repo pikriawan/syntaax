@@ -11,6 +11,7 @@ import Modal, {
   ModalBody,
   ModalFooter
 } from '@/components/modal'
+import SignOutButton from '@/components/sign-out-button'
 
 export default function Profile () {
   const [user, setUser] = useState()
@@ -65,9 +66,7 @@ export default function Profile () {
           ) : <Loader />}
         </ModalBody>
         <ModalFooter>
-          <Button className={style['modal__button--sign-out']} color='error'>
-            Sign out
-          </Button>
+          <SignOutButton className={style['modal__button--sign-out']} color='error' />
         </ModalFooter>
       </Modal>
     </>

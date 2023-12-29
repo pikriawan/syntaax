@@ -12,7 +12,7 @@ export default function Dropdown ({
 }) {
   return (
     <DropdownContext.Provider value={{ color }}>
-      <div className={cn(className, style.dropdown)}>
+      <div className={cn(style.dropdown, className)}>
         {children}
       </div>
     </DropdownContext.Provider>

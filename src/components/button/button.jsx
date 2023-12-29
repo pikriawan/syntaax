@@ -57,9 +57,9 @@ export default function Button ({
     <button
       {...props}
       className={cn(
-        className,
         style.button,
-        style[`button--${buttonColor}`]
+        style[`button--${buttonColor}`],
+        className
       )}
       disabled={disabled || (!isMounted && type === 'submit')}
       type={type}

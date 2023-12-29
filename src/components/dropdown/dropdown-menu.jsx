@@ -34,12 +34,12 @@ export default function DropdownMenu ({
 
   return (
     <div className={cn(
-      className,
       style.dropdown__menu,
       style[`dropdown__menu--stick-${stick}`],
       {
         [style['dropdown__menu--hidden']]: !open
-      }
+      },
+      className
     )} ref={dropdownMenuRef}>
       {children}
     </div>

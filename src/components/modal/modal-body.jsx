@@ -4,7 +4,7 @@ import style from './style.module.css'
 
 export default function ModalBody ({ children, className }) {
   return (
-    <div className={cn(className, style.modal__body)}>
+    <div className={cn(style.modal__body, className)}>
       {children}
     </div>
   )

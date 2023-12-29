@@ -9,5 +9,9 @@ export default {
   ],
   session: {
     maxAge: 24 * 60 * 60
+  },
+  pages: {
+    signIn: '/',
+    signOut: '/'
   }
 }
