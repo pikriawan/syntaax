@@ -15,7 +15,7 @@ export default function DropdownMenu ({
   const dropdownMenuRef = useRef(null)
 
   function handleOutsideClick (event) {
-    if (event.target.contains(dropdownMenuRef.current)) {
+    if (!dropdownMenuRef.current.contains(event.target)) {
       onClose()
     }
   }

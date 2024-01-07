@@ -1,0 +1,28 @@
+.project-card {
+  align-items: center;
+  border: 0.125rem solid var(--dark-main);
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  min-height: 2.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.project-card__title {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.project-card__button--option {
+  background-color: transparent;
+  padding: 0;
+}
+
+.project-card__button--option:hover {
+  background-color: transparent;
+}
+
+.project-card__button--option:active {
+  background-color: transparent;
+}

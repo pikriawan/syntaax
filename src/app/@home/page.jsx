@@ -1,8 +1,9 @@
+import Image from 'next/image'
+
 import style from './page.module.css'
 import CreateProject from '@/components/create-project'
 import Profile from '@/components/profile'
-
-import Image from 'next/image'
+import ProjectList from '@/components/project-list'
 
 export default function HomePage () {
   return (
@@ -18,6 +19,9 @@ export default function HomePage () {
         <CreateProject />
         <Profile />
       </header>
+      <main className={style.main}>
+        <ProjectList />
+      </main>
     </>
   )
 }

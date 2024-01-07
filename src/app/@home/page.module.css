@@ -1,6 +1,6 @@
 .header {
   align-items: center;
-  border-bottom: 0.0625rem solid var(--dark-main);
+  border-bottom: 0.125rem solid var(--dark-main);
   display: grid;
   grid-template-areas: '. brand . create-project__button--plus . profile__button .';
   grid-template-columns: 1rem 1.5rem auto 2rem 1rem 2rem 1rem;

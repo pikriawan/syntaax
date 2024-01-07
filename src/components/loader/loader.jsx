@@ -16,7 +16,7 @@ export default function Loader ({
       fill='transparent'
       height={height}
       stroke={color}
-      strokeWidth={1}
+      strokeWidth={2}
       viewBox='0 0 16 16'
       width={width}
       xmlns='http://www.w3.org/2000/svg'

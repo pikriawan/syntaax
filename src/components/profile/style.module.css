@@ -10,6 +10,14 @@
   width: 2rem;
 }
 
+.profile__button:hover {
+  background-color: transparent;
+}
+
+.profile__button:active {
+  background-color: transparent;
+}
+
 .profile__icon {
   border-radius: 9999px;
 }

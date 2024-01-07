@@ -1,6 +1,6 @@
 .modal {
   background-color: var(--body-bg);
-  border: 0.0625rem solid var(--dark-main);
+  border: 0.125rem solid var(--dark-main);
   border-radius: 0.5rem;
   left: 50%;
   min-height: 2rem;

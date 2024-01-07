@@ -1,6 +1,7 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
+import { revalidatePath } from 'next/cache'
 
 import authOption from '@/lib/auth-option'
 import client from '@/lib/client'
@@ -35,6 +36,7 @@ export async function createProject (name) {
     name,
     owner: user.email
   })
+  revalidatePath('/')
   return {
     success: true,
     message: 'Project created'
@@ -98,6 +100,7 @@ export async function updateProject (name, {
     })
   }
 
+  revalidatePath('/')
   return {
     success: true,
     message: 'Project updated'
@@ -134,6 +137,7 @@ export async function deleteProject (name) {
     name,
     owner: user.email
   })
+  revalidatePath('/')
   return {
     success: true,
     message: 'Project deleted'

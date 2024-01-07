@@ -4,7 +4,7 @@
 
 .dropdown__menu {
   background-color: var(--body-bg);
-  border: 1px solid var(--dark-main);
+  border: 0.125rem solid var(--dark-main);
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -71,7 +71,7 @@
   background-color: var(--dark-light);
   border: 0;
   display: block;
-  height: 1px;
+  height: 0.125rem;
   margin: 0.5rem 0;
   width: 100%;
 }
