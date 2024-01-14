@@ -86,17 +86,17 @@ export async function updateProject (name, {
 
   const updateField = {}
 
-  if (newName) {
-    updateField.name = newName
-  }
-
   if (data) {
-    updateField.data = data
+    await projectCollection.updateOne({ name }, {
+      $set: { data }
+    })
   }
 
-  if (Object.keys(updateField).length > 0) {
+  if (newName) {
     await projectCollection.updateOne({ name }, {
-      $set: { updateField }
+      $set: {
+        name: newName
+      }
     })
   }
 

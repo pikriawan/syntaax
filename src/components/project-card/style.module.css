@@ -9,6 +9,20 @@
   width: 100%;
 }
 
+.project-card__link {
+  color: var(--body-color);
+  display: block;
+  width: 100%;
+}
+
+.project-card__link:hover {
+  color: var(--body-color);
+}
+
+.project-card__link:active {
+  color: var(--body-color);
+}
+
 .project-card__title {
   font-size: 1rem;
   font-weight: 400;
@@ -25,4 +39,36 @@
 
 .project-card__button--option:active {
   background-color: transparent;
+}
+
+.modal__body {
+  align-items: center;
+  display: flex;
+}
+
+.text-field {
+  width: 100%;
+}
+
+.message {
+  color: var(--error-main);
+  margin-top: 0.5rem;
+}
+
+
+.message--hidden {
+  display: none;
+}
+
+.modal__footer {
+  display: flex;
+  gap: 1rem;
+}
+
+.modal__cancel-button {
+  width: 100%;
+}
+
+.modal__submit-button {
+  width: 100%;
 }

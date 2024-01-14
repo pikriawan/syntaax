@@ -9,6 +9,15 @@
   width: 100%;
 }
 
+.message {
+  color: var(--error-main);
+  margin-top: 0.5rem;
+}
+
+.message--hidden {
+  display: none;
+}
+
 .modal__footer {
   display: flex;
   gap: 1rem;

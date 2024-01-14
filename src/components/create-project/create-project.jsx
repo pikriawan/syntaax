@@ -1,5 +1,6 @@
 'use client'
 
+import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -17,18 +18,31 @@ export default function CreateProject () {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
   const [newProjectName, setNewProjectName] = useState('')
+  const [message, setMessage] = useState('')
+
+  async function handleSetNewProjectName (event) {
+    setNewProjectName(event.target.value)
+
+    if (message) {
+      setMessage('')
+    }
+  }
 
   async function handleCreateProject (event) {
     event.preventDefault()
+
+    if (message) {
+      setMessage('')
+    }
+
     setIsCreating(true)
     const data = await createProject(newProjectName)
 
     if (data.success) {
-      // success toast
       setNewProjectName('')
       setIsModalOpen(false)
     } else {
-      // error toast
+      setMessage(data.message)
     }
 
     setIsCreating(false)
@@ -58,11 +72,16 @@ export default function CreateProject () {
           <form id='create-project-form' onSubmit={handleCreateProject}>
             <TextField
               className={style['modal__text-field']}
-              onInput={(event) => setNewProjectName(event.target.value)}
+              onInput={handleSetNewProjectName}
               required
               value={newProjectName}
             />
           </form>
+          <p className={cn(style.message, {         
+            [style['message--hidden']]: message === ''
+          })}>
+            {message}
+          </p>
         </ModalBody>
         <ModalFooter className={style.modal__footer}>
           <Button
