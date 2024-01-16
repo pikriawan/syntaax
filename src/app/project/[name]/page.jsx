@@ -1,7 +1,5 @@
-export default function ProjectPage ({ params }) {
-  return (
-    <p>
-      Name: {params.name}
-    </p>
-  )
+import Project from '@/components/project'
+
+export default async function ProjectPage ({ params }) {
+  return <Project name={params.name} />
 }
