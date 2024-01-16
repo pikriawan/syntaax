@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
-export default RootRouteHandler ({
+export default function RootRouteHandler ({
   home,
   landing,
   children,
