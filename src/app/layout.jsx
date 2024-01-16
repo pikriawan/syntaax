@@ -2,6 +2,7 @@ import style from './layout.module.css'
 import { inter } from '@/app/font'
 import '@/app/global.css'
 import Eruda from '@/components/eruda'
+import RootRouteHandler from '@/components/root-route-handler'
 import { fetchUser } from '@/lib/fetcher'
 
 export const metadata = {
@@ -16,13 +17,22 @@ export const viewport = {
   userScalable: 'no'
 }
 
-export default async function RootLayout ({ home, landing }) {
+export default async function RootLayout ({
+  home,
+  landing,
+  children
+}) {
   const user = await fetchUser()
 
   return (
     <html lang='en'>
       <body className={inter.className}>
-        {user ? home : landing}
+        <RootRouteHandler
+          home={home}
+          landing={landing}
+          children={children}
+          isAuthenticated={user}
+        />
         {process.env.NODE_ENV === 'development' && <Eruda />}
       </body>
     </html>
