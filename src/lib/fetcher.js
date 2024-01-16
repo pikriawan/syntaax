@@ -24,6 +24,7 @@ export async function fetchProjects () {
 
   return projects.length > 0 ? projects.map((project) => ({
     name: project.name,
+    owner: project.owner,
     data: project.data
   })) : []
 }
@@ -40,6 +41,7 @@ export async function fetchProject (name) {
   })
   return project ? {
     name: project.name,
+    owner: project.owner,
     data: project.data
   } : null
 }
