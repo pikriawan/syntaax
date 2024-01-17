@@ -24,12 +24,16 @@ export default function Project ({ name }) {
     fetchProject()
   }, [])
 
-  return isFetching ? <Loader /> : (
+  return isFetching ? (
+    <div className={style['loader-wrapper']}>
+      <Loader height={32} width={32} />
+    </div>
+  ) : (
     project ? (
       <>
         <header className={style.header}>
-          <Button
-            className={style['header__back']}
+          <button
+            className={style.header__back}
             href='/'
             onClick={() => router.back()}
           >
@@ -39,13 +43,15 @@ export default function Project ({ name }) {
               src='/img/arrow-left.svg'
               width={24}
             />
-          </Button>
-          <h3>
+          </button>
+          <h3 className={style.header__title}>
             {project.name}
           </h3>
-          <Button>
+          <Button className={style.header__edit}>
+            Edit
           </Button>
-          <Button>
+          <Button className={style.header__save}>
+            Save
           </Button>
         </header>
       </>

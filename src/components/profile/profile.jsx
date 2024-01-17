@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 import style from './style.module.css'
-import Button from '@/components/button'
 import Loader from '@/components/loader'
 import Modal, {
   ModalHeader,
@@ -29,7 +28,7 @@ export default function Profile () {
 
   return (
     <>
-      <Button className={style.profile__button} onClick={() => setIsModalOpen(true)}>
+      <button className={style.profile__button} onClick={() => setIsModalOpen(true)}>
         {user ? (
           <Image
             alt='Profile'
@@ -39,7 +38,7 @@ export default function Profile () {
             width={32}
           />
         ) : <Loader />}
-      </Button>
+      </button>
       <Modal onClose={() => setIsModalOpen(false)} open={isModalOpen}>
         <ModalHeader>
           <h3>

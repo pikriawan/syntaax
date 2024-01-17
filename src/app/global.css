@@ -49,10 +49,14 @@
 }
 
 html {
+  min-width: 100vw;
+  min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background-color: var(--body-bg);
   color: var(--body-color);
+  min-width: 100vw;
+  min-height: 100vh;
 }

@@ -75,14 +75,14 @@ export default function ProjectCard ({ name }) {
           </Link>
         </h3>
         <Dropdown>
-          <Button className={style['project-card__button--option']} onClick={() => setIsDropdownOpen(true)}>
+          <button className={style['project-card__button--option']} onClick={() => setIsDropdownOpen(true)}>
             <Image
               alt='Three dots vertical'
               height={16}
               src='/img/three-dots-vertical.svg'
               width={16}
             />
-          </Button>
+          </button>
           <DropdownMenu
             onClose={() => setIsDropdownOpen(false)}
             open={isDropdownOpen}

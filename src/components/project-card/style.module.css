@@ -29,16 +29,11 @@
 }
 
 .project-card__button--option {
+  align-items: center;
   background-color: transparent;
-  padding: 0;
-}
-
-.project-card__button--option:hover {
-  background-color: transparent;
-}
-
-.project-card__button--option:active {
-  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .modal__body {
