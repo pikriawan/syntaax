@@ -111,6 +111,7 @@ export default function ProjectCard ({ name }) {
           <form id={`update-project-form-${name}`} onSubmit={handleUpdateProject}>
             <TextField
               className={style['text-field']}
+              disabled={isUpdating}
               onInput={handleSetUpdatedProjectName}
               required
               value={updatedProjectName}

@@ -20,6 +20,15 @@ export async function createProject (name) {
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
   const projectCollection = db.collection('projects')
+  const isProjectNameValid = /^[a-z0-9\- .]{5,20}$/i.test(name);
+
+  if (!isProjectNameValid) {
+    return {
+      success: false,
+      message: 'Project name doesn\'t valid'
+    }
+  }
+
   const isProjectNameAvailable = await projectCollection.findOne({
     name,
     owner: user.email,
@@ -39,7 +48,13 @@ export async function createProject (name) {
   revalidatePath('/')
   return {
     success: true,
-    message: 'Project created'
+    message: 'Project created',
+    data: {
+      project: {
+        name,
+        owner: user.email
+      }
+    }
   }
 }
 
@@ -69,6 +84,15 @@ export async function updateProject (name, {
     return {
       success: false,
       message: 'Project not found'
+    }
+  }
+
+  const isProjectNameValid = /^[a-z0-9\- .]{5,20}$/i.test(newName);
+
+  if (!isProjectNameValid) {
+    return {
+      success: false,
+      message: 'Project name doesn\'t valid'
     }
   }
 
@@ -103,7 +127,14 @@ export async function updateProject (name, {
   revalidatePath('/')
   return {
     success: true,
-    message: 'Project updated'
+    message: 'Project updated',
+    data: {
+      project: {
+        name: newName,
+        owner: user.email,
+        data
+      }
+    }
   }
 }
 
