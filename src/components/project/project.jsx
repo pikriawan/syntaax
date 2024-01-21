@@ -75,14 +75,14 @@ export default function Project ({ name }) {
     project ? (
       <>
         <header className={style.header}>
-          <button className={style.header__back} onClick={() => router.replace('/')}>
+          <a className={style.header__back} href='/'>
             <Image
               alt='Back'
               height={24}
               src='/img/arrow-left.svg'
               width={24}
             />
-          </button>
+          </a>
           <h3 className={style.header__title}>
             {project.name}
           </h3>
