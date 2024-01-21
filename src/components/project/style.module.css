@@ -70,3 +70,45 @@
 .modal__submit-button {
   width: 100%;
 }
+
+.tabs {
+  height: 100%;
+  width: 100%;
+}
+
+.tab-list {
+  align-items: center;
+  border-bottom: 0.125rem solid var(--dark-main);
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+  -ms-overflow-style: none;
+  overflow-x: scroll;
+  padding: 1rem;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.tab:focus {
+  outline: none;
+}
+
+.tab-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  align-items: center;
+  background-color: var(--body-bg);
+  border: 0.125rem solid var(--dark-main);
+  border-radius: 0.5rem;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  min-width: 7.5rem;
+  padding: 0 1rem;
+}
+
+.tab:focus {
+  outline: none;
+}

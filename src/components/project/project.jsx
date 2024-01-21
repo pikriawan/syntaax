@@ -4,7 +4,12 @@ import cn from 'classnames'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import urldecode from 'urldecode'
+import {
+  Tab,
+  Tabs,
+  TabList,
+  TabPanel
+} from 'react-tabs'
 
 import style from './style.module.css'
 import Button from '@/components/button'
@@ -22,7 +27,7 @@ export default function Project ({ name }) {
   const [project, setProject] = useState()
   const [isFetching, setIsFetching] = useState(true)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const [updatedProjectName, setUpdatedProjectName] = useState(urldecode(name))
+  const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
   const [editMessage, setEditMessage] = useState('')
 
@@ -42,7 +47,7 @@ export default function Project ({ name }) {
     }
 
     setIsUpdating(true)
-    const data = await updateProject(urldecode(name), {
+    const data = await updateProject(name, {
       name: updatedProjectName
     })
 
@@ -139,6 +144,42 @@ export default function Project ({ name }) {
             Save
           </Button>
         </header>
+        <main>
+          <Tabs className={style.tabs}>
+            <TabList className={style['tab-list']}>
+              <Tab className={style.tab}>
+                HTML
+              </Tab>
+              <Tab className={style.tab}>
+                CSS
+              </Tab>
+              <Tab className={style.tab}>
+                JS
+              </Tab>
+              <Tab className={style.tab}>
+                Console
+              </Tab>
+              <Tab className={style.tab}>
+                Output
+              </Tab>
+            </TabList>
+            <TabPanel className={style['tab-panel']}>
+              HTML Editor
+            </TabPanel>
+            <TabPanel className={style['tab-panel']}>
+              CSS Editor
+            </TabPanel>
+            <TabPanel className={style['tab-panel']}>
+              JS Editor
+            </TabPanel>
+            <TabPanel className={style['tab-panel']}>
+              Console
+            </TabPanel>
+            <TabPanel className={style['tab-panel']}>
+              Output
+            </TabPanel>
+          </Tabs>
+        </main>
       </>
     ) : (
       <p>

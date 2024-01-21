@@ -10,7 +10,7 @@
 }
 
 .text-field:disabled {
-  background-color: var(--dark-light);
+  background-color: var(--light-dark);
   opacity: 0.8;
 }
 
