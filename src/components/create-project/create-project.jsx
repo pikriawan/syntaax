@@ -72,6 +72,7 @@ export default function CreateProject () {
           <form id='create-project-form' onSubmit={handleCreateProject}>
             <TextField
               className={style['modal__text-field']}
+              disabled={isCreating}
               onInput={handleSetNewProjectName}
               required
               value={newProjectName}

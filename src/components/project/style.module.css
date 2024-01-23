@@ -107,8 +107,21 @@
   justify-content: center;
   min-width: 7.5rem;
   padding: 0 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.tab:hover {
+  background-color: var(--dark-dark);
+}
+
+.tab:active {
+  background-color: var(--dark-light);
 }
 
 .tab:focus {
   outline: none;
+}
+
+.tab--active {
+  background-color: var(--dark-main);
 }

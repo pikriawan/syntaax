@@ -145,7 +145,7 @@ export default function Project ({ name }) {
           </Button>
         </header>
         <main>
-          <Tabs className={style.tabs}>
+          <Tabs className={style.tabs} selectedTabClassName={style['tab--active']}>
             <TabList className={style['tab-list']}>
               <Tab className={style.tab}>
                 HTML
