@@ -1,9 +1,10 @@
 import style from './layout.module.css'
 import { inter } from '@/app/font'
 import '@/app/global.css'
-import Eruda from '@/components/eruda'
 import RootRouteHandler from '@/components/root-route-handler'
 import { fetchUser } from '@/lib/fetcher'
+
+import dynamic from 'next/dynamic'
 
 export const metadata = {
   title: 'Syntaax',
@@ -16,6 +17,10 @@ export const viewport = {
   minimumScale: 1,
   userScalable: 'no'
 }
+
+const DynamicEruda = dynamic(() => import('../components/eruda'), {
+  ssr: false
+})
 
 export default async function RootLayout ({
   home,
@@ -33,7 +38,7 @@ export default async function RootLayout ({
           children={children}
           isAuthenticated={user}
         />
-        {process.env.NODE_ENV === 'development' && <Eruda />}
+        {process.env.NODE_ENV === 'development' && <DynamicEruda />}
       </body>
     </html>
   )

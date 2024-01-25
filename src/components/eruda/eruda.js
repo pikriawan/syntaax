@@ -11,6 +11,4 @@ export default function Eruda () {
       eruda.destroy()
     }
   }, [])
-
-  return null
 }

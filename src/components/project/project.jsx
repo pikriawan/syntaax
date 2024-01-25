@@ -13,6 +13,7 @@ import {
 
 import style from './style.module.css'
 import Button from '@/components/button'
+import Editor from '@/components/editor'
 import Loader from '@/components/loader'
 import Modal, {
   ModalHeader,
@@ -30,6 +31,10 @@ export default function Project ({ name }) {
   const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
   const [editMessage, setEditMessage] = useState('')
+  const [html, setHtml] = useState('')
+  const [css, setCss] = useState('')
+  const [js, setJs] = useState('')
+  const [code, setCode] = useState('')
 
   function handleSetUpdatedProjectName (event) {
     setUpdatedProjectName(event.target.value)
@@ -71,6 +76,20 @@ export default function Project ({ name }) {
 
     fetchProject()
   }, [])
+
+  useEffect(() => {
+    setCode(`<!doctype html>
+<html>
+  <head>
+    <style>${css}</style>
+  </head>
+  <body>
+    ${html}
+    <script>${js}</script>
+  </body>
+</html>`)
+    console.log(code)
+  }, [html, css, js])
 
   return isFetching ? (
     <div className={style['loader-wrapper']}>
@@ -164,19 +183,19 @@ export default function Project ({ name }) {
               </Tab>
             </TabList>
             <TabPanel className={style['tab-panel']}>
-              HTML Editor
+              <Editor onInput={(event) => setHtml(event.target.value)} value={html} />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              CSS Editor
+              <Editor onInput={(event) => setCss(event.target.value)} value={css} />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              JS Editor
+              <Editor onInput={(event) => setJs(event.target.value)} value={js} />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
               Console
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              Output
+              <iframe srcdoc={code}></iframe>
             </TabPanel>
           </Tabs>
         </main>
