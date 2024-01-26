@@ -10,8 +10,8 @@
   align-items: center;
   border-bottom: 0.125rem solid var(--dark-main);
   display: grid;
-  grid-template-areas: '. header__back . header__title . header__edit . header__save .';
-  grid-template-columns: 1rem 1.5rem 1rem auto auto auto 1rem auto 1rem;
+  grid-template-areas: '. header__back . header__title . header__edit . header__save . header__run .';
+  grid-template-columns: 1rem 1.5rem 1rem auto auto auto 1rem auto 1rem auto 1rem;
   height: 4rem;
   width: 100%;
 }
@@ -37,6 +37,10 @@
 
 .header__save {
   grid-area: header__save;
+}
+
+.header__run {
+  grid-area: header__run;
 }
 
 .modal__body {

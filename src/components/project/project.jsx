@@ -31,6 +31,7 @@ export default function Project ({ name }) {
   const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
   const [editMessage, setEditMessage] = useState('')
+  const [isSaving, setIsSaving] = useState(false)
   const [html, setHtml] = useState('')
   const [css, setCss] = useState('')
   const [js, setJs] = useState('')
@@ -66,30 +67,34 @@ export default function Project ({ name }) {
     setIsUpdating(false)
   }
 
+  async function save (event) {
+    event.preventDefault()
+    setIsSaving(true)
+    const data = await updateProject(name, {
+      data: `<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`
+    })
+    console.log(data)
+    setIsSaving(false)
+  }
+
+  function run () {
+    setCode(`<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`)
+  }
+
   useEffect(() => {
     async function fetchProject () {
       const response = await fetch(`/api/project/${name}`)
       const data = await response.json()
       setProject(data)
       setIsFetching(false)
+      const doc = data.data || ''
+      setHtml(doc.split('<body>')[1]?.split('<script>')[0] || '')
+      setCss(doc.split('<style>')[1]?.split('</style>')[0] || '')
+      setJs(doc.split('<script>')[1]?.split('</script>')[0] || '')
     }
 
     fetchProject()
   }, [])
-
-  useEffect(() => {
-    setCode(`<!doctype html>
-<html>
-  <head>
-    <style>${css}</style>
-  </head>
-  <body>
-    ${html}
-    <script>${js}</script>
-  </body>
-</html>`)
-    console.log(code)
-  }, [html, css, js])
 
   return isFetching ? (
     <div className={style['loader-wrapper']}>
@@ -159,8 +164,16 @@ export default function Project ({ name }) {
               </Button>
             </ModalFooter>
           </Modal>
-          <Button className={style.header__save}>
+          <Button
+            className={style.header__save}
+            disabled={isSaving}
+            loading={isSaving}
+            onClick={save}
+          >
             Save
+          </Button>
+          <Button className={style.header__run} onClick={run}>
+            Run
           </Button>
         </header>
         <main>

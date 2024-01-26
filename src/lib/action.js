@@ -110,20 +110,17 @@ export async function updateProject (name, {
 
   const updateField = {}
 
-  if (data) {
-    await projectCollection.updateOne({ name }, {
-      $set: { data }
-    })
-  }
-
   if (newName) {
-    await projectCollection.updateOne({ name }, {
-      $set: {
-        name: newName
-      }
-    })
+    updateField.name = newName
   }
 
+  if (data) {
+    updateField.data = data
+  }
+
+  await projectCollection.updateOne({ name }, {
+    $set: { ...updateField }
+  })
   revalidatePath('/')
   return {
     success: true,
