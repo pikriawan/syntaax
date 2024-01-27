@@ -2,6 +2,7 @@
 
 import cn from 'classnames'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import {
@@ -103,14 +104,14 @@ export default function Project ({ name }) {
     project ? (
       <>
         <header className={style.header}>
-          <a className={style.header__back} href='/'>
+          <Link className={style.header__back} href='/'>
             <Image
               alt='Back'
               height={24}
               src='/img/arrow-left.svg'
               width={24}
             />
-          </a>
+          </Link>
           <h3 className={style.header__title}>
             {project.name}
           </h3>
