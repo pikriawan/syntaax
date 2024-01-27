@@ -1,0 +1,18 @@
+.editor__parent {
+  height: 100%;
+  width: 100%;
+}
+
+.cm-editor {
+  min-height: 100%;
+  outline: 0.125rem solid #161b22;
+  width: 100%;
+}
+
+.cm-editor.cm-focused {
+  outline: 0.125rem solid #21262d;
+}
+
+.cm-gutter {
+  background-color: #0d1117;
+}

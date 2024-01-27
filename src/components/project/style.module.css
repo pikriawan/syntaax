@@ -43,6 +43,11 @@
   grid-area: header__run;
 }
 
+.main {
+  height: calc(100vh - 4.125rem);
+  width: 100%;
+}
+
 .modal__body {
   align-items: center;
   display: flex;
@@ -128,4 +133,16 @@
 
 .tab--active {
   background-color: var(--dark-main);
+}
+
+.tab__panel--active {
+  height: 100%;
+  width: 100%;
+}
+
+.iframe {
+  background-color: #fff;
+  border: 0;
+  min-height: 100%;
+  width: 100%;
 }

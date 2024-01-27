@@ -8,6 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.12.0",
+    "@codemirror/commands": "^6.3.3",
+    "@codemirror/lang-css": "^6.2.1",
+    "@codemirror/lang-html": "^6.4.8",
+    "@codemirror/lang-javascript": "^6.2.1",
+    "@codemirror/state": "^6.4.0",
+    "@codemirror/view": "^6.23.1",
+    "@uiw/codemirror-theme-github": "^4.21.21",
     "classnames": "^2.3.2",
     "mongodb": "^6.3.0",
     "next": "^14.1.0",

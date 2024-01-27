@@ -176,8 +176,12 @@ export default function Project ({ name }) {
             Run
           </Button>
         </header>
-        <main>
-          <Tabs className={style.tabs} selectedTabClassName={style['tab--active']}>
+        <main className={style.main}>
+          <Tabs
+            className={style.tabs}
+            selectedTabClassName={style['tab--active']}
+            selectedTabPanelClassName={style['tab__panel--active']}
+          >
             <TabList className={style['tab-list']}>
               <Tab className={style.tab}>
                 HTML
@@ -196,19 +200,31 @@ export default function Project ({ name }) {
               </Tab>
             </TabList>
             <TabPanel className={style['tab-panel']}>
-              <Editor onInput={(event) => setHtml(event.target.value)} value={html} />
+              <Editor
+                onInput={(value) => setHtml(value)}
+                language='html'
+                value={html}
+              />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              <Editor onInput={(event) => setCss(event.target.value)} value={css} />
+              <Editor
+                onInput={(value) => setCss(value)}
+                language='css'
+                value={css}
+              />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              <Editor onInput={(event) => setJs(event.target.value)} value={js} />
+              <Editor
+                onInput={(value) => setJs(value)}
+                language='javascript'
+                value={js}
+              />
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
               Console
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
-              <iframe srcdoc={code}></iframe>
+              <iframe className={style.iframe} srcDoc={code}></iframe>
             </TabPanel>
           </Tabs>
         </main>
