@@ -1,3 +1,5 @@
+'use client'
+
 import { closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete'
 import { defaultKeymap } from '@codemirror/commands'
 import { html } from '@codemirror/lang-html'

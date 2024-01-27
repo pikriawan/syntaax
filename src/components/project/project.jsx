@@ -73,7 +73,6 @@ export default function Project ({ name }) {
     const data = await updateProject(name, {
       data: `<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`
     })
-    console.log(data)
     setIsSaving(false)
   }
 
@@ -193,9 +192,6 @@ export default function Project ({ name }) {
                 JS
               </Tab>
               <Tab className={style.tab}>
-                Console
-              </Tab>
-              <Tab className={style.tab}>
                 Output
               </Tab>
             </TabList>
@@ -219,9 +215,6 @@ export default function Project ({ name }) {
                 language='javascript'
                 value={js}
               />
-            </TabPanel>
-            <TabPanel className={style['tab-panel']}>
-              Console
             </TabPanel>
             <TabPanel className={style['tab-panel']}>
               <iframe className={style.iframe} srcDoc={code}></iframe>
