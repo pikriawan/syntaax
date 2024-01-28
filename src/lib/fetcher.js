@@ -1,6 +1,5 @@
 'use server'
 
-import { getServerSession } from 'next-auth/next'
 import { auth } from '@/auth'
 import client from '@/lib/client'
 
