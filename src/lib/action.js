@@ -1,13 +1,11 @@
 'use server'
 
-import { getServerSession } from 'next-auth/next'
 import { revalidatePath } from 'next/cache'
-
-import authOption from '@/lib/auth-option'
+import { auth } from '@/auth'
 import client from '@/lib/client'
 
 export async function createProject (name) {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   const user = session?.user
 
   if (!user) {
@@ -62,7 +60,7 @@ export async function updateProject (name, {
   name: newName,
   data
 }) {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   const user = session?.user
 
   if (!user) {
@@ -136,7 +134,7 @@ export async function updateProject (name, {
 }
 
 export async function deleteProject (name) {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   const user = session?.user
 
   if (!user) {

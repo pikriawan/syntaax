@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-
 import { fetchUser, fetchProjects } from '@/lib/fetcher'
 
 export async function GET () {

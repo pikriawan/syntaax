@@ -1,17 +1,16 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
-
-import authOption from '@/lib/auth-option'
+import { auth } from '@/auth'
 import client from '@/lib/client'
 
 export async function fetchUser () {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   return session?.user || null
 }
 
 export async function fetchProjects () {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   const user = session?.user
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)
@@ -30,7 +29,7 @@ export async function fetchProjects () {
 }
 
 export async function fetchProject (name) {
-  const session = await getServerSession(authOption)
+  const session = await auth()
   const user = session?.user
   await client.connect()
   const db = client.db(process.env.DATABASE_NAME)

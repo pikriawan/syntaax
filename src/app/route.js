@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-
 import { fetchUser } from '@/lib/fetcher'
 
 export async function GET () {

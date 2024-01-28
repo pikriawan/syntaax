@@ -1,8 +1,7 @@
+import dynamic from 'next/dynamic'
 import style from './style.module.css'
 import { inter } from '@/app/font'
 import '@/app/global.css'
-
-import dynamic from 'next/dynamic'
 
 export const metadata = {
   title: 'Syntaax',

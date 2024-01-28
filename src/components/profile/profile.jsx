@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
 import style from './style.module.css'
 import Loader from '@/components/loader'
 import Modal, {

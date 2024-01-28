@@ -1,5 +1,4 @@
 import Image from 'next/image'
-
 import style from './page.module.css'
 import CreateProject from '@/components/create-project'
 import Profile from '@/components/profile'

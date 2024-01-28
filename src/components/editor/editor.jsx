@@ -18,7 +18,6 @@ import {
   useRef,
   useState
 } from 'react'
-
 import './style.css'
 import { roboto_mono } from '@/app/font'
 

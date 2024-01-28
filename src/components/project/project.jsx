@@ -11,7 +11,6 @@ import {
   TabList,
   TabPanel
 } from 'react-tabs'
-
 import style from './style.module.css'
 import Button from '@/components/button'
 import Editor from '@/components/editor'

@@ -3,7 +3,6 @@
 import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
-
 import style from './style.module.css'
 import Button from '@/components/button'
 import Dropdown, {

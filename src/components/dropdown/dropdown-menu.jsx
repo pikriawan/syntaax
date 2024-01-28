@@ -2,7 +2,6 @@
 
 import cn from 'classnames'
 import { useEffect, useRef } from 'react'
-
 import style from './style.module.css'
 
 export default function DropdownMenu ({

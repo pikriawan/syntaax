@@ -2,7 +2,6 @@
 
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-
 import style from './style.module.css'
 import Button from '@/components/button'
 
