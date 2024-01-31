@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+/*import dynamic from 'next/dynamic'
 import style from './style.module.css'
 import { inter } from '@/app/font'
 import '@/app/global.css'
@@ -21,4 +21,8 @@ export default async function RootLayout ({ children }) {
       </body>
     </html>
   )
+}*/
+
+export default function Layout({ children }) {
+  return children
 }

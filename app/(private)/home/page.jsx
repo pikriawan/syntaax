@@ -1,4 +1,4 @@
-import Image from 'next/image'
+/*import Image from 'next/image'
 import style from './page.module.css'
 import CreateProject from '@/components/create-project'
 import Profile from '@/components/profile'
@@ -22,5 +22,13 @@ export default function HomePage () {
         <ProjectList />
       </main>
     </>
+  )
+}*/
+import { createProject } from '../../action'
+export default function HomePage() {
+  return (
+    <form action={createProject}>
+      <button type='submit'>Submit</button>
+    </form>
   )
 }

@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation'
+/*import { redirect } from 'next/navigation'
 import { fetchUser } from '@/lib/fetcher'
 
 export default async function PrivateLayout ({ children }) {
@@ -6,4 +6,7 @@ export default async function PrivateLayout ({ children }) {
   const isAuthenticated = user !== null
   if (!isAuthenticated) redirect('/landing')
   else return children
+}*/
+export default function Layout({ children }) {
+  return children
 }
