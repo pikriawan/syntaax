@@ -48,7 +48,14 @@ export async function createProject(prevState, formData) {
     })
     revalidatePath('/')
     return {
-      message: 'Project creation successful'
+      message: 'Project creation successful',
+      data: {
+        project: {
+          ownerEmail: session?.user.email,
+          name: formData.get('name'),
+          data: ''
+        }
+      }
     }
   } catch (err) {
     return {
@@ -129,7 +136,18 @@ export async function updateProject(
     revalidatePath('/')
     if (updatedFields.name) revalidatePath(`/project/${updatedFields.name}`)
     return {
-      message: 'Project update successful'
+      message: 'Project update successful',
+      data: {
+        project: {
+          ownerEmail: existingProject.ownerEmail,
+          name: existingProject.name,
+          data: existingProject.data
+        },
+        updatedProject: {
+          ownerEmail: existingProject.ownerEmail,
+          ...updatedProject
+        }
+      }
     }
   } catch (err) {
     return {
@@ -167,7 +185,14 @@ export async function deleteProject(projectName) {
     })
     revalidatePath('/')
     return {
-      message: 'Project deletion successful'
+      message: 'Project deletion successful',
+      data: {
+        project: {
+          ownerEmail: existingProject.ownerEmail,
+          name: existingProject.name,
+          data: existingProject.data
+        }
+      }
     }
   } catch (err) {
     return {
