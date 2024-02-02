@@ -3,6 +3,14 @@
 import { auth } from './auth'
 import mongoClient from './mongoClient'
 
+function serialize(data) {
+  const serialized = JSON.parse(JSON.stringify(data))
+  const filtered = Object.entries(serialized).filter(([prop]) => prop !== "_id").reduce((acc, cur) => ({
+    ...acc,
+    [cur[0]]: cur[1]
+  }), {})
+}
+
 export async function fetchUser() {
   const session = await auth()
   return session?.user
@@ -18,15 +26,7 @@ export async function fetchProjects() {
       ownerEmail: session?.user?.email
     }).sort({
       name: 1
-    }).toArray().map(({
-      ownerEmail,
-      name,
-      data
-    }) => ({
-      ownerEmail,
-      name,
-      data
-    }))
+    }).toArray().map(project) => serialize(project))
   } catch (err) {
     return []
   }
@@ -42,11 +42,7 @@ export async function fetchProject(projectName) {
       ownerEmail: session?.user?.email,
       name: projectName
     })
-    return project ? {
-      ownerEmail: project.ownerEmail,
-      name: project.name,
-      data: project.data
-    } : null
+    return project ? serialize(project) : null
   } catch (err) {
     return null
   }
