@@ -23,10 +23,10 @@ export async function fetchProjects() {
     await mongoClient.connect()
     const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     return projectCollection.find({
-      ownerEmail: session?.user?.email
+      ownerEmail: session?.user.email
     }).sort({
       name: 1
-    }).toArray().map(project) => serialize(project))
+    }).toArray().map((project) => serialize(project))
   } catch (err) {
     return []
   }
@@ -39,7 +39,7 @@ export async function fetchProject(projectName) {
     await mongoClient.connect()
     const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
     const project = projectCollection.findOne({
-      ownerEmail: session?.user?.email,
+      ownerEmail: session?.user.email,
       name: projectName
     })
     return project ? serialize(project) : null
