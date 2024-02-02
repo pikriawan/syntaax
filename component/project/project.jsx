@@ -12,16 +12,16 @@ import {
   TabPanel
 } from 'react-tabs'
 import style from './style.module.css'
-import Button from '@/components/button'
-import Editor from '@/components/editor'
-import Loader from '@/components/loader'
+import Button from '../button'
+import Editor from '../editor'
+import Loader from '../loader'
 import Modal, {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from '@/components/modal'
-import TextField from '@/components/text-field'
-import { updateProject } from '@/lib/action'
+} from '../modal'
+import TextField from '../text-field'
+import { updateProject } from '../../app/action'
 
 export default function Project ({ name }) {
   const router = useRouter()

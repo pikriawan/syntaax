@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { fetchUser, fetchProjects } from '@/lib/fetcher'
+import { fetchUser, fetchProjects } from '../../fetcher'
 
 export async function GET () {
   const user = await fetchUser()

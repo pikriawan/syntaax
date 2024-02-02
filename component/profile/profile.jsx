@@ -3,13 +3,13 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
-import Loader from '@/components/loader'
+import Loader from '../loader'
 import Modal, {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from '@/components/modal'
-import SignOutButton from '@/components/sign-out-button'
+} from '../modal'
+import SignOutButton from '../sign-out-button'
 
 export default function Profile () {
   const [user, setUser] = useState()

@@ -3,7 +3,7 @@
 import { signOut } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
-import Button from '@/components/button'
+import Button from '../button'
 
 export default function SignOutButton ({ className, ...props }) {
   const [isMounted, setIsMounted] = useState(false)

@@ -1,6 +1,6 @@
 import style from './style.module.css'
-import ProjectCard from '@/components/project-card'
-import { fetchProjects } from '@/lib/fetcher'
+import ProjectCard from '../project-card'
+import { fetchProjects } from '../../app/fetcher'
 
 export default async function ProjectList () {
   const projects = await fetchProjects()

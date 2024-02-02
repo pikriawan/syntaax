@@ -4,14 +4,14 @@ import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 import style from './style.module.css'
-import Button from '@/components/button'
+import Button from '../button'
 import Modal, {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from '@/components/modal'
-import TextField from '@/components/text-field'
-import { createProject } from '@/lib/action'
+} from '../modal'
+import TextField from '../text-field'
+import { createProject } from '../../app/action'
 
 export default function CreateProject () {
   const [isModalOpen, setIsModalOpen] = useState(false)

@@ -4,20 +4,20 @@ import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 import style from './style.module.css'
-import Button from '@/components/button'
+import Button from '../button'
 import Dropdown, {
   DropdownMenu,
   DropdownItem,
   DropdownDivider
-} from '@/components/dropdown'
-import Link from '@/components/link'
+} from '../dropdown'
+import Link from '../link'
 import Modal, {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from '@/components/modal'
-import TextField from '@/components/text-field'
-import { updateProject, deleteProject } from '@/lib/action'
+} from '../modal'
+import TextField from '../text-field'
+import { updateProject, deleteProject } from '../../app/action'
 
 export default function ProjectCard ({ name }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

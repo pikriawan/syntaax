@@ -3,8 +3,8 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
-import { inter } from '@/app/font'
-import Loader from '@/components/loader/loader'
+import { inter } from '../../app/font'
+import Loader from '../loader'
 
 export default function Button ({
   children,

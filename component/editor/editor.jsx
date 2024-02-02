@@ -19,7 +19,7 @@ import {
   useState
 } from 'react'
 import './style.css'
-import { roboto_mono } from '@/app/font'
+import { roboto_mono } from '../../app/font'
 
 function Editor ({
   onInput,

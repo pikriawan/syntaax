@@ -1,14 +1,13 @@
-/*import dynamic from 'next/dynamic'
-import style from './style.module.css'
-import { inter } from '@/app/font'
-import '@/app/global.css'
+import dynamic from 'next/dynamic'
+import { inter } from './font'
+import './global.css'
 
 export const metadata = {
   title: 'Syntaax',
   description: 'A simple HTML, CSS, and JS code editor'
 }
 
-const DynamicEruda = dynamic(() => import('../components/eruda'), {
+const DynamicEruda = dynamic(() => import('../component/eruda'), {
   ssr: false
 })
 
@@ -21,8 +20,4 @@ export default async function RootLayout ({ children }) {
       </body>
     </html>
   )
-}*/
-
-export default function Layout({ children }) {
-  return children
 }
