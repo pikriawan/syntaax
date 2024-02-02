@@ -3,68 +3,51 @@
 import { auth } from './auth'
 import mongoClient from './mongoClient'
 
-export async function fetchUser () {
+export async function fetchUser() {
   const session = await auth()
-  return {
-    data: {
-      user: session?.user
-    }
-  }
+  return session?.user
 }
 
-export async function fetchProjects () {
+export async function fetchProjects() {
   const session = await auth()
-  let projects
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
-    projects = await projectCollection.find({
+    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
+    return projectCollection.find({
       ownerEmail: session?.user?.email
     }).sort({
       name: 1
-    }).toArray()
+    }).toArray().map(({
+      ownerEmail,
+      name,
+      data
+    }) => ({
+      ownerEmail,
+      name,
+      data
+    }))
   } catch (err) {
-    return {
-      error: 'Something went wrong'
-    }
-  }
-
-  return {
-    data: {
-      projects: projects.length > 0 ? projects.map((project) => ({
-        ownerEmail: project.ownerEmail,
-        name: project.name,
-        data: project.data
-      })) : []
-    }
+    return []
   }
 }
 
-export async function fetchProject (projectName) {
+export async function fetchProject(projectName) {
   const session = await auth()
-  let project
 
   try {
     await mongoClient.connect()
     const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
-    project = await projectCollection.findOne({
+    const project = projectCollection.findOne({
       ownerEmail: session?.user?.email,
       name: projectName
     })
+    return project ? {
+      ownerEmail: project.ownerEmail,
+      name: project.name,
+      data: project.data
+    } : null
   } catch (err) {
-    return {
-      error: 'Something went wrong'
-    }
-  }
-
-  return {
-    data: {
-      project: project ? {
-        ownerEmail: project.ownerEmail,
-        name: project.name,
-        data: project.data
-      } : null
-    }
+    return null
   }
 }
