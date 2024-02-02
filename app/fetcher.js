@@ -5,7 +5,7 @@ import mongoClient from './mongoClient'
 
 function serialize(data) {
   const serialized = JSON.parse(JSON.stringify(data))
-  const filtered = Object.entries(serialized).filter(([prop]) => prop !== "_id").reduce((acc, cur) => ({
+  return Object.entries(serialized).filter(([prop]) => prop !== "_id").reduce((acc, cur) => ({
     ...acc,
     [cur[0]]: cur[1]
   }), {})
