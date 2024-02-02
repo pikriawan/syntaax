@@ -10,7 +10,10 @@ export async function createProject(prevState, formData) {
 
   if (!session?.user) {
     return {
-      error: 'Not authenticated'
+      success: false,
+      message: null,
+      error: 'Not authenticated',
+      data: null
     }
   }
 
@@ -23,13 +26,16 @@ export async function createProject(prevState, formData) {
 
   if (!validatedFields.success) {
     return {
-      error: 'Invalid project name'
+      success: false,
+      message: null,
+      error: 'Invalid project name',
+      data: null
     }
   }
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
+    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: formData.get('name')
@@ -37,29 +43,35 @@ export async function createProject(prevState, formData) {
 
     if (existingProject) {
       return {
-        error: 'Project name already taken'
+        success: false,
+        message: null,
+        error: 'Project name already taken',
+        data: null
       }
     }
 
-    await projectCollection.insertOne({
+    const project = await projectCollection.insertOne({
       ownerEmail: session?.user.email,
       name: formData.get('name'),
       data: ''
     })
     revalidatePath('/')
     return {
+      success: true,
       message: 'Project creation successful',
+      error: null,
       data: {
-        project: {
-          ownerEmail: session?.user.email,
-          name: formData.get('name'),
-          data: ''
-        }
+        ownerEmail: project.ownerEmail,
+        name: project.name,
+        data: project.data
       }
     }
   } catch (err) {
     return {
-      error: 'Something went wrong'
+      success: false,
+      message: null,
+      error: 'Something went wrong',
+      data: null
     }
   }
 }
@@ -73,7 +85,10 @@ export async function updateProject(
 
   if (!session?.user) {
     return {
-      error: 'Not authenticated'
+      success: false,
+      message: null,
+      error: 'Not authenticated',
+      data: null
     }
   }
 
@@ -89,7 +104,7 @@ export async function updateProject(
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
+    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
@@ -97,7 +112,10 @@ export async function updateProject(
 
     if (!existingProject) {
       return {
-        error: 'Project not found'
+        success: false,
+        message: null,
+        error: 'Project not found',
+        data: null
       }
     }
 
@@ -111,7 +129,10 @@ export async function updateProject(
 
       if (!validatedFields.success) {
         return {
-          error: 'Invalid project name'
+          success: false,
+          message: null,
+          error: 'Invalid project name',
+          data: null
         }
       }
 
@@ -122,36 +143,38 @@ export async function updateProject(
 
       if (isUpdatedProjectNameExist) {
         return {
-          error: 'Project name already taken'
+          success: false,
+          message: null,
+          error: 'Project name already taken',
+          data: null
         }
       }
     }
 
-    await projectCollection.updateOne({
+    const project = await projectCollection.updateOne({
       ownerEmail: session?.user.email,
       name: projectName
     }, {
       $set: { ...updatedFields }
     })
     revalidatePath('/')
-    if (updatedFields.name) revalidatePath(`/project/${updatedFields.name}`)
+    revalidatePath(`/project/${project.name}`)
     return {
+      success: true,
       message: 'Project update successful',
+      error: null,
       data: {
-        project: {
-          ownerEmail: existingProject.ownerEmail,
-          name: existingProject.name,
-          data: existingProject.data
-        },
-        updatedProject: {
-          ownerEmail: existingProject.ownerEmail,
-          ...updatedProject
-        }
+        ownerEmail: project.ownerEmail,
+        name: project.name,
+        data: project.data
       }
     }
   } catch (err) {
     return {
-      error: 'Something went wrong'
+      success: false,
+      message: null,
+      error: 'Something went wrong',
+      data: null
     }
   }
 }
@@ -161,13 +184,16 @@ export async function deleteProject(projectName) {
 
   if (!session?.user) {
     return {
-      error: 'Not authenticated'
+      success: false,
+      message: null,
+      error: 'Not authenticated',
+      data: null
     }
   }
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
+    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
@@ -175,7 +201,10 @@ export async function deleteProject(projectName) {
 
     if (!existingProject) {
       return {
-        error: 'Project not found'
+        success: false,
+        message: null,
+        error: 'Project not found',
+        data: null
       }
     }
 
@@ -196,7 +225,10 @@ export async function deleteProject(projectName) {
     }
   } catch (err) {
     return {
-      error: 'Something went wrong'
+      success: false,
+      message: null,
+      error: 'Something went wrong',
+      data: null
     }
   }
 }
