@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import style from './style.module.css'
 
@@ -32,7 +32,7 @@ export default function DropdownMenu ({
   }, [open, onClose])
 
   return (
-    <div className={cn(
+    <div className={clsx(
       style.dropdown__menu,
       style[`dropdown__menu--stick-${stick}`],
       {

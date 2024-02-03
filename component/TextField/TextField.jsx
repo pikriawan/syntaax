@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import clsx from 'clsx'
 import style from './style.module.css'
 
 export default function TextField ({
@@ -40,7 +40,7 @@ export default function TextField ({
   return (
     <input
       {...props}
-      className={cn(
+      className={clsx(
         style['text-field'],
         style[`text-field--${textFieldColor}`],
         className

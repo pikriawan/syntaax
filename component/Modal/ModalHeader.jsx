@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import Image from 'next/image'
 import { useContext } from 'react'
 import ModalContext from './ModalContext'
@@ -10,7 +10,7 @@ export default function ModalHeader ({ children, className }) {
   const { onClose } = useContext(ModalContext)
 
   return (
-    <header className={cn(
+    <header className={clsx(
       className,
       style.header,
       style.modal__header

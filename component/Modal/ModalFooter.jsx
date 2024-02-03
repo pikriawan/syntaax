@@ -1,9 +1,9 @@
-import cn from 'classnames'
+import clsx from 'clsx'
 import style from './style.module.css'
 
 export default function ModalFooter ({ children, className }) {
   return (
-    <div className={cn(className, style.modal__footer)}>
+    <div className={clsx(className, style.modal__footer)}>
       {children}
     </div>
   )

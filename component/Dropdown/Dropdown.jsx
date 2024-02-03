@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import DropdownContext from './DropdownContext'
 import style from './style.module.css'
 
@@ -11,7 +11,7 @@ export default function Dropdown ({
 }) {
   return (
     <DropdownContext.Provider value={{ color }}>
-      <div className={cn(style.dropdown, className)}>
+      <div className={clsx(style.dropdown, className)}>
         {children}
       </div>
     </DropdownContext.Provider>

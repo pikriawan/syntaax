@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import clsx from 'clsx'
 import style from './style.module.css'
 
 export default function Loader ({
@@ -11,7 +11,7 @@ export default function Loader ({
   return (
     <svg
       {...props}
-      className={cn(style.loader, className)}
+      className={clsx(style.loader, className)}
       fill='transparent'
       height={height}
       stroke={color}

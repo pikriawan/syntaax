@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -137,7 +137,7 @@ export default function Project ({ name }) {
                   value={updatedProjectName}
                 />
               </form>
-              <p className={cn(style['message'], {
+              <p className={clsx(style['message'], {
                 [style['message--hidden']]: editMessage === ''
               })}>
                 {editMessage}

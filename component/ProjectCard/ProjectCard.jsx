@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import Image from 'next/image'
 import { useState } from 'react'
 import style from './style.module.css'
@@ -116,7 +116,7 @@ export default function ProjectCard ({ name }) {
               value={updatedProjectName}
             />
           </form>
-          <p className={cn(style['message'], {
+          <p className={clsx(style['message'], {
             [style['message--hidden']]: editMessage === ''
           })}>
             {editMessage}

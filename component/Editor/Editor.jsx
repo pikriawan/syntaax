@@ -12,7 +12,7 @@ import {
   keymap
 } from '@codemirror/view'
 import { githubDark } from '@uiw/codemirror-theme-github'
-import cn from 'classnames'
+import clsx from 'clsx'
 import {
   useEffect,
   useRef,
@@ -64,7 +64,7 @@ function Editor ({
     }
   }, [])
 
-  return <div className={cn('editor__parent', roboto_mono.className)} ref={editorParentRef}></div>
+  return <div className={clsx('editor__parent', roboto_mono.className)} ref={editorParentRef}></div>
 }
 
 export default Editor

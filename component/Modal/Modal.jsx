@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import ModalContext from './ModalContext'
@@ -30,7 +30,7 @@ export default function Modal ({
       <ModalContext.Provider value={{
         onClose: handleClose
       }}>
-        <div className={cn(
+        <div className={clsx(
           className,
           style.modal,
           {
@@ -40,7 +40,7 @@ export default function Modal ({
           {children}
         </div>
       </ModalContext.Provider>
-      <div className={cn(style.modal__overlay, {
+      <div className={clsx(style.modal__overlay, {
         [style['modal__overlay--hidden']]: !open
       })} onClick={handleClose}></div>
     </>,

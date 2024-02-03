@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'classnames'
+import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
 import { inter } from '../../app/font'
@@ -55,15 +55,15 @@ export default function Button ({
   return (
     <button
       {...props}
-      className={cn(
+      className={clsx(
         style.button,
-        style[`Button--${buttonColor}`],
+        style[`button--${buttonColor}`],
         className
       )}
       disabled={disabled || (!isMounted && type === 'submit')}
       type={type}
     >
-      <span className={cn(
+      <span className={clsx(
         style.button__children,
         inter.className,
         {
@@ -73,7 +73,7 @@ export default function Button ({
         {children}
       </span>
       <Loader
-        className={cn(style.button__loader, {
+        className={clsx(style.button__loader, {
           [style['button__loader--hidden']]: !loading
         })}
         height={14}
