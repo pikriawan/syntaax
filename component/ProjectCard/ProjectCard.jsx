@@ -9,7 +9,7 @@ import Dropdown, {
   DropdownMenu,
   DropdownItem,
   DropdownDivider
-} from '../dropdown'
+} from '../Dropdown'
 import Link from '../Link'
 import Modal, {
   ModalHeader,

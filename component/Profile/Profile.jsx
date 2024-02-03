@@ -8,7 +8,7 @@ import Modal, {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from '../modal'
+} from '../Modal'
 import SignOutButton from '../SignOutButton'
 
 export default function Profile () {

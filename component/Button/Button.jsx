@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
 import { inter } from '../../app/font'
-import Loader from '../loader'
+import Loader from '../Loader'
 
 export default function Button ({
   children,
