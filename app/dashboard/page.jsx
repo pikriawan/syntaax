@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import style from './page.module.css'
-import CreateProject from '../../component/create-project'
-import Profile from '../../component/profile'
-import ProjectList from '../../component/project-list'
+import CreateProject from '../../component/CreateProject'
+import Profile from '../../component/Profile'
+import ProjectList from '../../component/ProjectList'
 
 export default function DashboardPage () {
   return (

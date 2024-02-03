@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import SignInButton from '../component/sign-in-button'
+import SignInButton from '../component/SignInButton'
 import { fetchUser } from './fetcher'
 
 export default async function RootPage () {

@@ -7,7 +7,7 @@ export const metadata = {
   description: 'A simple HTML, CSS, and JS code editor'
 }
 
-const DynamicEruda = dynamic(() => import('../component/eruda'), {
+const DynamicEruda = dynamic(() => import('../component/Eruda'), {
   ssr: false
 })
 
