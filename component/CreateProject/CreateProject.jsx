@@ -2,8 +2,13 @@
 
 import clsx from 'clsx'
 import Image from 'next/image'
-import { useState } from 'react'
-import style from './style.module.css'
+import {
+  useEffect,
+  useRef,
+  useState
+} from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
+import { createProject } from '../../app/action'
 import Button from '../Button'
 import Modal, {
   ModalHeader,
@@ -11,40 +16,41 @@ import Modal, {
   ModalFooter
 } from '../Modal'
 import TextField from '../TextField'
-import { createProject } from '../../app/action'
+import style from './style.module.css'
 
-export default function CreateProject () {
+function SubmitButton({ children, ...props }) {
+  const [isMounted, setIsMounted] = useState(false)
+  const { pending } = useFormStatus()
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  return (
+    <Button
+      {...props}
+      disabled={!isMounted || pending}
+      loading={pending}
+      type="submit"
+    >{children}</Button>
+  )
+}
+
+const initialState = {
+  success: null,
+  message: null,
+  error: null,
+  data: null
+}
+
+export default function CreateProject() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isCreating, setIsCreating] = useState(false)
-  const [newProjectName, setNewProjectName] = useState('')
-  const [message, setMessage] = useState('')
+  const [response, createProjectAction] = useFormState(createProject, initialState)
+  const inputRef = useRef(null)
 
-  async function handleSetNewProjectName (event) {
-    setNewProjectName(event.target.value)
-
-    if (message) {
-      setMessage('')
-    }
-  }
-
-  async function handleCreateProject (event) {
-    event.preventDefault()
-
-    if (message) {
-      setMessage('')
-    }
-
-    setIsCreating(true)
-    const data = await createProject(newProjectName)
-
-    if (data.success) {
-      setNewProjectName('')
-      setIsModalOpen(false)
-    } else {
-      setMessage(data.message)
-    }
-
-    setIsCreating(false)
+  async function handleCreateProject(event) {
+    await event.currentTarget.form.requestSubmit()
+    //inputRef.current.value = ''
   }
 
   return (
@@ -57,50 +63,43 @@ export default function CreateProject () {
           width={24}
         />
       </Button>
-      <Modal
-        disableClose={isCreating}
-        onClose={() => setIsModalOpen(false)}
-        open={isModalOpen}
-      >
+      <Modal onClose={() => setIsModalOpen(false)} open={isModalOpen}>
         <ModalHeader>
           <h3>
             New project
           </h3>
         </ModalHeader>
         <ModalBody>
-          <form id='create-project-form' onSubmit={handleCreateProject}>
+          <form action={createProjectAction} id='create-project-form'>
             <TextField
               className={style['modal__text-field']}
-              disabled={isCreating}
-              onInput={handleSetNewProjectName}
+              name='name'
+              ref={inputRef}
               required
-              value={newProjectName}
             />
           </form>
           <p className={clsx(style.message, {
-            [style['message--hidden']]: message === ''
+            [style['message--hidden']]: response.error === ''
           })}>
-            {message}
+            {response.error}
           </p>
         </ModalBody>
         <ModalFooter className={style.modal__footer}>
           <Button
             className={style['modal__button--cancel']}
             color='error'
-            disabled={isCreating}
             onClick={() => setIsModalOpen(false)}
           >
             Cancel
           </Button>
-          <Button
+          <SubmitButton
             className={style['modal__button--submit']}
-            disabled={isCreating}
             form='create-project-form'
-            loading={isCreating}
+            onClick={handleCreateProject}
             type='submit'
           >
             Create project
-          </Button>
+          </SubmitButton>
         </ModalFooter>
       </Modal>
     </>

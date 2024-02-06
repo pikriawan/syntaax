@@ -1,11 +1,14 @@
+'use client'
+
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import style from './style.module.css'
 
-export default function TextField ({
+const TextField = forwardRef(function TextField({
   className,
   color,
   ...props
-}) {
+}, ref) {
   let textFieldColor = ''
 
   switch (color) {
@@ -45,7 +48,10 @@ export default function TextField ({
         style[`text-field--${textFieldColor}`],
         className
       )}
+      ref={ref}
       type='text'
     />
   )
-}
+})
+
+export default TextField

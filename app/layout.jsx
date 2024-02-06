@@ -11,7 +11,7 @@ const DynamicEruda = dynamic(() => import('../component/Eruda'), {
   ssr: false
 })
 
-export default async function RootLayout ({ children }) {
+export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className={inter.className}>

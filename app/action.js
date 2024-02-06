@@ -55,7 +55,7 @@ export async function createProject(prevState, formData) {
       name: formData.get('name'),
       data: ''
     })
-    revalidatePath('/')
+    revalidatePath('/home')
     return {
       success: true,
       message: 'Project creation successful',
@@ -157,7 +157,7 @@ export async function updateProject(
     }, {
       $set: { ...updatedFields }
     })
-    revalidatePath('/')
+    revalidatePath('/home')
     revalidatePath(`/project/${project.name}`)
     return {
       success: true,
@@ -212,7 +212,7 @@ export async function deleteProject(projectName) {
       ownerEmail: session?.user.email,
       name: projectName
     })
-    revalidatePath('/')
+    revalidatePath('/home')
     return {
       message: 'Project deletion successful',
       data: {

@@ -4,7 +4,7 @@ import { fetchUser } from './fetcher'
 
 export default async function RootPage () {
   const user = await fetchUser()
-  if (user) redirect('/dashboard')
+  if (user) redirect('/home')
   return (
     <div style={{
       padding: '1rem'
