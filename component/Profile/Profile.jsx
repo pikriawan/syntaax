@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import style from './style.module.css'
+import { auth } from '../../app/auth'
 import Loader from '../Loader'
 import Modal, {
   ModalHeader,
@@ -10,6 +10,7 @@ import Modal, {
   ModalFooter
 } from '../Modal'
 import SignOutButton from '../SignOutButton'
+import style from './style.module.css'
 
 export default function Profile () {
   const [user, setUser] = useState()
@@ -17,9 +18,9 @@ export default function Profile () {
 
   useEffect(() => {
     async function fetchUser () {
-      const response = await fetch('/api/user')
-      const data = await response.json()
-      setUser(data)
+      const res = await fetch('/api/auth/session')
+      const data = await res.json()
+      setUser(data?.user)
     }
 
     fetchUser()

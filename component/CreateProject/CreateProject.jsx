@@ -15,28 +15,11 @@ import Modal, {
   ModalBody,
   ModalFooter
 } from '../Modal'
+import SubmitButton from '../SubmitButton'
 import TextField from '../TextField'
 import style from './style.module.css'
 
-function SubmitButton({ children, ...props }) {
-  const [isMounted, setIsMounted] = useState(false)
-  const { pending } = useFormStatus()
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  return (
-    <Button
-      {...props}
-      disabled={!isMounted || pending}
-      loading={pending}
-      type="submit"
-    >{children}</Button>
-  )
-}
-
-const initialState = {
+const initialResponse = {
   success: null,
   message: null,
   error: null,
@@ -45,7 +28,7 @@ const initialState = {
 
 export default function CreateProject() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [response, createProjectAction] = useFormState(createProject, initialState)
+  const [response, createProjectAction] = useFormState(createProject, initialResponse)
   const inputRef = useRef(null)
 
   async function handleCreateProject(event) {

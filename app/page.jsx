@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import SignInButton from '../component/SignInButton'
+import GoogleSignInButton from '../component/GoogleSignInButton'
 import { fetchUser } from './fetcher'
 
 export default async function RootPage () {
@@ -9,7 +9,7 @@ export default async function RootPage () {
     <div style={{
       padding: '1rem'
     }}>
-      <SignInButton />
+      <GoogleSignInButton />
     </div>
   )
 }

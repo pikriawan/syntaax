@@ -15,8 +15,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        {children}
         {process.env.NODE_ENV === 'development' && <DynamicEruda />}
+        {children}
       </body>
     </html>
   )

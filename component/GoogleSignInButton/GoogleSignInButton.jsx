@@ -2,12 +2,10 @@
 
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import style from './style.module.css'
 import Button from '../Button'
+import style from './style.module.css'
 
-const GOOGLE = 'google'
-
-export default function SignInButton ({ className, ...props }) {
+export default function GoogleSignInButton ({ className, ...props }) {
   const [isMounted, setIsMounted] = useState(false)
   const [isSigningIn, setIsSigningIn] = useState(false)
 
@@ -18,7 +16,7 @@ export default function SignInButton ({ className, ...props }) {
   async function handleSignIn (event) {
     event.preventDefault()
     setIsSigningIn(true)
-    await signIn(GOOGLE, {
+    await signIn('google', {
       callbackUrl: '/'
     })
   }
@@ -31,7 +29,7 @@ export default function SignInButton ({ className, ...props }) {
       loading={isSigningIn}
       onClick={handleSignIn}
     >
-      Sign in with {GOOGLE.replace(GOOGLE[0], GOOGLE[0].toUpperCase())}
+      Sign in with Google
     </Button>
   )
 }

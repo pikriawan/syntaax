@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useFormStatus } from 'react-dom'
+import Button from '../Button'
 
 export default function SubmitButton({
   children,
@@ -16,7 +17,7 @@ export default function SubmitButton({
   }, [])
 
   return (
-    <button
+    <Button
       {...props}
       disabled={
         disabled ||
@@ -24,6 +25,6 @@ export default function SubmitButton({
         pending
       }
       type="submit"
-    >{children}</button>
+    >{children}</Button>
   )
 }

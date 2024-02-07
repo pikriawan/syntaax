@@ -2,7 +2,7 @@
 
 import { useFormState } from 'react-dom'
 import { createProject } from '../action'
-import SubmitButton from './SubmitButton'
+import SubmitButton from '../../component/SubmitButton'
 
 const initialResponse = {
   success: null,
