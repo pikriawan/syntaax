@@ -5,11 +5,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { createProject } from '../../app/action'
 import Button from '../Button'
-import Modal, {
-  ModalBody,
-  ModalFooter,
-  ModalHeader
-} from '../Modal'
+import Modal, { ModalBody, ModalFooter, ModalHeader } from '../Modal'
 import TextField from '../TextField'
 import style from './style.module.css'
 
@@ -40,22 +36,18 @@ export default function CreateProject() {
 
   return (
     <>
-      <Button className={style['create-project__button--plus']} onClick={() => setIsModalOpen(true)}>
-        <Image
-          alt='Plus'
-          height={24}
-          src='/img/plus.svg'
-          width={24}
-        />
+      <Button
+        className={style['create-project__button--plus']}
+        onClick={() => setIsModalOpen(true)}
+      >
+        <Image alt="Plus" height={24} src="/img/plus.svg" width={24} />
       </Button>
       <Modal onClose={() => setIsModalOpen(false)} open={isModalOpen}>
         <ModalHeader>
-          <h3>
-            New project
-          </h3>
+          <h3>New project</h3>
         </ModalHeader>
         <ModalBody>
-          <form id='create-project-form' onSubmit={handleCreateProject}>
+          <form id="create-project-form" onSubmit={handleCreateProject}>
             <TextField
               className={style['modal__text-field']}
               disabled={isCreating}
@@ -64,16 +56,18 @@ export default function CreateProject() {
               value={newProjectName}
             />
           </form>
-          <p className={clsx(style.message, {
-            [style['message--hidden']]: error === ''
-          })}>
+          <p
+            className={clsx(style.message, {
+              [style['message--hidden']]: error === ''
+            })}
+          >
             {error}
           </p>
         </ModalBody>
         <ModalFooter className={style.modal__footer}>
           <Button
             className={style['modal__button--cancel']}
-            color='error'
+            color="error"
             disabled={isCreating}
             onClick={() => setIsModalOpen(false)}
           >
@@ -83,8 +77,8 @@ export default function CreateProject() {
             className={style['modal__button--submit']}
             disabled={isCreating}
             loading={isCreating}
-            form='create-project-form'
-            type='submit'
+            form="create-project-form"
+            type="submit"
           >
             Create project
           </Button>

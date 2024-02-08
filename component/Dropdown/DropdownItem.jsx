@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import DropdownContext from './DropdownContext'
 import style from './style.module.css'
 
-export default function DropdownItem ({
+export default function DropdownItem({
   children,
   className,
   onClick = () => {}
@@ -43,11 +43,14 @@ export default function DropdownItem ({
   }
 
   return (
-    <div className={clsx(
-      style.dropdown__item,
-      style[`dropdown__item--${dropdownItemBackgroundColor}`],
-      className
-    )} onClick={onClick}>
+    <div
+      className={clsx(
+        style.dropdown__item,
+        style[`dropdown__item--${dropdownItemBackgroundColor}`],
+        className
+      )}
+      onClick={onClick}
+    >
       {children}
     </div>
   )

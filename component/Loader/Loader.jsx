@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import style from './style.module.css'
 
-export default function Loader ({
+export default function Loader({
   className,
   color = '#fafafa',
   height = 16,
@@ -12,23 +12,23 @@ export default function Loader ({
     <svg
       {...props}
       className={clsx(style.loader, className)}
-      fill='transparent'
+      fill="transparent"
       height={height}
       stroke={color}
       strokeWidth={2}
-      viewBox='0 0 16 16'
+      viewBox="0 0 16 16"
       width={width}
-      xmlns='http://www.w3.org/2000/svg'
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path d='M 8 1 A 7 7 0 0 1 15 8 A 7 7 0 0 1 8 15 A 7 7 0 0 1 1 8'>
+      <path d="M 8 1 A 7 7 0 0 1 15 8 A 7 7 0 0 1 8 15 A 7 7 0 0 1 1 8">
         <animateTransform
-          attributeName='transform'
-          attributeType='XML'
-          dur='0.5s'
-          from='0 8 8'
-          repeatCount='indefinite'
-          to='360 8 8'
-          type='rotate'
+          attributeName="transform"
+          attributeType="XML"
+          dur="0.5s"
+          from="0 8 8"
+          repeatCount="indefinite"
+          to="360 8 8"
+          type="rotate"
         />
       </path>
     </svg>

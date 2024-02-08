@@ -1,8 +1,4 @@
-import {
-  Inter,
-  Poppins,
-  Roboto_Mono
-} from 'next/font/google'
+import { Inter, Poppins, Roboto_Mono } from 'next/font/google'
 
 export const inter = Inter({
   weight: ['400', '700'],

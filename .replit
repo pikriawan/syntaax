@@ -6,6 +6,9 @@ hidden = [
 ]
 run = "npm run dev"
 
+[env]
+PATH = "$PATH:/home/runner/$REPL_SLUG/node_modules/.bin"
+
 [nix]
 channel = "stable-23_05"
 

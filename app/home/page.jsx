@@ -9,10 +9,10 @@ export default function HomePage() {
     <>
       <header className={style.header}>
         <Image
-          alt='Syntaax'
+          alt="Syntaax"
           className={style.brand}
           height={24}
-          src='/img/syntaax.svg'
+          src="/img/syntaax.svg"
           width={24}
         />
         <CreateProject />

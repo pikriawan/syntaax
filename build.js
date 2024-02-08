@@ -1,2 +1,2 @@
-const BUILD = 1
+const BUILD = 0
 process.exit(BUILD)

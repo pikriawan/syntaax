@@ -2,10 +2,9 @@
 
 import { signOut } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import style from './style.module.css'
 import Button from '../Button'
 
-export default function SignOutButton ({ className, ...props }) {
+export default function SignOutButton({ className, ...props }) {
   const [isMounted, setIsMounted] = useState(false)
   const [isSigningOut, setIsSigningOut] = useState(false)
 
@@ -13,7 +12,7 @@ export default function SignOutButton ({ className, ...props }) {
     setIsMounted(true)
   }, [])
 
-  async function handleSignOut (event) {
+  async function handleSignOut(event) {
     event.preventDefault()
     setIsSigningOut(true)
     await signOut({

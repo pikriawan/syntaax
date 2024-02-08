@@ -6,36 +6,21 @@ import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
 import { javascript } from '@codemirror/lang-javascript'
 import { EditorState } from '@codemirror/state'
-import {
-  EditorView,
-  lineNumbers,
-  keymap
-} from '@codemirror/view'
+import { EditorView, lineNumbers, keymap } from '@codemirror/view'
 import { githubDark } from '@uiw/codemirror-theme-github'
 import clsx from 'clsx'
-import {
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './style.css'
 import { roboto_mono } from '../../app/font'
 
-function Editor ({
-  onInput,
-  language,
-  value
-}) {
+function Editor({ onInput, language, value }) {
   const editorParentRef = useRef({})
   const state = EditorState.create({
     extensions: [
       lineNumbers(),
       closeBrackets(),
       githubDark,
-      keymap.of([
-        ...closeBracketsKeymap,
-        ...defaultKeymap,
-      ]),
+      keymap.of([...closeBracketsKeymap, ...defaultKeymap]),
       language === 'html' ? html() : language === 'css' ? css() : javascript(),
       EditorView.lineWrapping,
       EditorView.updateListener.of((v) => {
@@ -64,7 +49,12 @@ function Editor ({
     }
   }, [])
 
-  return <div className={clsx('editor__parent', roboto_mono.className)} ref={editorParentRef}></div>
+  return (
+    <div
+      className={clsx('editor__parent', roboto_mono.className)}
+      ref={editorParentRef}
+    ></div>
+  )
 }
 
 export default Editor

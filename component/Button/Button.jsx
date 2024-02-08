@@ -6,7 +6,7 @@ import style from './style.module.css'
 import { inter } from '../../app/font'
 import Loader from '../Loader'
 
-export default function Button ({
+export default function Button({
   children,
   className,
   color,
@@ -55,21 +55,15 @@ export default function Button ({
   return (
     <button
       {...props}
-      className={clsx(
-        style.button,
-        style[`button--${buttonColor}`],
-        className
-      )}
+      className={clsx(style.button, style[`button--${buttonColor}`], className)}
       disabled={disabled || (!isMounted && type === 'submit')}
       type={type}
     >
-      <span className={clsx(
-        style.button__children,
-        inter.className,
-        {
+      <span
+        className={clsx(style.button__children, inter.className, {
           [style['button__children--invisible']]: loading
-        }
-      )}>
+        })}
+      >
         {children}
       </span>
       <Loader

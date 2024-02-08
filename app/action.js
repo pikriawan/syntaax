@@ -18,7 +18,11 @@ export async function createProject(projectName) {
   }
 
   const projectSchema = z.object({
-    name: z.string().regex(/[ \-.0-9a-z]/gi).min(3).max(20)
+    name: z
+      .string()
+      .regex(/[ \-.0-9a-z]/gi)
+      .min(3)
+      .max(20)
   })
   const validatedFields = projectSchema.safeParse({
     name: projectName
@@ -35,7 +39,9 @@ export async function createProject(projectName) {
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
+    const projectCollection = mongoClient
+      .db(process.env.DATABASE_NAME)
+      .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
@@ -76,10 +82,10 @@ export async function createProject(projectName) {
   }
 }
 
-export async function updateProject(projectName, {
-  name: newProjectName,
-  data: newProjectData
-}) {
+export async function updateProject(
+  projectName,
+  { name: newProjectName, data: newProjectData }
+) {
   const session = await auth()
 
   if (!session?.user) {
@@ -103,7 +109,9 @@ export async function updateProject(projectName, {
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
+    const projectCollection = mongoClient
+      .db(process.env.DATABASE_NAME)
+      .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
@@ -120,7 +128,11 @@ export async function updateProject(projectName, {
 
     if (updatedFields.name) {
       const projectSchema = z.object({
-        name: z.string().regex(/[ \-.0-9a-z]/gi).min(3).max(20)
+        name: z
+          .string()
+          .regex(/[ \-.0-9a-z]/gi)
+          .min(3)
+          .max(20)
       })
       const validatedFields = projectSchema.safeParse({
         name: newProjectName
@@ -135,10 +147,11 @@ export async function updateProject(projectName, {
         }
       }
 
-      const isUpdatedProjectNameExist = await projectCollection.findOne({
-        ownerEmail: session?.user.email,
-        name: newProjectName
-      }) !== null
+      const isUpdatedProjectNameExist =
+        (await projectCollection.findOne({
+          ownerEmail: session?.user.email,
+          name: newProjectName
+        })) !== null
 
       if (isUpdatedProjectNameExist) {
         return {
@@ -150,12 +163,15 @@ export async function updateProject(projectName, {
       }
     }
 
-    const project = await projectCollection.updateOne({
-      ownerEmail: session?.user.email,
-      name: projectName
-    }, {
-      $set: { ...updatedFields }
-    })
+    const project = await projectCollection.updateOne(
+      {
+        ownerEmail: session?.user.email,
+        name: projectName
+      },
+      {
+        $set: { ...updatedFields }
+      }
+    )
     revalidatePath('/home')
     revalidatePath(`/project/${project.name}`)
     return {
@@ -192,7 +208,9 @@ export async function deleteProject(projectName) {
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
+    const projectCollection = mongoClient
+      .db(process.env.DATABASE_NAME)
+      .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName

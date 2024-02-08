@@ -13,7 +13,7 @@ const DynamicEruda = dynamic(() => import('../component/Eruda'), {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={inter.className}>
         {process.env.NODE_ENV === 'development' && <DynamicEruda />}
         {children}

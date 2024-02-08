@@ -6,7 +6,9 @@
   height: 2rem;
   outline: 0;
   padding: 0 8px;
-  transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    border 0.2s ease-in-out;
 }
 
 .text-field:disabled {

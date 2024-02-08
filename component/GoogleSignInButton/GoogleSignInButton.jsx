@@ -3,9 +3,8 @@
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import Button from '../Button'
-import style from './style.module.css'
 
-export default function GoogleSignInButton ({ className, ...props }) {
+export default function GoogleSignInButton({ className, ...props }) {
   const [isMounted, setIsMounted] = useState(false)
   const [isSigningIn, setIsSigningIn] = useState(false)
 
@@ -13,7 +12,7 @@ export default function GoogleSignInButton ({ className, ...props }) {
     setIsMounted(true)
   }, [])
 
-  async function handleSignIn (event) {
+  async function handleSignIn(event) {
     event.preventDefault()
     setIsSigningIn(true)
     await signIn('google', {

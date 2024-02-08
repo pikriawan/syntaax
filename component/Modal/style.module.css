@@ -15,7 +15,8 @@
   display: none;
 }
 
-.modal__header {}
+.modal__header {
+}
 
 .header {
   align-items: center;

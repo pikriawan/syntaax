@@ -6,7 +6,9 @@
   height: 2rem;
   padding: 0 1rem;
   position: relative;
-  transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
   user-select: none;
 }
 

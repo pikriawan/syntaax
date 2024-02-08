@@ -4,11 +4,10 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 import style from './style.module.css'
 
-const TextField = forwardRef(function TextField({
-  className,
-  color,
-  ...props
-}, ref) {
+const TextField = forwardRef(function TextField(
+  { className, color, ...props },
+  ref
+) {
   let textFieldColor = ''
 
   switch (color) {
@@ -49,7 +48,7 @@ const TextField = forwardRef(function TextField({
         className
       )}
       ref={ref}
-      type='text'
+      type="text"
     />
   )
 })
