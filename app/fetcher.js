@@ -29,8 +29,7 @@ export async function fetchProjects() {
     }).toArray()
     return projects.map((project) => serialize(project))
   } catch (err) {
-    console.log(err)
-    return []
+    return null
   }
 }
 
@@ -39,14 +38,13 @@ export async function fetchProject(projectName) {
 
   try {
     await mongoClient.connect()
-    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection('projects')
+    const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     const project = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
     })
     return project ? serialize(project) : null
   } catch (err) {
-    console.log(err)
     return null
   }
 }

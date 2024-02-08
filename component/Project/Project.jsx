@@ -11,6 +11,7 @@ import {
   TabList,
   TabPanel
 } from 'react-tabs'
+import { fetchProject } from '../../app/fetcher'
 import style from './style.module.css'
 import Button from '../Button'
 import Editor from '../Editor'
@@ -81,18 +82,18 @@ export default function Project ({ name }) {
   }
 
   useEffect(() => {
-    async function fetchProject () {
-      const response = await fetch(`/api/project/${name}`)
-      const data = await response.json()
+    async function fetchData () {
+      const data = await fetchProject(name)
       setProject(data)
       setIsFetching(false)
-      const doc = data.data || ''
+      const doc = data?.data || ''
       setHtml(doc.split('<body>')[1]?.split('<script>')[0] || '')
       setCss(doc.split('<style>')[1]?.split('</style>')[0] || '')
       setJs(doc.split('<script>')[1]?.split('</script>')[0] || '')
+      console.log(data)
     }
 
-    fetchProject()
+    fetchData()
   }, [])
 
   return isFetching ? (
