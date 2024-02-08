@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from './style.module.css'
 import Button from '../Button'
 import Dropdown, {
@@ -24,46 +24,37 @@ export default function ProjectCard ({ name }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
-  const [editMessage, setEditMessage] = useState('')
+  const [error, setError] = useState('')
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  function handleSetUpdatedProjectName (event) {
-    setUpdatedProjectName(event.target.value)
-
-    if (editMessage) {
-      setEditMessage('')
-    }
-  }
-
   async function handleUpdateProject (event) {
     event.preventDefault()
-
-    if (editMessage) {
-      setEditMessage('')
-    }
-
+    setError('')
     setIsUpdating(true)
     const data = await updateProject(name, {
       name: updatedProjectName
     })
+    setIsUpdating(false)
 
     if (data.success) {
       setIsEditModalOpen(false)
     } else {
-      setEditMessage(data.message)
+      setError(data.error)
     }
-
-    setIsUpdating(false)
   }
 
   async function handleDeleteProject (event) {
     event.preventDefault()
     setIsDeleting(true)
     await deleteProject(name)
-    setIsDeleteModalOpen(false)
     setIsDeleting(false)
+    setIsDeleteModalOpen(false)
   }
+
+  useEffect(() => {
+    setError('')
+  }, [isEditModalOpen, updatedProjectName])
 
   return (
     <>
@@ -111,15 +102,15 @@ export default function ProjectCard ({ name }) {
             <TextField
               className={style['text-field']}
               disabled={isUpdating}
-              onInput={handleSetUpdatedProjectName}
+              onInput={(event) => setUpdatedProjectName(event.target.value)}
               required
               value={updatedProjectName}
             />
           </form>
           <p className={clsx(style['message'], {
-            [style['message--hidden']]: editMessage === ''
+            [style['message--hidden']]: error === ''
           })}>
-            {editMessage}
+            {error}
           </p>
         </ModalBody>
         <ModalFooter className={style['modal__footer']}>

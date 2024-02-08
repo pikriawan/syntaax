@@ -31,41 +31,28 @@ export default function Project ({ name }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
-  const [editMessage, setEditMessage] = useState('')
+  const [error, setError] = useState('')
   const [isSaving, setIsSaving] = useState(false)
   const [html, setHtml] = useState('')
   const [css, setCss] = useState('')
   const [js, setJs] = useState('')
   const [code, setCode] = useState('')
 
-  function handleSetUpdatedProjectName (event) {
-    setUpdatedProjectName(event.target.value)
-
-    if (editMessage) {
-      setEditMessage('')
-    }
-  }
-
   async function handleUpdateProjectName (event) {
     event.preventDefault()
-
-    if (editMessage) {
-      setEditMessage('')
-    }
-
+    setError('')
     setIsUpdating(true)
     const data = await updateProject(name, {
       name: updatedProjectName
     })
+    setIsUpdating(false)
 
     if (data.success) {
       setIsEditModalOpen(false)
       router.replace(`/project/${updatedProjectName}`)
     } else {
-      setEditMessage(data.message)
+      setError(data.error)
     }
-
-    setIsUpdating(false)
   }
 
   async function save (event) {
@@ -90,11 +77,14 @@ export default function Project ({ name }) {
       setHtml(doc.split('<body>')[1]?.split('<script>')[0] || '')
       setCss(doc.split('<style>')[1]?.split('</style>')[0] || '')
       setJs(doc.split('<script>')[1]?.split('</script>')[0] || '')
-      console.log(data)
     }
 
     fetchData()
   }, [])
+
+  useEffect(() => {
+    setError('')
+  }, [isEditModalOpen, updatedProjectName])
 
   return isFetching ? (
     <div className={style['loader-wrapper']}>
@@ -133,15 +123,15 @@ export default function Project ({ name }) {
                 <TextField
                   className={style['text-field']}
                   disabled={isUpdating}
-                  onInput={handleSetUpdatedProjectName}
+                  onInput={(event) => setUpdatedProjectName(event.target.value)}
                   required
                   value={updatedProjectName}
                 />
               </form>
               <p className={clsx(style['message'], {
-                [style['message--hidden']]: editMessage === ''
+                [style['message--hidden']]: error === ''
               })}>
-                {editMessage}
+                {error}
               </p>
             </ModalBody>
             <ModalFooter className={style['modal__footer']}>

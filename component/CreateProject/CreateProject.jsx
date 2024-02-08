@@ -21,6 +21,7 @@ export default function CreateProject() {
 
   async function handleCreateProject(event) {
     event.preventDefault()
+    setError('')
     setIsCreating(true)
     const data = await createProject(newProjectName)
     setIsCreating(false)
@@ -35,14 +36,7 @@ export default function CreateProject() {
 
   useEffect(() => {
     setError('')
-  }, [
-    isModalOpen,
-    setIsModalOpen,
-    newProjectName,
-    setNewProjectName,
-    isCreating,
-    setIsCreating
-  ])
+  }, [isModalOpen, newProjectName])
 
   return (
     <>
