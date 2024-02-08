@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { auth } from './auth'
 import mongoClient from './mongoClient'
 
-export async function createProject(prevState, formData) {
+export async function createProject(projectName) {
   const session = await auth()
 
   if (!session?.user) {
@@ -21,7 +21,7 @@ export async function createProject(prevState, formData) {
     name: z.string().regex(/[ \-.0-9a-z]/gi).min(3).max(20)
   })
   const validatedFields = projectSchema.safeParse({
-    name: formData.get('name')
+    name: projectName
   })
 
   if (!validatedFields.success) {
@@ -38,7 +38,7 @@ export async function createProject(prevState, formData) {
     const projectCollection = mongoClient.db(process.env.DATABASE_NAME).collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
       ownerEmail: session?.user.email,
-      name: formData.get('name')
+      name: projectName
     })
 
     if (existingProject) {
@@ -52,7 +52,7 @@ export async function createProject(prevState, formData) {
 
     const project = await projectCollection.insertOne({
       ownerEmail: session?.user.email,
-      name: formData.get('name'),
+      name: projectName,
       data: ''
     })
     revalidatePath('/home')
@@ -76,11 +76,10 @@ export async function createProject(prevState, formData) {
   }
 }
 
-export async function updateProject(
-  projectName,
-  prevState,
-  formData
-) {
+export async function updateProject(projectName, {
+  name: newProjectName,
+  data: newProjectData
+}) {
   const session = await auth()
 
   if (!session?.user) {
@@ -94,12 +93,12 @@ export async function updateProject(
 
   const updatedFields = {}
 
-  if (formData.get('name')) {
-    updatedFields.name = formData.get('name')
+  if (newProjectName) {
+    updatedFields.name = newProjectName
   }
 
-  if (formData.get('data')) {
-    updatedFields.data = formData.get('data')
+  if (newProjectData) {
+    updatedFields.data = newProjectData
   }
 
   try {
@@ -124,7 +123,7 @@ export async function updateProject(
         name: z.string().regex(/[ \-.0-9a-z]/gi).min(3).max(20)
       })
       const validatedFields = projectSchema.safeParse({
-        name: formData.get('name')
+        name: newProjectName
       })
 
       if (!validatedFields.success) {
@@ -138,7 +137,7 @@ export async function updateProject(
 
       const isUpdatedProjectNameExist = await projectCollection.findOne({
         ownerEmail: session?.user.email,
-        name: formData.get('name')
+        name: newProjectName
       }) !== null
 
       if (isUpdatedProjectNameExist) {
