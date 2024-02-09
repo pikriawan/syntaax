@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import ModalContext from './ModalContext'
+import ModalContext from './_ModalContext'
 import style from './style.module.css'
 
 export default function Modal({

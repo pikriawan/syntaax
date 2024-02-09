@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useContext } from 'react'
-import ModalContext from './ModalContext'
+import ModalContext from './_ModalContext'
 import style from './style.module.css'
 
 export default function ModalHeader({ children, className }) {

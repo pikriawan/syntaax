@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { useContext } from 'react'
-import DropdownContext from './DropdownContext'
+import DropdownContext from './_DropdownContext'
 import style from './style.module.css'
 
 export default function DropdownItem({

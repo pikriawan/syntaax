@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import DropdownContext from './DropdownContext'
+import DropdownContext from './_DropdownContext'
 import style from './style.module.css'
 
 export default function Dropdown({ children, className, color }) {
