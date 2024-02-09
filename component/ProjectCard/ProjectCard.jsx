@@ -90,7 +90,7 @@ export default function ProjectCard({ name }) {
         </Dropdown>
       </div>
       <Modal
-        disableClose={isUpdating || isDeleting}
+        disableClose={isUpdating}
         onClose={() => setIsEditModalOpen(false)}
         open={isEditModalOpen}
       >
@@ -139,6 +139,7 @@ export default function ProjectCard({ name }) {
         </ModalFooter>
       </Modal>
       <Modal
+        disableClose={isDeleting}
         onClose={() => setIsDeleteModalOpen(false)}
         open={isDeleteModalOpen}
       >
