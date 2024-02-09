@@ -42,7 +42,7 @@ export default function CreateProject() {
       >
         <Image alt="Plus" height={24} src="/img/plus.svg" width={24} />
       </Button>
-      <Modal onClose={() => setIsModalOpen(false)} open={isModalOpen}>
+      <Modal disableClose={isCreating} onClose={() => setIsModalOpen(false)} open={isModalOpen}>
         <ModalHeader>
           <h3>New project</h3>
         </ModalHeader>

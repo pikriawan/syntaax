@@ -90,7 +90,7 @@ export default function ProjectCard({ name }) {
         </Dropdown>
       </div>
       <Modal
-        disableClose={isUpdating}
+        disableClose={isUpdating || isDeleting}
         onClose={() => setIsEditModalOpen(false)}
         open={isEditModalOpen}
       >
