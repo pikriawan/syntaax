@@ -1,12 +1,16 @@
 'use client'
 
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useState
+} from 'react'
 import style from './style.module.css'
 import { inter } from '../../app/font'
 import Loader from '../Loader'
 
-export default function Button({
+const Button = forwardRef(function Button({
   children,
   className,
   color,
@@ -14,7 +18,7 @@ export default function Button({
   loading,
   type,
   ...props
-}) {
+}, ref) {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -57,6 +61,7 @@ export default function Button({
       {...props}
       className={clsx(style.button, style[`button--${buttonColor}`], className)}
       disabled={disabled || (!isMounted && type === 'submit')}
+      ref={ref}
       type={type}
     >
       <span
@@ -75,4 +80,6 @@ export default function Button({
       />
     </button>
   )
-}
+})
+
+export default Button
