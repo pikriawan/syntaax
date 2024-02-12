@@ -81,7 +81,7 @@ export default function Project({ name }) {
 
   return isFetching ? (
     <div className={style['loader-wrapper']}>
-      <Loader height={24} width={24} />
+      <Loader height={16} width={16} />
     </div>
   ) : project ? (
     <>
