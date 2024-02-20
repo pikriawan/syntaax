@@ -6,14 +6,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { updateProject } from '../../app/action'
 import { fetchProject } from '../../app/fetcher'
-import style from './style.module.css'
+import { vercel } from '../../lib/theme'
 import Button from '../Button'
-import Editor from '../Editor'
+import {
+  CSSEditor,
+  HTMLEditor,
+  JavaScriptEditor
+} from '../Editor'
 import Loader from '../Loader'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../Modal'
 import TextField from '../TextField'
-import { updateProject } from '../../app/action'
+import style from './style.module.css'
 
 export default function Project({ name }) {
   const router = useRouter()
@@ -167,23 +172,23 @@ export default function Project({ name }) {
             <Tab className={style.tab}>Output</Tab>
           </TabList>
           <TabPanel className={style['tab-panel']}>
-            <Editor
+            <HTMLEditor
+              extensions={[vercel]}
               onInput={(value) => setHtml(value)}
-              language="html"
               value={html}
             />
           </TabPanel>
           <TabPanel className={style['tab-panel']}>
-            <Editor
+            <CSSEditor
+              extensions={[vercel]}
               onInput={(value) => setCss(value)}
-              language="css"
               value={css}
             />
           </TabPanel>
           <TabPanel className={style['tab-panel']}>
-            <Editor
+            <JavaScriptEditor
+              extensions={[vercel]}
               onInput={(value) => setJs(value)}
-              language="javascript"
               value={js}
             />
           </TabPanel>

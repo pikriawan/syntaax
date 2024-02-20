@@ -2,39 +2,38 @@
 
 import { closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete'
 import { defaultKeymap } from '@codemirror/commands'
-import { html } from '@codemirror/lang-html'
-import { css } from '@codemirror/lang-css'
-import { javascript } from '@codemirror/lang-javascript'
-import { EditorState } from '@codemirror/state'
-import { EditorView, lineNumbers, keymap } from '@codemirror/view'
-import { githubDark } from '@uiw/codemirror-theme-github'
-import clsx from 'clsx'
-import { useEffect, useRef, useState } from 'react'
-import './style.css'
-import { roboto_mono } from '../../app/font'
+import {
+  EditorView,
+  lineNumbers,
+  keymap
+} from '@codemirror/view'
+import { useEffect, useRef } from 'react'
 
-function Editor({ onInput, language, value }) {
-  const editorParentRef = useRef({})
-  const state = EditorState.create({
-    extensions: [
-      lineNumbers(),
-      closeBrackets(),
-      githubDark,
-      keymap.of([...closeBracketsKeymap, ...defaultKeymap]),
-      language === 'html' ? html() : language === 'css' ? css() : javascript(),
-      EditorView.lineWrapping,
-      EditorView.updateListener.of((v) => {
-        if (v.docChanged) {
-          onInput(v.view.state.doc.toString())
-        }
-      })
-    ]
-  })
+export default function Editor({
+  extensions = [],
+  onInput = () => {},
+  value = ''
+}) {
+  const parentRef = useRef(null)
 
   useEffect(() => {
     const view = new EditorView({
-      state,
-      parent: editorParentRef.current
+      extensions: [
+        lineNumbers(),
+        closeBrackets(),
+        keymap.of([
+          ...closeBracketsKeymap,
+          ...defaultKeymap
+        ]),
+        EditorView.lineWrapping,
+        EditorView.updateListener.of((update) => {
+          if (update.docChanged) {
+            onInput(update.view.state.doc.toString())
+          }
+        }),
+        ...extensions
+      ],
+      parent: parentRef.current
     })
     view.dispatch({
       changes: {
@@ -49,12 +48,5 @@ function Editor({ onInput, language, value }) {
     }
   }, [])
 
-  return (
-    <div
-      className={clsx('editor__parent', roboto_mono.className)}
-      ref={editorParentRef}
-    ></div>
-  )
+  return <div ref={parentRef}></div>
 }
-
-export default Editor

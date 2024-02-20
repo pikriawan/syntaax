@@ -1,5 +1,9 @@
 import dynamic from 'next/dynamic'
-import { inter } from './font'
+import {
+  inter,
+  poppins,
+  roboto_mono
+} from './font'
 import './global.css'
 
 export const metadata = {
@@ -13,8 +17,8 @@ const DynamicEruda = dynamic(() => import('../component/Eruda'), {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html className={`${inter.variable} ${poppins.variable} ${roboto_mono.variable}`} lang="en">
+      <body>
         {process.env.NODE_ENV === 'development' && <DynamicEruda />}
         {children}
       </body>
