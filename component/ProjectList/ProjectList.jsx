@@ -7,10 +7,13 @@ export default async function ProjectList() {
 
   return (
     <div className={style['project-list']}>
-      {projects.length > 0 &&
+      {projects.length > 0 ? (
         projects.map((project) => (
           <ProjectCard key={project.name} name={project.name} />
-        ))}
+        ))
+      ) : (
+        <p>You don't have any projects yet. Go make one!</p>
+      )}
     </div>
   )
 }
