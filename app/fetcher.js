@@ -1,11 +1,11 @@
 'use server'
 
 import { auth } from './auth'
-import mongoClient from './mongoClient'
+import client from './client'
 
-function serialize(data) {
-  const serialized = JSON.parse(JSON.stringify(data))
-  return Object.entries(serialized)
+function parse(data) {
+  const rawData = JSON.parse(JSON.stringify(data))
+  return Object.entries(rawData)
     .filter(([prop]) => prop !== '_id')
     .reduce(
       (acc, cur) => ({
@@ -25,8 +25,8 @@ export async function fetchProjects() {
   const session = await auth()
 
   try {
-    await mongoClient.connect()
-    const projectCollection = mongoClient
+    await client.connect()
+    const projectCollection = client
       .db(process.env.DATABASE_NAME)
       .collection(process.env.PROJECT_COLLECTION_NAME)
     const projects = await projectCollection
@@ -37,7 +37,7 @@ export async function fetchProjects() {
         name: 1
       })
       .toArray()
-    return projects.map((project) => serialize(project))
+    return projects.map((project) => parse(project))
   } catch (err) {
     return null
   }
@@ -47,15 +47,15 @@ export async function fetchProject(projectName) {
   const session = await auth()
 
   try {
-    await mongoClient.connect()
-    const projectCollection = mongoClient
+    await client.connect()
+    const projectCollection = client
       .db(process.env.DATABASE_NAME)
       .collection(process.env.PROJECT_COLLECTION_NAME)
     const project = await projectCollection.findOne({
       ownerEmail: session?.user.email,
       name: projectName
     })
-    return project ? serialize(project) : null
+    return project ? parse(project) : null
   } catch (err) {
     return null
   }
