@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { auth } from './auth'
-import mongoClient from './mongoClient'
+import client from './client'
 
 export async function createProject(projectName) {
   const session = await auth()
@@ -38,8 +38,8 @@ export async function createProject(projectName) {
   }
 
   try {
-    await mongoClient.connect()
-    const projectCollection = mongoClient
+    await client.connect()
+    const projectCollection = client
       .db(process.env.DATABASE_NAME)
       .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
@@ -108,8 +108,8 @@ export async function updateProject(
   }
 
   try {
-    await mongoClient.connect()
-    const projectCollection = mongoClient
+    await client.connect()
+    const projectCollection = client
       .db(process.env.DATABASE_NAME)
       .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({
@@ -207,8 +207,8 @@ export async function deleteProject(projectName) {
   }
 
   try {
-    await mongoClient.connect()
-    const projectCollection = mongoClient
+    await client.connect()
+    const projectCollection = client
       .db(process.env.DATABASE_NAME)
       .collection(process.env.PROJECT_COLLECTION_NAME)
     const existingProject = await projectCollection.findOne({

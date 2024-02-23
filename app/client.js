@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
 
-const mongoClient = new MongoClient(process.env.MONGODB_URI, {
+const client = new MongoClient(process.env.MONGODB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -8,4 +8,4 @@ const mongoClient = new MongoClient(process.env.MONGODB_URI, {
   }
 })
 
-export default mongoClient
+export default client
