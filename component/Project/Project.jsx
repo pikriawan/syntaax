@@ -25,6 +25,7 @@ export default function Project({ name }) {
   const [project, setProject] = useState()
   const [isFetching, setIsFetching] = useState(true)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [tabIndex, setTabIndex] = useState(0)
   const [updatedProjectName, setUpdatedProjectName] = useState(name)
   const [isUpdating, setIsUpdating] = useState(false)
   const [error, setError] = useState('')
@@ -61,6 +62,7 @@ export default function Project({ name }) {
   }
 
   function run() {
+    setTabIndex(3)
     setCode(
       `<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`
     )
@@ -162,6 +164,8 @@ export default function Project({ name }) {
       <main className={style.main}>
         <Tabs
           className={style.tabs}
+          onSelect={(index) => setTabIndex(index)}
+          selectedIndex={tabIndex}
           selectedTabClassName={style['tab--active']}
           selectedTabPanelClassName={style['tab__panel--active']}
         >
