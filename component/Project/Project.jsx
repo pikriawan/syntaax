@@ -61,13 +61,6 @@ export default function Project({ name }) {
     setIsSaving(false)
   }
 
-  function run() {
-    setTabIndex(3)
-    setCode(
-      `<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`
-    )
-  }
-
   useEffect(() => {
     async function fetchData() {
       const data = await fetchProject(name)
@@ -85,6 +78,12 @@ export default function Project({ name }) {
   useEffect(() => {
     setError('')
   }, [isEditModalOpen, updatedProjectName])
+
+  useEffect(() => {
+    if (tabIndex === 3) {
+      setCode(`<!doctype html><html><head><style>${css}</style></head><body>${html}<script>${js}</script></body></html>`)
+    }
+  }, [tabIndex])
 
   return isFetching ? (
     <div className={style['loader-wrapper']}>
@@ -157,7 +156,7 @@ export default function Project({ name }) {
         >
           Save
         </Button>
-        <Button className={style.header__run} onClick={run}>
+        <Button className={style.header__run} onClick={() => setTabIndex(3)}>
           Run
         </Button>
       </header>
