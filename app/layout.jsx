@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import { DynamicEruda } from '../component/Eruda'
 import {
   inter,
   poppins,
@@ -10,10 +10,6 @@ export const metadata = {
   title: 'Syntaax',
   description: 'A simple HTML, CSS, and JS code editor'
 }
-
-const DynamicEruda = dynamic(() => import('../component/Eruda'), {
-  ssr: false
-})
 
 export default function RootLayout({ children }) {
   return (
