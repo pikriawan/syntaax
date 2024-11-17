@@ -54,19 +54,18 @@ export default function ProjectCard({ name }) {
 
   return (
     <>
-      <div className={style['project-card']}>
+      <Link className={style['project-card']} href={`/project/${name}`}>
         <h3 className={style['project-card__title']}>
-          <Link
-            className={style['project-card__link']}
-            href={`/project/${name}`}
-          >
-            {name}
-          </Link>
+          {name}
         </h3>
         <Dropdown>
           <button
             className={style['project-card__button--option']}
-            onClick={() => setIsDropdownOpen(true)}
+            onClick={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setIsDropdownOpen(true)
+            }}
           >
             <Image
               alt="Three dots vertical"
@@ -76,19 +75,32 @@ export default function ProjectCard({ name }) {
             />
           </button>
           <DropdownMenu
-            onClose={() => setIsDropdownOpen(false)}
+            className={style['project-card__option']}
+            onClose={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setIsDropdownOpen(false)
+            }}
             open={isDropdownOpen}
             stick="right"
           >
-            <DropdownItem onClick={() => setIsEditModalOpen(true)}>
+            <DropdownItem onClick={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setIsEditModalOpen(true)
+            }}>
               Edit
             </DropdownItem>
-            <DropdownItem onClick={() => setIsDeleteModalOpen(true)}>
+            <DropdownItem className={style['project-card__option--error']} onClick={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setIsDeleteModalOpen(true)
+            }}>
               Delete
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </div>
+      </Link>
       <Modal
         disableClose={isUpdating}
         onClose={() => setIsEditModalOpen(false)}
