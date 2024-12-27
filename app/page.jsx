@@ -1,17 +1,19 @@
-import { signIn } from "@/auth";
+import { auth } from "@/auth";
+import SigninForm from "@/components/SigninForm";
+import SignoutForm from "@/components/SignoutForm/SignoutForm";
 
-function SignIn() {
-    return (
-        <form action={async () => {
-            "use server";
+export default async function HomePage() {
+    const session = await auth();
 
-            await signIn("google");
-        }}>
-            <button>Signin with Google</button>
-        </form>
+    return session?.user ? (
+        <>
+            <p>Hello, {session.user.name}!</p>
+            <SignoutForm />
+        </>
+    ) : (
+        <>
+            <p>Thanks for visiting here! Let's sign in!</p>
+            <SigninForm />
+        </>
     );
-}
-
-export default function Page() {
-    return <SignIn />
 }
