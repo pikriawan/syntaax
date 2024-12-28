@@ -8,14 +8,11 @@ html {
     width: 100%;
     height: 100%;
     --color-primary-main: #F6F6F6;
-    --color-primary-light: #D1D1D1;
-    --color-primary-dark: #888888;
+    --color-primary-hover: #D1D1D1;
     --color-secondary-main: #121212;
-    --color-secondary-light: #5D5D5D;
-    --color-secondary-dark: #454545;
+    --color-secondary-hover: #3D3D3D;
     --color-danger-main: #FF004F;
-    --color-danger-light: #FF5D85;
-    --color-danger-dark: #B40040;
+    --color-danger-hover: #FF2460;
     --color-background: #121212;
     --color-border: #3D3D3D;
     --color-text-light: #F6F6F6;

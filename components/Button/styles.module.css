@@ -1,30 +1,23 @@
 .button {
     padding: 0.5rem 1rem;
-    background-color: var(--color-primary-main);
+    background-color: var(--color-background);
     border-radius: 0.5rem;
     border: 0;
-    color: var(--color-text-dark);
+    color: var(--color-text-light);
     font-size: 1rem;
-}
-
-.button:hover {
-    background-color: var(--color-primary-light);
-}
-
-.button:active {
-    background-color: var(--color-primary-dark);
+    font-family: var(--font-inter);
+    transition: background-color 0.2s ease-in-out;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .button-primary {
     background-color: var(--color-primary-main);
+    color: var(--color-text-dark);
 }
 
 .button-primary:hover {
-    background-color: var(--color-primary-light);
-}
-
-.button-primary:active {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary-hover);
 }
 
 .button-secondary {
@@ -34,11 +27,7 @@
 }
 
 .button-secondary:hover {
-    background-color: var(--color-secondary-light);
-}
-
-.button-secondary:active {
-    background-color: var(--color-secondary-dark);
+    background-color: var(--color-secondary-hover);
 }
 
 .button-danger {
@@ -47,14 +36,10 @@
 }
 
 .button-danger:hover {
-    background-color: var(--color-danger-light);
+    background-color: var(--color-danger-hover);
 }
 
-.button-danger:active {
-    background-color: var(--color-danger-dark);
-}
-
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .button {
         cursor: pointer;
     }
