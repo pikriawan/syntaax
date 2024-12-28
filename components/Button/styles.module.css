@@ -1,14 +1,18 @@
 .button {
     padding: 0.5rem 1rem;
-    background-color: var(--color-background);
+    background-color: var(--color-primary-main);
     border-radius: 0.5rem;
     border: 0;
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     font-size: 1rem;
     font-family: var(--font-inter);
     transition: background-color 0.2s ease-in-out;
     -webkit-user-select: none;
     user-select: none;
+}
+
+.button:hover {
+    background-color: var(--color-primary-hover);
 }
 
 .button-primary {
