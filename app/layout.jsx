@@ -2,24 +2,35 @@ import { Inter, Poppins, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { ErudaNoSSR } from "@/components/Eruda";
 
-export const inter = Inter({
+const inter = Inter({
     subsets: ["latin"],
     variable: "--font-inter",
     display: "swap"
 });
 
-export const poppins = Poppins({
+const poppins = Poppins({
     subsets: ["latin"],
     weight: ["700"],
     variable: "--font-poppins",
     display: "swap"
 });
 
-export const roboto_mono = Roboto_Mono({
+const roboto_mono = Roboto_Mono({
     subsets: ["latin"],
     variable: "--font-roboto-mono",
     display: "swap"
 });
+
+export const metadata = {
+    title: "Syntaax"
+};
+
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false
+};
 
 export default function RootLayout({ children }) {
     return (

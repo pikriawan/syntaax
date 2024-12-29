@@ -10,11 +10,12 @@ html {
     --color-primary-main: #F6F6F6;
     --color-primary-hover: #D1D1D1;
     --color-secondary-main: #121212;
-    --color-secondary-hover: #3D3D3D;
+    --color-secondary-hover: #2A2A2A;
     --color-danger-main: #FF004F;
     --color-danger-hover: #FF2460;
     --color-background: #121212;
     --color-border: #3D3D3D;
+    --color-disabled: #3D3D3D;
     --color-text-light: #F6F6F6;
     --color-text-dark: #121212;
 }

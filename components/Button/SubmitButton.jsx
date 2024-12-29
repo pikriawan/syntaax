@@ -6,5 +6,13 @@ import Button from "./Button";
 export default function SubmitButton({ children, ...props }) {
     const { pending } = useFormStatus();
 
-    return <Button disabled={pending} {...props}>{children}</Button>;
+    return (
+        <Button
+            disabled={pending}
+            loading={pending}
+            {...props}
+        >
+            {children}
+        </Button>
+    );
 }
