@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
-import AppBar from "@/components/AppBar";
-import Navbar from "@/components/Navbar";
+import Appbar from "@/components/Appbar";
+import MobileNavbar from "@/components/MobileNavbar";
 
 export default function HomePage() {
     return (
-        <AppBar className={styles["app-bar"]}>
-            <Navbar />
-        </AppBar>
+        <Appbar className={styles["app-bar"]}>
+            <MobileNavbar />
+        </Appbar>
     );
 }

@@ -3,5 +3,7 @@
 }
 
 @media (min-width: 768px) {
-    cursor: pointer;
+    .link {
+        cursor: pointer;
+    }
 }

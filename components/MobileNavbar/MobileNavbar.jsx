@@ -7,11 +7,11 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./styles.module.css";
-import AppBar from "@/components/AppBar";
+import Appbar from "@/components/Appbar";
 import { BaseButton } from "@/components/Button";
 import Link from "@/components/Link";
 
-export default function Navbar() {
+export default function MobileNavbar() {
     const pathname = usePathname();
     const [mounted, setMounted] = useState(false);
     const [show, setShow] = useState(false);
@@ -22,13 +22,13 @@ export default function Navbar() {
 
     return (
         <>
-            <BaseButton className={styles["icon-button"]} onClick={() => setShow(true)}>
+            <BaseButton className={styles["navbar-toggle"]} onClick={() => setShow(true)}>
                 <Bars3Icon className={styles.icon} />
             </BaseButton>
             {mounted && createPortal(
                 <>
                     <div className={clsx(styles.navbar, show && styles.show)}>
-                        <AppBar className={styles["app-bar"]}>
+                        <Appbar className={styles["app-bar"]}>
                             <Link href="/" onClick={() => setShow(false)}>
                                 <Image
                                     width={16}
@@ -38,10 +38,10 @@ export default function Navbar() {
                                     className={styles.brand}
                                 />
                             </Link>
-                            <BaseButton className={styles["icon-button"]} onClick={() => setShow(false)}>
+                            <BaseButton onClick={() => setShow(false)}>
                                 <XMarkIcon className={styles.icon} />
                             </BaseButton>
-                        </AppBar>
+                        </Appbar>
                         <div className={styles["navbar-items"]}>
                             <Link href="/" className={clsx(styles["navbar-item"], pathname === "/" && styles["active"])} onClick={() => setShow(false)}>
                                 <DocumentIcon className={styles.icon} />
