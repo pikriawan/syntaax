@@ -82,6 +82,15 @@
     visibility: visible;
 }
 
+.base-button {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    background-color: transparent;
+}
+
 @keyframes spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);

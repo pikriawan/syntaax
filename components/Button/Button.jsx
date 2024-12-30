@@ -13,10 +13,10 @@ export default function Button({
     return (
         <button
             className={clsx(
-                className,
                 styles.button,
                 styles[`button-${variant}`],
-                loading && styles.loading
+                loading && styles.loading,
+                className,
             )}
             disabled={disabled || loading}
             {...props}
