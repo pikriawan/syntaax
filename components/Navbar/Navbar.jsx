@@ -2,21 +2,26 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./styles.module.css";
 import AppBar from "@/components/AppBar";
 import { BaseButton } from "@/components/Button";
+import Link from "@/components/Link";
 
 export default function Navbar() {
     const pathname = usePathname();
-    const [open, setOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <>
-            <BaseButton className={styles["icon-button"]}>
+            <BaseButton className={styles["icon-button"]} onClick={() => setShow(true)}>
                 <Image
                     width={24}
                     height={24}
@@ -24,9 +29,9 @@ export default function Navbar() {
                     alt="Navbar icon"
                 />
             </BaseButton>
-            {createPortal(
+            {mounted && createPortal(
                 <>
-                    <div className={styles.navbar}>
+                    <div className={clsx(styles.navbar, show && styles.show)}>
                         <AppBar className={styles["app-bar"]}>
                             <Link href="/">
                                 <Image
@@ -34,9 +39,10 @@ export default function Navbar() {
                                     height={16}
                                     src="/syntaax.svg"
                                     alt="Syntaax"
+                                    className={styles.brand}
                                 />
                             </Link>
-                            <BaseButton className={styles["icon-button"]}>
+                            <BaseButton className={styles["icon-button"]} onClick={() => setShow(false)}>
                                 <Image
                                     width={24}
                                     height={24}

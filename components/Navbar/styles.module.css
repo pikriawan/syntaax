@@ -1,5 +1,6 @@
 .icon-button img {
-    vertical-align: middle;
+    display: block;
+    vertical-align: bottom;
 }
 
 .navbar {
@@ -7,8 +8,13 @@
     height: 100%;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -100%;
     z-index: 2;
+    transition: left 0.2s ease-in-out;
+}
+
+.navbar.show {
+    left: 0;
 }
 
 .app-bar {
@@ -16,6 +22,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
+}
+
+.brand {
+    display: block;
+    vertical-align: bottom;
 }
 
 .navbar-items {
@@ -34,6 +45,7 @@
     background-color: var(--color-secondary-main);
     color: var(--color-text-light);
     text-decoration: none;
+    cursor: default;
 }
 
 .navbar-item:hover {
@@ -51,4 +63,10 @@
 
 .navbar-item.active img {
     filter: invert(100%);
+}
+
+@media (min-width: 768px) {
+    .navbar-item {
+        cursor: pointer;
+    }
 }

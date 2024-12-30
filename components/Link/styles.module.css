@@ -1,0 +1,7 @@
+.link {
+    cursor: default;
+}
+
+@media (min-width: 768px) {
+    cursor: pointer;
+}
