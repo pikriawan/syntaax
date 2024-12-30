@@ -1,6 +1,9 @@
-.icon-button img {
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-text-light);
     display: block;
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 .navbar {
@@ -46,6 +49,7 @@
     color: var(--color-text-light);
     text-decoration: none;
     cursor: default;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .navbar-item:hover {
@@ -59,6 +63,10 @@
 
 .navbar-item.active:hover {
     background-color: var(--color-primary-hover);
+}
+
+.navbar-item.active .icon {
+    color: var(--color-text-dark);
 }
 
 .navbar-item.active img {

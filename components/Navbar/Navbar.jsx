@@ -1,5 +1,6 @@
 "use client";
 
+import { Bars3Icon, DocumentIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -22,18 +23,13 @@ export default function Navbar() {
     return (
         <>
             <BaseButton className={styles["icon-button"]} onClick={() => setShow(true)}>
-                <Image
-                    width={24}
-                    height={24}
-                    src="/bars-3.svg"
-                    alt="Navbar icon"
-                />
+                <Bars3Icon className={styles.icon} />
             </BaseButton>
             {mounted && createPortal(
                 <>
                     <div className={clsx(styles.navbar, show && styles.show)}>
                         <AppBar className={styles["app-bar"]}>
-                            <Link href="/">
+                            <Link href="/" onClick={() => setShow(false)}>
                                 <Image
                                     width={16}
                                     height={16}
@@ -43,31 +39,16 @@ export default function Navbar() {
                                 />
                             </Link>
                             <BaseButton className={styles["icon-button"]} onClick={() => setShow(false)}>
-                                <Image
-                                    width={24}
-                                    height={24}
-                                    src="/x-mark.svg"
-                                    alt="Navbar icon"
-                                />
+                                <XMarkIcon className={styles.icon} />
                             </BaseButton>
                         </AppBar>
                         <div className={styles["navbar-items"]}>
-                            <Link href="/" className={clsx(styles["navbar-item"], pathname === "/" && styles["active"])}>
-                                <Image
-                                    width={24}
-                                    height={24}
-                                    src="/document.svg"
-                                    alt="Projects"
-                                />
+                            <Link href="/" className={clsx(styles["navbar-item"], pathname === "/" && styles["active"])} onClick={() => setShow(false)}>
+                                <DocumentIcon className={styles.icon} />
                                 <span className={styles["navbar-text"]}>Projects</span>
                             </Link>
-                            <Link href="/profile" className={clsx(styles["navbar-item"], pathname === "/profile" && styles["active"])}>
-                                <Image
-                                    width={24}
-                                    height={24}
-                                    src="/user.svg"
-                                    alt="Profile"
-                                />
+                            <Link href="/profile" className={clsx(styles["navbar-item"], pathname === "/profile" && styles["active"])} onClick={() => setShow(false)}>
+                                <UserIcon className={styles.icon} />
                                 <span className={styles["navbar-text"]}>Profile</span>
                             </Link>
                         </div>
