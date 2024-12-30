@@ -89,6 +89,8 @@
     font-family: var(--font-inter);
     font-size: 1rem;
     background-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 @keyframes spin {
@@ -102,7 +104,8 @@
 }
 
 @media (min-width: 768px) {
-    .button {
+    .button,
+    .base-button {
         cursor: pointer;
     }
 }
