@@ -18,7 +18,8 @@ html {
     --color-disabled: #3D3D3D;
     --color-text-light: #F6F6F6;
     --color-text-dark: #121212;
-    --app-bar-height: 3.5rem;
+    --appbar-height: 3.5rem;
+    --desktop-navbar-width: 20rem;
 }
 
 body {
