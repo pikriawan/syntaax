@@ -2,8 +2,14 @@
     cursor: default;
 }
 
+.base-link {
+    cursor: default;
+    text-decoretion: none;
+}
+
 @media (min-width: 768px) {
-    .link {
+    .link,
+    .base-link {
         cursor: pointer;
     }
 }
