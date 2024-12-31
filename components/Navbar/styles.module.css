@@ -5,7 +5,10 @@
     position: fixed;
     top: 0;
     left: -100%;
+    display: flex;
+    flex-direction: column;
     z-index: 1;
+    transition: left 0.2s ease-in-out;
 }
 
 .navbar.show {
@@ -27,6 +30,39 @@
 
 .icon {
     vertical-align: middle;
+}
+
+.navbar-nav {
+    height: calc(100% - var(--appbar-height));
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.navbar-item {
+    background-color: var(--color-secondary-main);
+    color: var(--color-text-light);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-item:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.navbar-item.active {
+    background-color: var(--color-primary-main);
+    color: var(--color-text-dark);
+}
+
+.navbar-item.active:hover {
+    background-color: var(--color-primary-hover);
 }
 
 @media (min-width: 768px) {
