@@ -5,13 +5,39 @@
     top: 0;
     left: 0;
     padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.5rem 1rem auto auto 1.5rem;
+    grid-template-areas: "navbar-toggle . brand . create-project-form-toggle";
     align-items: center;
 }
 
 .icon {
     vertical-align: middle;
+}
+
+.navbar-toggle {
+    grid-area: navbar-toggle;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary-main);
+    gap: 0.5rem;
+    grid-area: brand;
+}
+
+.brand img {
+    display: block;
+}
+
+.brand span {
+    font-family: var(--font-poppins);
+    font-weight: 700;
+}
+
+.create-project-form-toggle {
+    grid-area: create-project-form-toggle;
 }
 
 .main {
@@ -24,6 +50,11 @@
 }
 
 @media (min-width: 768px) {
+    .appbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .navbar-toggle {
         display: none;
     }
