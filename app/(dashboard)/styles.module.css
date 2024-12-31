@@ -1,0 +1,7 @@
+.appbar {
+    width: 100%;
+    height: var(--appbar-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
