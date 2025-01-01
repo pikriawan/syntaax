@@ -2,6 +2,6 @@
 
 import dynamic from "next/dynamic";
 
-const ErudaNoSSR = dynamic(() => import("./_Eruda"), { ssr: false });
+const ErudaNoSSR = dynamic(() => import("./Eruda"), { ssr: false });
 
 export default ErudaNoSSR;

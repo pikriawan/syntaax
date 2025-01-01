@@ -2,6 +2,6 @@
 
 import eruda from "eruda";
 
-export default function _Eruda() {
+export default function Eruda() {
     eruda.init();
 }

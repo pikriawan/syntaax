@@ -1,0 +1,16 @@
+.link {
+    color: var(--color-link);
+    text-decoration: none;
+    cursor: default;
+    transition: color 0.2s ease-in-out;
+}
+
+.link:hover {
+    color: var(--color-link-hover);
+}
+
+@media (min-width: 768px) {
+    .link {
+        cursor: pointer;
+    }
+}

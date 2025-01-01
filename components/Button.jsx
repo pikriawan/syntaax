@@ -1,36 +1,37 @@
 import clsx from "clsx";
 import Image from "next/image";
-import styles from "./styles.module.css";
+import BaseButton from "./BaseButton";
+import styles from "@/styles/Button.module.css";
 
 export default function Button({
     children,
     className,
-    disabled,
+    color,
     loading,
-    variant = "primary",
+    disabled,
     ...props
 }) {
     return (
-        <button
+        <BaseButton
+            disabled={disabled || loading}
             className={clsx(
                 styles.button,
-                styles[`button-${variant}`],
+                styles[`button-${color}`],
                 loading && styles.loading,
-                className,
+                className
             )}
-            disabled={disabled || loading}
             {...props}
         >
-            <span className={styles["button-children"]}>
+            <span className={styles["button-content"]}>
                 {children}
             </span>
             <Image
-                src="loader.svg"
-                alt="Loader"
                 width={16}
                 height={16}
+                src="/loader.svg"
+                alt="Loader"
                 className={styles["button-loader"]}
             />
-        </button>
+        </BaseButton>
     );
 }
