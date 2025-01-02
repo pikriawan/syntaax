@@ -17,7 +17,7 @@ export default function Stack({
             <div
                 className={clsx(
                     styles.stack,
-                    `${direction}`,
+                    direction,
                     `justify-${justifyContent}`,
                     `items-${alignItems}`,
                     `spacing-${spacing}`,
