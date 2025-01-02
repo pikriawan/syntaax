@@ -16,7 +16,7 @@ export default function Button({
             disabled={disabled || loading}
             className={clsx(
                 styles.button,
-                styles[`button-${color}`],
+                styles[`${color}`],
                 loading && styles.loading,
                 className
             )}

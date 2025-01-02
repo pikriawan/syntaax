@@ -14,31 +14,31 @@
     background-color: var(--color-primary-hover);
 }
 
-.button-primary {
+.button.primary {
     background-color: var(--color-primary-main);
     color: var(--color-text-dark);
 }
 
-.button-primary:hover {
+.button.primary:hover {
     background-color: var(--color-primary-hover);
 }
 
-.button-secondary {
+.button.secondary {
     background-color: var(--color-secondary-main);
     color: var(--color-text-light);
     box-shadow: 0 0 0 0.0625rem var(--color-border) inset;
 }
 
-.button-secondary:hover {
+.button.secondary:hover {
     background-color: var(--color-secondary-hover);
 }
 
-.button-danger {
+.button.danger {
     background-color: var(--color-danger-main);
     color: var(--color-text-light);
 }
 
-.button-danger:hover {
+.button.danger:hover {
     background-color: var(--color-danger-hover);
 }
 

@@ -1,0 +1,8 @@
+.appbar {
+    height: var(--appbar-height);
+    box-shadow: 0 -0.0625rem 0 var(--color-border) inset;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
