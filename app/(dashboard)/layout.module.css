@@ -1,0 +1,17 @@
+.dashboard-layout {
+    height: 100%;
+}
+
+.navbar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .navbar-toggle {
+        display: none;
+    }
+
+    .navbar {
+        display: block;
+    }
+}
