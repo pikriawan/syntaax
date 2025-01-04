@@ -1,0 +1,12 @@
+.desktop-navbar {
+    width: var(--desktop-navbar-width);
+    height: calc(100% - var(--appbar-height));
+    box-shadow: -0.0625rem 0 0 var(--color-border) inset;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktop-navbar {
+        display: block;
+    }
+}
