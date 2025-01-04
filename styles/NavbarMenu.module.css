@@ -1,11 +1,8 @@
-.navbar {
-    width: var(--desktop-navbar-width);
-    height: calc(100% - var(--appbar-height));
-    background-color: var(--color-background);
-    box-shadow: -0.0625rem 0 0 var(--color-border) inset;
+.navbar-menu {
+    overflow-y: auto;
 }
 
-.navbar-nav {
+.navbar-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -13,6 +10,7 @@
 }
 
 .navbar-item {
+    display: block;
     list-style-type: none;
     border-radius: 0.5rem;
     transition: background-color 0.2s ease-in-out;

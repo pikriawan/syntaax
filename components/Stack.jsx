@@ -9,6 +9,8 @@ export default function Stack({
     direction,
     justifyContent,
     alignItems,
+    fullWidth,
+    fullHeight,
     spacing = 0,
     ...props
 }) {
@@ -18,9 +20,11 @@ export default function Stack({
                 className={clsx(
                     styles.stack,
                     direction,
-                    `justify-${justifyContent}`,
-                    `items-${alignItems}`,
                     `spacing-${spacing}`,
+                    fullWidth && styles["full-width"],
+                    fullHeight && styles["full-height"],
+                    justifyContent && `justify-${justifyContent}`,
+                    alignItems && `items-${alignItems}`,
                     className
                 )}
                 {...props}
