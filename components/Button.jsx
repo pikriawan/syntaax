@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import BaseButton from "./BaseButton";
+import loader from "@/public/loader.svg";
 import styles from "@/styles/Button.module.css";
 
 export default function Button({
@@ -28,7 +29,7 @@ export default function Button({
             <Image
                 width={16}
                 height={16}
-                src="/loader.svg"
+                src={loader}
                 alt="Loader"
                 className={styles["button-loader"]}
             />

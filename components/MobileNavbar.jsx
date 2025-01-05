@@ -10,6 +10,7 @@ import Appbar from "./Appbar";
 import BaseButton from "./BaseButton";
 import Link from "./Link";
 import NavbarMenu from "./NavbarMenu";
+import syntaax from "@/public/syntaax.svg";
 import styles from "@/styles/MobileNavbar.module.css";
 
 export default function MobileNavbar({ className, ...props }) {
@@ -45,12 +46,7 @@ export default function MobileNavbar({ className, ...props }) {
                 <div className={clsx(styles["mobile-navbar"], show && styles.show ,className)} {...props}>
                     <Appbar>
                         <Link href="/" className={styles["brand-link"]}>
-                            <Image
-                                width={16}
-                                height={16}
-                                src="/syntaax.svg"
-                                alt="Syntaax"
-                            />
+                            <Image width={16} height={16} src={syntaax} alt="Syntaax" />
                         </Link>
                         <BaseButton className={styles["icon-button"]} onClick={() => setShow(false)}>
                             <XMarkIcon width={24} height={24} />

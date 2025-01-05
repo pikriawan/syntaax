@@ -1,4 +1,6 @@
 .brand-link,
 .icon-button {
-    display: flex;
+    color: #F01260;
+    display: inline-block;
+    line-height: 0;
 }

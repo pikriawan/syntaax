@@ -3,6 +3,10 @@
 import clsx from "clsx";
 import styles from "@/styles/Stack.module.css";
 
+function sanitizeSpacing(spacing) {
+    return spacing.toString().split(".").join("\\.");
+}
+
 export default function Stack({
     children,
     className,
@@ -44,7 +48,7 @@ export default function Stack({
                     align-items: ${alignItems};
                 }
 
-                .spacing-${spacing} {
+                .spacing-${sanitizeSpacing(spacing)} {
                     gap: ${spacing}rem;
                 }
             `}</style>

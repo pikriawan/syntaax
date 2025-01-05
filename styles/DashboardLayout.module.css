@@ -1,0 +1,9 @@
+.brand-text {
+    font-family: var(--font-poppins);
+    color: var(--color-primary-main);
+}
+
+.icon-button {
+    display: inline-block;
+    line-height: 0;
+}
