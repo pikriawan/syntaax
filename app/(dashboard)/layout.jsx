@@ -1,8 +1,6 @@
 import Image from "next/image";
 import syntaax from "@/public/syntaax.svg";
 import Appbar from "@/components/Appbar";
-import BaseButton from "@/components/BaseButton";
-import Button from "@/components/Button";
 import DesktopNavbar from "@/components/DesktopNavbar";
 import Link from "@/components/Link";
 import MobileNavbar from "@/components/MobileNavbar";
@@ -23,8 +21,10 @@ export default function DashboardLayout({ children }) {
                     </Link>
                 </Stack>
             </Appbar>
-            <DesktopNavbar />
-            <main>{children}</main>
+            <Stack className={styles.content}>
+                <DesktopNavbar />
+                <main>{children}</main>
+            </Stack>
         </>
     );
 }

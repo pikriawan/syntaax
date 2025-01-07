@@ -42,7 +42,8 @@
     background-color: var(--color-danger-hover);
 }
 
-.button:disabled {
+.button:disabled,
+.button:disabled:hover {
     background-color: var(--color-disabled);
     color: var(--color-text-light);
     box-shadow: none;

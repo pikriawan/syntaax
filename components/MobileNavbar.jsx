@@ -45,7 +45,7 @@ export default function MobileNavbar({ className, ...props }) {
             {mounted && createPortal(
                 <div className={clsx(styles["mobile-navbar"], show && styles.show ,className)} {...props}>
                     <Appbar>
-                        <Link href="/" className={styles["brand-link"]}>
+                        <Link href="/" className={styles["brand-link"]} onClick={() => setShow(false)}>
                             <Image width={16} height={16} src={syntaax} alt="Syntaax" />
                         </Link>
                         <BaseButton className={styles["icon-button"]} onClick={() => setShow(false)}>
