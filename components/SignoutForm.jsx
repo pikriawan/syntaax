@@ -8,7 +8,7 @@ export default function SignoutForm() {
         <form action={async () => {
             "use server";
 
-            await signOut({ redirectTo: "/signin" });
+            await signOut({ redirectTo: "/" });
         }}>
             <SubmitButton color="danger">
                 <Stack spacing={0.5} alignItems="center">
