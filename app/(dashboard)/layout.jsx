@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }) {
             </Appbar>
             <Stack className={styles.content}>
                 <DesktopNavbar />
-                <main>{children}</main>
+                <main className={styles.main}>{children}</main>
             </Stack>
         </>
     );

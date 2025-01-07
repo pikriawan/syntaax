@@ -1,3 +1,5 @@
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import Stack from "./Stack";
 import SubmitButton from "./SubmitButton";
 import { signOut } from "@/auth";
 
@@ -8,7 +10,12 @@ export default function SignoutForm() {
 
             await signOut({ redirectTo: "/signin" });
         }}>
-            <SubmitButton color="danger">Sign out</SubmitButton>
+            <SubmitButton color="danger">
+                <Stack spacing={0.5} alignItems="center">
+                    <ArrowRightStartOnRectangleIcon width={24} height={24} />
+                    Sign out
+                </Stack>
+            </SubmitButton>
         </form>
     )
 }
