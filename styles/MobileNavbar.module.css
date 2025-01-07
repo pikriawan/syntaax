@@ -1,7 +1,6 @@
 .icon-button,
 .brand-link {
-    display: inline-block;
-    line-height: 0;
+    display: flex;
 }
 
 .mobile-navbar {

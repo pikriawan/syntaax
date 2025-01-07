@@ -23,10 +23,6 @@ export default function MobileNavbar({ className, ...props }) {
     }, []);
 
     useEffect(() => {
-        setShow(false);
-    }, [pathname]);
-
-    useEffect(() => {
         function handleResize() {
             if (window.innerWidth > 768) {
                 setShow(false);
@@ -36,6 +32,10 @@ export default function MobileNavbar({ className, ...props }) {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        setShow(false);
+    }, [pathname]);
 
     return (
         <>
@@ -52,7 +52,7 @@ export default function MobileNavbar({ className, ...props }) {
                             <XMarkIcon width={24} height={24} />
                         </BaseButton>
                     </Appbar>
-                    <NavbarMenu className={styles["navbar-menu"]} />
+                    <NavbarMenu className={styles["navbar-menu"]} onNavigate={() => setShow(false)} />
                 </div>,
                 document.body
             )}

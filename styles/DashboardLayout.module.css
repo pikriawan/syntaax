@@ -4,8 +4,7 @@
 }
 
 .icon-button {
-    display: inline-block;
-    line-height: 0;
+    display: flex;
 }
 
 .content {
