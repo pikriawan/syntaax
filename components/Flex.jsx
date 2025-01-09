@@ -3,17 +3,21 @@
 import styled from "styled-components";
 
 function Flex({ children, ...props }) {
+    if (!props.as) {
+        props.as = "div";
+    }
+
     return (
-        <div {...props}>
+        <props.as {...props}>
             {children}
-        </div>
+        </props.as>
     );
 }
 
 export default styled(Flex)`
+    display: flex;
     width: ${({ width }) => width};
     height: ${({ height }) => height};
-    display: flex;
     flex-direction: ${({ direction }) => direction};
     justify-content: ${({ justify }) => justify};
     align-items: ${({ align }) => align};

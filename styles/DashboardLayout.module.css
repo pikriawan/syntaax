@@ -7,10 +7,6 @@
     display: flex;
 }
 
-.content {
-    height: calc(100% - var(--appbar-height));
-}
-
 .main {
     width: 100%;
     overflow-y: auto;

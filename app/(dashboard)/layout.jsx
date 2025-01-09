@@ -2,29 +2,29 @@ import Image from "next/image";
 import syntaax from "@/public/syntaax.svg";
 import Appbar from "@/components/Appbar";
 import DesktopNavbar from "@/components/DesktopNavbar";
+import Flex from "@/components/Flex";
 import Link from "@/components/Link";
 import MobileNavbar from "@/components/MobileNavbar";
-import Stack from "@/components/Stack";
 import styles from "@/styles/DashboardLayout.module.css";
 
 export default function DashboardLayout({ children }) {
     return (
         <>
             <Appbar>
-                <Stack spacing={1} alignItems="center">
+                <Flex gap="1rem" align="center">
                     <MobileNavbar />
                     <Link href="/">
-                        <Stack spacing={0.5} alignItems="center">
+                        <Flex gap="0.5rem" align="center">
                             <Image width={16} height={16} src={syntaax} alt="Syntaax" />
                             <span className={styles["brand-text"]}>syntaax</span>
-                        </Stack>
+                        </Flex>
                     </Link>
-                </Stack>
+                </Flex>
             </Appbar>
-            <div className={styles.content}>
+            <Flex height="calc(100% - var(--appbar-height))">
                 <DesktopNavbar />
                 <main className={styles.main}>{children}</main>
-            </div>
+            </Flex>
         </>
     );
 }
