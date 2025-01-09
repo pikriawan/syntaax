@@ -1,9 +1,9 @@
 import Image from "next/image";
-import syntaax from "@/public/syntaax.svg";
 import Appbar from "@/components/Appbar";
 import DesktopNavbar from "@/components/DesktopNavbar";
 import Link from "@/components/Link";
 import MobileNavbar from "@/components/MobileNavbar";
+import syntaax from "@/public/syntaax.svg";
 import styles from "@/styles/DashboardLayout.module.css";
 
 export default function DashboardLayout({ children }) {
