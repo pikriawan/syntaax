@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import clsx from "clsx";
 import styles from "@/styles/Stack.module.css";
@@ -54,4 +54,6 @@ export default function Stack({
             `}</style>
         </>
     );
-}
+}*/
+
+export default function Stack() {}
