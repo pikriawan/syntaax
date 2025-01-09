@@ -11,7 +11,7 @@ export default function SignoutForm() {
             await signOut({ redirectTo: "/" });
         }}>
             <SubmitButton color="danger">
-                <Flex as="span" gap="0.5rem" align="center">
+                <Flex as="span" $gap="0.5rem" $align="center">
                     <ArrowRightStartOnRectangleIcon width={24} height={24} />
                     Sign out
                 </Flex>

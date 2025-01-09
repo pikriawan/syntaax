@@ -8,7 +8,7 @@ export default async function ProfilePage() {
     const session = await auth();
 
     return (
-        <Flex className={styles["profile-page"]} direction="column" gap="1rem">
+        <Flex className={styles["profile-page"]} $direction="column" $gap="1rem">
             <h1 className={styles["profile-title"]}>Profile</h1>
             <Image
                 width={120}
