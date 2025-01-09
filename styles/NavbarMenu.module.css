@@ -20,11 +20,11 @@
     background-color: var(--color-secondary-hover);
 }
 
-.navbar-item.active {
+.navbar-item-active {
     background-color: var(--color-primary-main);
 }
 
-.navbar-item.active:hover {
+.navbar-item-active:hover {
     background-color: var(--color-primary-hover);
 }
 
@@ -36,10 +36,10 @@
     padding: 0.5rem;
 }
 
-.navbar-item.active .navbar-link {
-    color: var(--color-text-dark);
-}
-
 .navbar-link:hover {
     color: var(--color-text-light);
+}
+
+.navbar-item-active .navbar-link {
+    color: var(--color-text-dark);
 }

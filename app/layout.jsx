@@ -1,6 +1,5 @@
 import { Inter, Poppins, Roboto_Mono } from "next/font/google";
 import ErudaNoSSR from "@/components/ErudaNoSSR";
-import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -37,9 +36,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.variable} ${poppins.variable} ${roboto_mono.variable}`}>
             <body>
-                <StyledComponentsRegistry>
-                    {children}
-                </StyledComponentsRegistry>
+                {children}
                 {process.env.NODE_ENV === "development" && <ErudaNoSSR />}
             </body>
         </html>

@@ -1,7 +1,7 @@
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
-import Flex from "./Flex";
 import SubmitButton from "./SubmitButton";
 import { signOut } from "@/auth";
+import styles from "@/styles/SignoutForm.module.css";
 
 export default function SignoutForm() {
     return (
@@ -11,10 +11,10 @@ export default function SignoutForm() {
             await signOut({ redirectTo: "/" });
         }}>
             <SubmitButton color="danger">
-                <Flex as="span" gap="0.5rem" align="center">
+                <span className={styles["button-content"]}>
                     <ArrowRightStartOnRectangleIcon width={24} height={24} />
                     Sign out
-                </Flex>
+                </span>
             </SubmitButton>
         </form>
     );

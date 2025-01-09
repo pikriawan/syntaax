@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { auth } from "@/auth";
-import Flex from "@/components/Flex";
 import SignoutForm from "@/components/SignoutForm";
 import styles from "@/styles/ProfilePage.module.css";
 
@@ -8,7 +7,7 @@ export default async function ProfilePage() {
     const session = await auth();
 
     return (
-        <Flex className={styles["profile-page"]} direction="column" gap="1rem">
+        <div className={styles.profile}>
             <h1 className={styles["profile-title"]}>Profile</h1>
             <Image
                 width={120}
@@ -20,6 +19,6 @@ export default async function ProfilePage() {
             <h2>{session?.user?.name}</h2>
             <p>{session?.user?.email}</p>
             <SignoutForm />
-        </Flex>
+        </div>
     );
 }
