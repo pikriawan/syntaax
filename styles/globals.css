@@ -22,6 +22,7 @@ html {
     --color-link-hover: #0070FF;
     --appbar-height: 3.5rem;
     --desktop-navbar-width: 15rem;
+    --desktop-toast-width: 30rem;
 }
 
 body {
