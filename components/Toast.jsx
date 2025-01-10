@@ -8,19 +8,11 @@ import styles from "@/styles/Toast.module.css";
 export default function Toast({
     children,
     className,
-    color,
     onHide,
     ...props
 }) {
     return (
-        <div
-            className={clsx(
-                styles.toast,
-                color && styles[`toast-${color}`],
-                className
-            )}
-            {...props}
-        >
+        <div className={clsx(styles.toast, className)} {...props}>
             <div className={styles["toast-content"]}>
                 {children}
             </div>

@@ -9,39 +9,35 @@ export default function ToastProvider({ children }) {
     const [mounted, setMounted] = useState(false);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
-    const [color, setColor] = useState(null);
     const timeoutRef = useRef(null);
+
+    function showToast(msg) {
+        setMessage(msg);
+        setShow(true);
+        clearTimeout(timeoutRef.current);
+
+        timeoutRef.current = setTimeout(() => {
+            setMessage("");
+            setShow(false);
+        }, 3000);
+    }
+
+    function hideToast() {
+        setMessage("");
+        setShow(false);
+        clearTimeout(timeoutRef.current);
+    }
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     return (
-        <ToastContext.Provider
-            value={({
-                color = null,
-                message: msg = ""
-            }) => {
-                setMessage(msg);
-                setColor(color);
-                setShow(true);
-
-                clearTimeout(timeoutRef.current);
-
-                timeoutRef.current = setTimeout(() => {
-                    setMessage("");
-                    setShow(false);
-                }, 3000);
-            }}
-        >
+        <ToastContext.Provider value={showToast}>
             {children}
             {mounted && createPortal(
                 show && (
-                    <Toast color={color} onHide={() => {
-                        clearTimeout(timeoutRef.current);
-                        setMessage("");
-                        setShow(false);
-                    }}>
+                    <Toast onHide={hideToast}>
                         {message}
                     </Toast>
                 ),

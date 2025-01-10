@@ -12,15 +12,6 @@
     border-radius: 0.5rem;
 }
 
-.toast-primary {
-    background-color: var(--color-background);
-}
-
-.toast-danger {
-    background-color: var(--color-danger-main);
-    box-shadow: none;
-}
-
 .toast-content {
     width: 100%;
 }
