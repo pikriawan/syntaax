@@ -1,5 +1,9 @@
 .appbar {
-    justify-content: flex-start;
+    justify-content: space-between;
+}
+
+.appbar-left {
+    display: flex;
     gap: 1rem;
 }
 

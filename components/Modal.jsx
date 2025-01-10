@@ -8,8 +8,8 @@ import styles from "@/styles/Modal.module.css";
 export default function Modal({
     children,
     className,
-    open,
-    onClose = () => {},
+    show,
+    onHide = () => {},
     ...props
 }) {
     const [mounted, setMounted] = useState(false);
@@ -18,9 +18,9 @@ export default function Modal({
         setMounted(true);
     }, []);
 
-    return mounted && open && createPortal(
+    return mounted && show && createPortal(
         <>
-            <div className={styles["modal-overlay"]} onClick={onClose} />
+            <div className={styles["modal-overlay"]} onClick={onHide} />
             <div className={clsx(styles.modal, className)} {...props}>
                 {children}
             </div>

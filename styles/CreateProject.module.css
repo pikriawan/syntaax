@@ -1,0 +1,19 @@
+.icon-button {
+    display: flex;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-actions {
+    width: 100%;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.form-action {
+    width: 100%;
+}
