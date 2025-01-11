@@ -13,7 +13,7 @@ export default function ProjectCard({ id, name, updatedAt }) {
                 <h2>{name}</h2>
                 <p>{timeAgo(updatedAt)}</p>
             </Link>
-            <ProjectOption id={id} className={styles["project-option-toggle"]} />
+            <ProjectOption id={id} name={name} className={styles["project-option-toggle"]} />
         </div>
     );
 }

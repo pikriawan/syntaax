@@ -13,8 +13,7 @@ import styles from "@/styles/CreateProject.module.css";
 
 const initialState = {
     success: null,
-    message: "",
-    inputs: null
+    message: ""
 };
 
 export default function CreateProject() {
@@ -25,14 +24,12 @@ export default function CreateProject() {
     const [state, action, pending] = useActionState(createProject, initialState);
 
     useEffect(() => {
+        setMessage(state.message);
+
         if (state.success) {
             setModalShow(false);
             setName("");
         }
-    }, [state]);
-
-    useEffect(() => {
-        setMessage(state.message);
     }, [state]);
 
     return pathname === "/projects" && (
