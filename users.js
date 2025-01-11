@@ -9,12 +9,11 @@ export async function getUser() {
     }
 
     const sql = neon(process.env.DATABASE_URL);
-    const response = await sql`
+    const userId = (await sql`
         SELECT id
         FROM users
-        WHERE email = ${session.user.email}
-    `;
-    const userId = response[0].id;
+        WHERE email = ${session.user.email};
+    `)[0].id;
 
     return { id: userId, ...session.user };
 }

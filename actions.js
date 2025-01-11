@@ -1,7 +1,6 @@
 "use server";
 
 import { neon } from "@neondatabase/serverless";
-import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { getUser } from "./users";
 

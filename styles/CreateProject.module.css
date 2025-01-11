@@ -8,6 +8,17 @@
     gap: 1rem;
 }
 
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-message {
+    font-size: 0.75rem;
+    color: var(--color-danger-main);
+}
+
 .form-actions {
     width: 100%;
     display: flex;

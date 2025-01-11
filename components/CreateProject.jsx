@@ -20,11 +20,13 @@ const initialState = {
 export default function CreateProject() {
     const pathname = usePathname();
     const [modalShow, setModalShow] = useState(false);
+    const [name, setName] = useState("");
     const [state, action, pending] = useActionState(createProject, initialState);
 
     useEffect(() => {
         if (state?.success) {
             setModalShow(false);
+            setName("");
         }
     }, [state]);
 
@@ -36,16 +38,19 @@ export default function CreateProject() {
             <Modal show={modalShow} onHide={() => setModalShow(false)}>
                 <form action={action} className={styles.form}>
                     <h2>New Project</h2>
-                    <Input
-                        autoComplete="off"
-                        name="name"
-                        label="Name"
-                        id="project-name"
-                        defaultValue={state?.inputs?.name}
-                        autoFocus
-                        required
-                    />
-                    {!pending && state?.message && <p className={styles["form-message"]}>{state.message}</p>}
+                    <div className={styles["form-field"]}>
+                        <Input
+                            autoComplete="off"
+                            name="name"
+                            label="Name"
+                            id="project-name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            autoFocus
+                            required
+                        />
+                        {!pending && state?.message && <p className={styles["form-message"]}>{state.message}</p>}
+                    </div>
                     <div className={styles["form-actions"]}>
                         <Button
                             type="button"
