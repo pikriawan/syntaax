@@ -1,10 +1,10 @@
 import ProjectList from "@/components/ProjectList";
-import styles from "@/styles/ProjectPage.module.css";
+import styles from "@/styles/ProjectsPage.module.css";
 
-export default function ProjectPage() {
+export default function ProjectsPage() {
     return (
         <div className={styles.project}>
             <ProjectList />
         </div>
-    )
+    );
 }

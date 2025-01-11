@@ -1,4 +1,8 @@
 .project-card {
+    position: relative;
+}
+
+.project-card-link {
     padding: 1rem;
     background-color: var(--color-background);
     box-shadow: 0 0 0 0.0625rem var(--color-border) inset;
@@ -9,11 +13,12 @@
     gap: 1rem;
 }
 
-.project-card:hover {
+.project-card-link:hover {
     color: var(--color-text-light);
 }
 
-.project-card-header {
-    display: flex;
-    justify-content: space-between;
+.project-option-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
