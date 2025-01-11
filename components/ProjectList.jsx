@@ -7,14 +7,16 @@ export default async function ProjectList() {
 
     return (
         <div className={styles["project-list"]}>
-            {projects.map((project) => (
+            {projects.length ? projects.map((project) => (
                 <ProjectCard
                     key={project.id}
                     id={project.id}
                     name={project.name}
                     updatedAt={project.updated_at}
                 />
-            ))}
+            )) : (
+                <p>You don't have any projects yet</p>
+            )}
         </div>
     );
 }

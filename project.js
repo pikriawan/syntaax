@@ -13,7 +13,7 @@ export async function listProjects() {
         SELECT *
         FROM projects
         WHERE user_id = ${user.id}
-        ORDER BY name;
+        ORDER BY updated_at DESC;
     `;
 
     return projects;

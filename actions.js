@@ -11,14 +11,14 @@ export async function createProject(state, formData) {
     if (!user) {
         return {
             success: false,
-            message: "Unauthenticated",
+            message: "Unauthenticated"
         };
     }
 
     if (rawData.name.length < 5) {
         return {
             success: false,
-            message: "Name must be at least 4 characters long",
+            message: "Name must be at least 5 characters long",
         };
     }
 
@@ -32,7 +32,7 @@ export async function createProject(state, formData) {
     if (exists) {
         return {
             success: false,
-            message: "Name already exists",
+            message: "Name already exists"
         };
     }
 
@@ -45,7 +45,7 @@ export async function createProject(state, formData) {
 
     return {
         success: true,
-        message: "",
+        message: ""
     }
 }
 
@@ -73,16 +73,14 @@ export async function editProjectMetadata(state, formData) {
     if (!exists) {
         return {
             success: false,
-            message: "Project not found",
-            inputs: rawData
+            message: "Project not found"
         };
     }
 
     if (rawData.name.length < 5) {
         return {
             success: false,
-            message: "Name must be at least 4 characters long",
-            inputs: rawData
+            message: "Name must be at least 5 characters long",
         };
     }
 
@@ -101,7 +99,8 @@ export async function editProjectMetadata(state, formData) {
 
     await sql`
         UPDATE projects
-        SET name = ${rawData.name}
+        SET name = ${rawData.name},
+            updated_at = ${new Date()}
         WHERE id = ${rawData.id};
     `;
 
@@ -111,4 +110,43 @@ export async function editProjectMetadata(state, formData) {
         success: true,
         message: ""
     }
+}
+
+export async function deleteProject(state, formData) {
+    const rawData = { id: formData.get("id") };
+    const user = await getUser();
+
+    if (!user) {
+        return {
+            success: false,
+            message: "Unauthenticated"
+        };
+    }
+
+    const sql = neon(process.env.DATABASE_URL);
+    const exists = (await sql`
+        SELECT id
+        FROM projects
+        WHERE id = ${rawData.id};
+    `).length > 0;
+
+    if (!exists) {
+        return {
+            success: false,
+            message: "Project not found"
+        };
+    }
+
+    await sql`
+        DELETE
+        FROM projects
+        WHERE id = ${rawData.id};
+    `;
+
+    revalidatePath("/");
+
+    return {
+        success: true,
+        message: ""
+    };
 }

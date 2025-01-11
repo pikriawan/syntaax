@@ -4,6 +4,7 @@ import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useState } from "react";
 import BaseButton from "./BaseButton";
+import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
 import Modal from "./Modal";
 import styles from "@/styles/ProjectOption.module.css";
@@ -11,6 +12,7 @@ import styles from "@/styles/ProjectOption.module.css";
 export default function ProjectOption({ id, name, className }) {
     const [modalShow, setModalShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
+    const [deleteShow, setDeleteShow] = useState(false);
 
     return (
         <>
@@ -27,10 +29,22 @@ export default function ProjectOption({ id, name, className }) {
                 >
                     Edit
                 </BaseButton>
-                <BaseButton className={clsx(styles["option-button"], styles["option-button-danger"])} onClick={() => setModalShow(false)}>Delete</BaseButton>
+                <BaseButton
+                    className={clsx(
+                        styles["option-button"],
+                        styles["option-button-danger"]
+                    )}
+                    onClick={() => {
+                        setModalShow(false);
+                        setDeleteShow(true);
+                    }}
+                >
+                    Delete
+                </BaseButton>
                 <BaseButton className={styles["option-button"]} onClick={() => setModalShow(false)}>Cancel</BaseButton>
             </Modal>
             <EditProject id={id} name={name} show={editShow} onHide={() => setEditShow(false)} />
+            <DeleteProject id={id} show={deleteShow} onHide={() => setDeleteShow(false)} />
         </>
     );
 }

@@ -33,8 +33,8 @@ export default function EditProject({ id, name, show, onHide }) {
         }}>
             <form action={action} className={styles.form}>
                 <h2>Edit Project</h2>
+                <input type="hidden" name="id" value={id} />
                 <div className={styles["form-field"]}>
-                    <input type="hidden" name="id" value={id} />
                     <Input
                         autoComplete="off"
                         name="name"
