@@ -51,6 +51,7 @@
 }
 
 .button-content {
+    pointer-events: none;
     transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 

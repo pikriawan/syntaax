@@ -23,6 +23,7 @@ html {
     --appbar-height: 3.5rem;
     --desktop-navbar-width: 15rem;
     --desktop-toast-width: 30rem;
+    --desktop-modal-width: 20rem;
 }
 
 body {
