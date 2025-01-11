@@ -21,13 +21,18 @@ export default function CreateProject() {
     const pathname = usePathname();
     const [modalShow, setModalShow] = useState(false);
     const [name, setName] = useState("");
+    const [message, setMessage] = useState("");
     const [state, action, pending] = useActionState(createProject, initialState);
 
     useEffect(() => {
-        if (state?.success) {
+        if (state.success) {
             setModalShow(false);
             setName("");
         }
+    }, [state]);
+
+    useEffect(() => {
+        setMessage(state.message);
     }, [state]);
 
     return pathname === "/projects" && (
@@ -45,18 +50,25 @@ export default function CreateProject() {
                             label="Name"
                             id="project-name"
                             value={name}
-                            onChange={(event) => setName(event.target.value)}
+                            onChange={(event) => {
+                                setName(event.target.value);
+                                setMessage("");
+                            }}
                             autoFocus
                             required
                         />
-                        {!pending && state?.message && <p className={styles["form-message"]}>{state.message}</p>}
+                        {!pending && message && <p className={styles["form-message"]}>{state.message}</p>}
                     </div>
                     <div className={styles["form-actions"]}>
                         <Button
                             type="button"
                             color="secondary"
                             className={styles["form-action"]}
-                            onClick={() => setModalShow(false)}
+                            onClick={() => {
+                                setModalShow(false);
+                                setName("");
+                                setMessage("");
+                            }}
                         >
                             Cancel
                         </Button>

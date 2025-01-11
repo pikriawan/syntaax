@@ -16,8 +16,8 @@ export default function ProjectOption({ id, className }) {
                 <EllipsisHorizontalIcon width={24} height={24} />
             </BaseButton>
             <Modal show={modalShow} onHide={() => setModalShow(false)} className={styles.modal}>
-                <BaseButton className={styles["option-button"]}>Edit</BaseButton>
-                <BaseButton className={clsx(styles["option-button"], styles["option-button-danger"])}>Delete</BaseButton>
+                <BaseButton className={styles["option-button"]} onClick={() => setModalShow(false)}>Edit</BaseButton>
+                <BaseButton className={clsx(styles["option-button"], styles["option-button-danger"])} onClick={() => setModalShow(false)}>Delete</BaseButton>
                 <BaseButton className={styles["option-button"]} onClick={() => setModalShow(false)}>Cancel</BaseButton>
             </Modal>
         </>
