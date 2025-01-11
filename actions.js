@@ -2,7 +2,7 @@
 
 import { neon } from "@neondatabase/serverless";
 import { revalidatePath } from "next/cache";
-import { getUser } from "./users";
+import { getUser } from "./user";
 
 export async function createProject(prevState, formData) {
     const rawData = { name: formData.get("name") };
