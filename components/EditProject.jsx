@@ -19,9 +19,9 @@ export default function EditProject({ id, name, show, onHide }) {
     const [state, action, pending] = useActionState(editProjectMetadata, initialState);
 
     useEffect(() => {
-        setMessage(state.message);
+        setMessage(state?.message);
 
-        if (state.success) {
+        if (state?.success) {
             onHide();
         }
     }, [state]);
@@ -48,7 +48,7 @@ export default function EditProject({ id, name, show, onHide }) {
                         autoFocus
                         required
                     />
-                    {!pending && message && <p className={styles["form-message"]}>{state.message}</p>}
+                    {!pending && message && <p className={styles["form-message"]}>{state?.message}</p>}
                 </div>
                 <div className={styles["form-actions"]}>
                     <Button

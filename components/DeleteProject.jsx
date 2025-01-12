@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export default function DeleteProject({ id, show, onHide }) {
-    const [state, action, pending] = useActionState(deleteProject, initialState);
+    const [state, action] = useActionState(deleteProject, initialState);
 
     useEffect(() => {
         if (state.success) {

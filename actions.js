@@ -26,7 +26,7 @@ export async function createProject(state, formData) {
     const exists = (await sql`
         SELECT name
         FROM projects
-        WHERE name = ${rawData.name};
+        WHERE name = ${rawData.name} AND user_id = ${user.id};
     `).length > 0;
 
     if (exists) {
@@ -67,7 +67,7 @@ export async function editProjectMetadata(state, formData) {
     const exists = (await sql`
         SELECT id
         FROM projects
-        WHERE id = ${rawData.id};
+        WHERE id = ${rawData.id} AND user_id = ${user.id};
     `).length > 0;
 
     if (!exists) {
@@ -87,7 +87,7 @@ export async function editProjectMetadata(state, formData) {
     const nameExists = (await sql`
         SELECT name
         FROM projects
-        WHERE name = ${rawData.name};
+        WHERE name = ${rawData.name} AND user_id = ${user.id};
     `).length > 0;
 
     if (nameExists) {
@@ -101,7 +101,7 @@ export async function editProjectMetadata(state, formData) {
         UPDATE projects
         SET name = ${rawData.name},
             updated_at = ${new Date()}
-        WHERE id = ${rawData.id};
+        WHERE id = ${rawData.id} AND user_id = ${user.id};
     `;
 
     revalidatePath("/");
@@ -127,7 +127,7 @@ export async function deleteProject(state, formData) {
     const exists = (await sql`
         SELECT id
         FROM projects
-        WHERE id = ${rawData.id};
+        WHERE id = ${rawData.id} AND user_id = ${user.id};
     `).length > 0;
 
     if (!exists) {
@@ -140,7 +140,7 @@ export async function deleteProject(state, formData) {
     await sql`
         DELETE
         FROM projects
-        WHERE id = ${rawData.id};
+        WHERE id = ${rawData.id} AND user_id = ${user.id};
     `;
 
     revalidatePath("/");

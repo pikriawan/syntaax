@@ -24,9 +24,9 @@ export default function CreateProject() {
     const [state, action, pending] = useActionState(createProject, initialState);
 
     useEffect(() => {
-        setMessage(state.message);
+        setMessage(state?.message);
 
-        if (state.success) {
+        if (state?.success) {
             setModalShow(false);
             setName("");
         }
@@ -54,7 +54,7 @@ export default function CreateProject() {
                             autoFocus
                             required
                         />
-                        {!pending && message && <p className={styles["form-message"]}>{state.message}</p>}
+                        {!pending && message && <p className={styles["form-message"]}>{state?.message}</p>}
                     </div>
                     <div className={styles["form-actions"]}>
                         <Button
