@@ -40,7 +40,8 @@ export default function RootLayout({ children }) {
                 <ToastProvider>
                     {children}
                 </ToastProvider>
-                {process.env.NODE_ENV === "development" && <ErudaNoSSR />}
+                {/*process.env.NODE_ENV === "development" && <ErudaNoSSR />*/}
+                <ErudaNoSSR />
             </body>
         </html>
     );
