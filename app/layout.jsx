@@ -1,7 +1,6 @@
 import { Inter, Poppins, Roboto_Mono } from "next/font/google";
-import ErudaNoSSR from "@/components/ErudaNoSSR";
-import ToastProvider from "@/components/ToastProvider";
-import "@/styles/globals.css";
+import ErudaNoSSR from "@/components/eruda-no-ssr";
+import "./globals.css";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -10,8 +9,8 @@ const inter = Inter({
 });
 
 const poppins = Poppins({
-    subsets: ["latin"],
     weight: ["700"],
+    subsets: ["latin"],
     variable: "--font-poppins",
     display: "swap"
 });
@@ -35,13 +34,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${inter.variable} ${poppins.variable} ${roboto_mono.variable}`}>
-            <body>
-                <ToastProvider>
-                    {children}
-                </ToastProvider>
-                {/*process.env.NODE_ENV === "development" && <ErudaNoSSR />*/}
-                <ErudaNoSSR />
+        <html lang="en" className={`${inter.variable} ${poppins.variable} ${roboto_mono.variable} w-full h-full`}>
+            <body className="w-full h-full bg-zinc-950 text-zinc-50 font-sans">
+                {children}
+                {process.env.NODE_ENV === "development" && <ErudaNoSSR />}
             </body>
         </html>
     );

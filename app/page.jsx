@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import Button from "@/components/Button";
-import Link from "@/components/Link";
-import { getUser } from "@/user";
+import Button from "@/components/ui/button";
+import { getUser } from "@/data/user";
 
-export default async function HomePage() {
+export default async function LandingPage() {
     const user = await getUser();
 
     if (user) {
@@ -11,18 +11,10 @@ export default async function HomePage() {
     }
 
     return (
-        <div style={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "1rem"
-        }}>
-            <h1>Welcome</h1>
-            <Link href="/signin">
-                <Button>Start building</Button>
-            </Link>
+        <div className="w-full h-full flex justify-center items-center">
+            <Button>
+                <Link href="/signin">Sign in</Link>
+            </Button>
         </div>
     );
 }

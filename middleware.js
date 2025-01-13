@@ -1,16 +1,13 @@
 import NextAuth from "next-auth";
-import authConfig from "./auth.config";
+import authConfig from "@/lib/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
+const publicRoutes = ["/", "/signin"];
+
 export default auth(async function middleware(req) {
-    if (
-        !req.auth &&
-        req.nextUrl.pathname !== "/signin" &&
-        req.nextUrl.pathname !== "/"
-    ) {
-        const newUrl = new URL("/signin", req.nextUrl.origin);
-        return Response.redirect(newUrl);
+    if (!req.auth && !publicRoutes.includes(req.nextUrl.pathname)) {
+        return Response.redirect(new URL("/signin", req.nextUrl.origin));
     }
 });
 
