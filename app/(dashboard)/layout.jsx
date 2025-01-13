@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
             </div>
             <div className="w-full h-[calc(100%-3.5rem)] flex">
                 <DesktopNavbar />
-                <main className="w-[calc(100%-15rem)] h-full overflow-y-auto">{children}</main>
+                <main className="w-full h-full overflow-y-auto md:w-[calc(100%-15rem)]">{children}</main>
             </div>
         </div>
     );
