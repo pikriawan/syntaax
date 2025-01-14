@@ -2,19 +2,16 @@
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import SyntaaxIcon from "./icons/syntaax-icon";
 import NavbarMenu from "./navbar-menu";
+import useMounted from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
 
 export default function MobileNavbar() {
-    const [mounted, setMounted] = useState(false);
+    const mounted = useMounted();
     const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     return (
         <>

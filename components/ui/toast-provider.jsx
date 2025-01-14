@@ -4,19 +4,16 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Toast from "./toast";
 import ToastContext from "@/contexts/toast-context";
+import useMounted from "@/hooks/use-mounted";
 
 const TOAST_OPEN_DURATION = 3000;
 
 export default function ToastProvider({ children }) {
-    const [mounted, setMounted] = useState(false);
+    const mounted = useMounted();
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [hover, setHover] = useState(false);
     const timeoutRef = useRef(null);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     useEffect(() => {
         if (hover) {
