@@ -1,20 +1,19 @@
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
-import SubmitButton from "@/components/ui/submit-button";
-import { signOut } from "@/lib/auth";
+import Image from "next/image";
+import SignoutForm from "@/components/signout-form";
+import { getUser } from "@/data/user";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+    const user = await getUser();
+
     return (
-        <div className="p-4 h-[50rem]">
-            <form action={async () => {
-                "use server";
-
-                await signOut({ redirectTo: "/" });
-            }}>
-                <SubmitButton color="danger" className="flex justify-center items-center gap-2">
-                    <ArrowRightStartOnRectangleIcon width={16} height={16} />
-                    Sign out
-                </SubmitButton>
-            </form>
+        <div className="px-4 py-6 flex flex-col items-start gap-4">
+            <h1 className="text-3xl font-bold">Profile</h1>
+            <Image width={120} height={120} src={user?.image} alt="Profile picture" className="rounded-full" />
+            <div className="flex flex-col gap-2">
+                <h2 className="text-2xl font-bold">{user?.name}</h2>
+                <p>{user?.email}</p>
+            </div>
+            <SignoutForm />
         </div>
     );
 }

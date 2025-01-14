@@ -1,5 +1,6 @@
 import { Inter, Poppins, Roboto_Mono } from "next/font/google";
 import ErudaNoSSR from "@/components/eruda-no-ssr";
+import ToastProvider from "@/components/ui/toast-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,7 +37,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.variable} ${poppins.variable} ${roboto_mono.variable} w-full h-full`}>
             <body className="w-full h-full bg-zinc-950 text-zinc-50 font-sans">
-                {children}
+                <ToastProvider>
+                    {children}
+                </ToastProvider>
                 {process.env.NODE_ENV === "development" && <ErudaNoSSR />}
             </body>
         </html>
