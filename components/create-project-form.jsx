@@ -2,7 +2,7 @@
 
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
@@ -14,11 +14,7 @@ import { createProject } from "@/actions/project";
 
 export default function CreateProjectForm() {
     const pathname = usePathname();
-    const [state, action, pending] = useActionState(createProject, undefined);
-
-    useEffect(() => {
-        console.log(state);
-    }, [state]);
+    const [state, action] = useActionState(createProject, undefined);
 
     return pathname === "/projects" && (
         <ModalProvider>
@@ -38,14 +34,9 @@ export default function CreateProjectForm() {
                                 defaultValue={state?.inputs?.name}
                             />
                             {state?.errors?.name && (
-                                <div className="text-red-500">
-                                    <p>Name must:</p>
-                                    <ul>
-                                        {state.errors.name.map((error) => (
-                                            <li key={error}>- {error}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                <p className="text-red-500">
+                                    {state.errors?.name[0]}
+                                </p>
                             )}
                         </div>
                         <div className="flex gap-3">
