@@ -14,7 +14,7 @@ export default function Modal({ children, className }) {
 
     useEffect(() => {
         if (open) {
-            const input = modalRef.current.querySelector("input");
+            const input = modalRef.current.querySelector("input:not([type=\"hidden\"])");
             input?.focus();
         }
     }, [open]);

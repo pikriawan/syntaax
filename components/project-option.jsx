@@ -1,7 +1,6 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { useActionState } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
@@ -10,28 +9,28 @@ import ModalClose from "./ui/modal-close";
 import ModalProvider from "./ui/modal-provider";
 import ModalTrigger from "./ui/modal-trigger";
 import SubmitButton from "./ui/submit-button";
-import { createProject } from "@/actions/project";
+import { updateProjectMetadata } from "@/actions/project";
 
-export default function CreateProjectForm() {
-    const pathname = usePathname();
-    const [state, action] = useActionState(createProject, undefined);
+export default function ProjectOption({ projectName }) {
+    const[state, action] = useActionState(updateProjectMetadata, undefined);
 
-    return pathname === "/projects" && (
+    return (
         <ModalProvider>
-            <ModalTrigger className="flex">
-                <button>
-                    <PlusIcon className="w-6 h-6" />
+            <ModalTrigger className="absolute top-4 right-4">
+                <button onClick={(event) => event.preventDefault()}>
+                    <EllipsisHorizontalIcon className="w-6 h-6" />
                 </button>
             </ModalTrigger>
             <Modal>
                 <div className="flex flex-col gap-4">
                     <form action={action} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
+                            <input type="hidden" name="old-name" value={projectName} />
                             <Input
                                 autoComplete="off"
                                 label="Name"id="name"
                                 name="name"
-                                defaultValue={state?.inputs?.name}
+                                defaultValue={state?.inputs?.name || projectName}
                                 required
                             />
                             {state?.errors?.name && (
@@ -44,7 +43,7 @@ export default function CreateProjectForm() {
                             <ModalClose className="grow">
                                 <Button className="w-full" type="button" color="secondary">Cancel</Button>
                             </ModalClose>
-                            <SubmitButton className="grow">Create</SubmitButton>
+                            <SubmitButton className="grow">Save</SubmitButton>
                         </div>
                     </form>
                 </div>
