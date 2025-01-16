@@ -23,7 +23,7 @@ export default function DeleteProjectForm({
         if (state?.success) {
             onClose();
         }
-    }, [state]);
+    }, [state, onClose]);
 
     return (
         <Modal open={open} onClose={onClose}>

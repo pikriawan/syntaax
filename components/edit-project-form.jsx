@@ -32,7 +32,7 @@ export default function EditProjectForm({
             setName(oldName);
             setErrors(null);
         }
-    }, [open]);
+    }, [open, oldName]);
 
     useEffect(() => {
         setErrors(state.errors);
@@ -40,7 +40,7 @@ export default function EditProjectForm({
         if (state.success) {
             onClose();
         }
-    }, [state]);
+    }, [state, onClose]);
 
     return (
         <Modal open={open} onClose={onClose}>

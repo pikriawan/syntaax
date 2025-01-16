@@ -11,7 +11,7 @@ export default function NavbarMenu({ onNavigate }) {
         if (typeof onNavigate === "function") {
             onNavigate();
         }
-    }, [pathname]);
+    }, [pathname, onNavigate]);
 
     return (
         <ul className="flex flex-col gap-3 p-4">

@@ -26,7 +26,7 @@ export default function ToastProvider({ children }) {
                 setMessage("");
             }, TOAST_OPEN_DURATION);
         }
-    }, [hover]);
+    }, [hover, open]);
 
     return (
         <ToastContext.Provider value={(msg) => {
