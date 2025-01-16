@@ -1,30 +1,43 @@
 "use client";
 
-import { useEffect, useRef, useActionState } from "react";
+import { useEffect, useRef, useActionState, useState } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
-import { editProjectMetadata } from "@/actions/project";
+import { editMetadata } from "@/actions/project";
+
+const initialState = {
+    success: null,
+    message: null,
+    errors: null
+};
 
 export default function EditProjectForm({
     publicId,
-    name,
+    name: oldName,
     open,
     onClose = () => {},
 }) {
-    const[state, action] = useActionState(editProjectMetadata, undefined);
+    const [name, setName] = useState(oldName);
+    const [state, action] = useActionState(editMetadata, initialState);
+    const [errors, setErrors] = useState(state.errors);
     const inputRef = useRef(null);
 
     useEffect(() => {
         if (open) {
             inputRef.current.focus();
             inputRef.current.select();
+        } else {
+            setName(oldName);
+            setErrors(null);
         }
     }, [open]);
 
     useEffect(() => {
-        if (state?.success) {
+        setErrors(state.errors);
+
+        if (state.success) {
             onClose();
         }
     }, [state]);
@@ -38,15 +51,17 @@ export default function EditProjectForm({
                         <input type="hidden" name="public_id" value={publicId} />
                         <Input
                             autoComplete="off"
-                            label="Name"id="name"
+                            label="Name"
+                            id="name"
                             name="name"
-                            defaultValue={state?.inputs?.name || name}
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
                             ref={inputRef}
                             required
                         />
-                        {state?.errors?.name && (
+                        {errors?.name && (
                             <p className="text-red-500">
-                                {state.errors?.name[0]}
+                                {errors.name[0]}
                             </p>
                         )}
                     </div>

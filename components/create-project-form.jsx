@@ -7,19 +7,34 @@ import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
-import { createProject } from "@/actions/project";
+import { create } from "@/actions/project";
+
+const initialState = {
+    success: null,
+    message: null,
+    errors: null
+};
 
 export default function CreateProjectForm() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
-    const [state, action] = useActionState(createProject, undefined);
+    const [name, setName] = useState("");
+    const [state, action] = useActionState(create, initialState);
+    const [errors, setErrors] = useState(state.errors);
     const inputRef = useRef(null);
 
     useEffect(() => {
         if (open) {
             inputRef.current.focus();
+        } else {
+            setName("");
+            setErrors(null);
         }
     }, [open]);
+
+    useEffect(() => {
+        setErrors(state.errors);
+    }, [state]);
 
     return pathname === "/projects" && (
         <>
@@ -33,15 +48,17 @@ export default function CreateProjectForm() {
                         <div className="flex flex-col gap-2">
                             <Input
                                 autoComplete="off"
-                                label="Name"id="name"
+                                label="Name"
+                                id="name"
                                 name="name"
-                                defaultValue={state?.inputs?.name}
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
                                 ref={inputRef}
                                 required
                             />
-                            {state?.errors?.name && (
+                            {errors?.name && (
                                 <p className="text-red-500">
-                                    {state.errors?.name[0]}
+                                    {errors.name[0]}
                                 </p>
                             )}
                         </div>

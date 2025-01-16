@@ -4,14 +4,20 @@ import { useEffect, useActionState } from "react";
 import Button from "./ui/button";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
-import { deleteProject } from "@/actions/project";
+import { del } from "@/actions/project";
+
+const initialState = {
+    success: null,
+    message: null,
+    errors: null
+};
 
 export default function DeleteProjectForm({
     publicId,
     open,
     onClose = () => {},
 }) {
-    const[state, action] = useActionState(deleteProject, undefined);
+    const[state, action] = useActionState(del, initialState);
 
     useEffect(() => {
         if (state?.success) {

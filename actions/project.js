@@ -1,6 +1,6 @@
 "use server";
 
-import { put, del } from "@vercel/blob";
+import { put, del as delBlob } from "@vercel/blob";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -9,7 +9,7 @@ import { ProjectFormSchema } from "@/lib/definitions";
 import sql from "@/lib/sql";
 import { parseFormData } from "@/lib/utils";
 
-export async function createProject(formData) {
+export async function create(state, formData) {
     const user = await getUser();
 
     if (!user) {
@@ -102,7 +102,7 @@ export async function createProject(formData) {
     redirect(`/project/${publicId}`);
 }
 
-export async function editProjectMetadata(formData) {
+export async function editMetadata(state, formData) {
     const user = await getUser();
 
     if (!user) {
@@ -124,8 +124,8 @@ export async function editProjectMetadata(formData) {
         };
     }
 
-    const existingProject = (await sql`
-        SELECT public_id
+    const exists = (await sql`
+        SELECT
         FROM projects
         WHERE public_id = ${rawData.public_id}
         AND user_id = (
@@ -133,9 +133,9 @@ export async function editProjectMetadata(formData) {
             FROM users
             WHERE public_id = ${user.public_id}
         );
-    `)[0];
+    `).length !== 0;
 
-    if (!existingProject) {
+    if (!exists) {
         return {
             success: false,
             message: "Project not found.",
@@ -167,7 +167,7 @@ export async function editProjectMetadata(formData) {
     await sql`
         UPDATE projects
         SET name = ${rawData.name}, updated_at = CURRENT_TIMESTAMP
-        WHERE public_id = ${existingProject.public_id}
+        WHERE public_id = ${rawData.public_id}
     `;
 
     revalidatePath("/");
@@ -179,7 +179,7 @@ export async function editProjectMetadata(formData) {
     };
 }
 
-export async function deleteProject(formData) {
+export async function del(state, formData) {
     const user = await getUser();
 
     if (!user) {
@@ -211,17 +211,17 @@ export async function deleteProject(formData) {
         };
     }
 
-    await del([
+    await delBlob([
         existingProject.html_url,
         existingProject.css_url,
         existingProject.js_url,
-        existingProject.public_id
+        rawData.public_id
     ]);
 
     await sql`
         DELETE
         FROM projects
-        WHERE public_id = ${existingProject.public_id};
+        WHERE public_id = ${rawData.public_id};
     `;
 
     revalidatePath("/");
