@@ -32,7 +32,7 @@ export default function ProjectOption({ publicId, name }) {
                         name={name}
                     />
                     <div className="w-full h-[0.0625rem] bg-zinc-800" />
-                    <OptionButton onClick={() => {
+                    <OptionButton className="text-red-500" onClick={() => {
                         setOpen(false);
                         setDeleteOpen(true);
                     }}>
