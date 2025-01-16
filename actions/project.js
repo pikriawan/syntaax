@@ -99,7 +99,7 @@ export async function create(state, formData) {
     `;
 
     revalidatePath("/");
-    redirect(`/project/${publicId}`);
+    redirect(`/project/${publicId}/edit`);
 }
 
 export async function editMetadata(state, formData) {
