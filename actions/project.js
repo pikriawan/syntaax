@@ -164,10 +164,11 @@ export async function editProjectMetadata(state, formData) {
     `;
 
     revalidatePath("/");
-    redirect(`/project/${existingProject.public_id}`);
+
+    return { success: true };
 }
 
-export async function deleteProject(formData) {
+export async function deleteProject(state, formData) {
     const user = await getUser();
 
     if (!user) {
@@ -212,4 +213,6 @@ export async function deleteProject(formData) {
     `;
 
     revalidatePath("/");
+
+    return { success: true };
 }

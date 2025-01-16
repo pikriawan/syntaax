@@ -1,18 +1,36 @@
 "use client";
 
-import { useActionState } from "react";
+import { useEffect, useRef, useActionState } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
-import ModalClose from "./ui/modal-close";
 import SubmitButton from "./ui/submit-button";
 import { editProjectMetadata } from "@/actions/project";
 
-export default function EditProjectForm({ publicId, name }) {
+export default function EditProjectForm({
+    publicId,
+    name,
+    open,
+    onClose = () => {},
+}) {
     const[state, action] = useActionState(editProjectMetadata, undefined);
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (open) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [open]);
+
+    useEffect(() => {
+        if (state?.success) {
+            onClose();
+        }
+    }, [state]);
 
     return (
-        <Modal>
+        <Modal open={open} onClose={onClose}>
             <div className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold">Edit Project</h2>
                 <form action={action} className="flex flex-col gap-4">
@@ -23,6 +41,7 @@ export default function EditProjectForm({ publicId, name }) {
                             label="Name"id="name"
                             name="name"
                             defaultValue={state?.inputs?.name || name}
+                            ref={inputRef}
                             required
                         />
                         {state?.errors?.name && (
@@ -32,9 +51,7 @@ export default function EditProjectForm({ publicId, name }) {
                         )}
                     </div>
                     <div className="flex gap-3">
-                        <ModalClose className="grow">
-                            <Button className="w-full" type="button" color="secondary">Cancel</Button>
-                        </ModalClose>
+                        <Button className="grow" type="button" color="secondary" onClick={onClose}>Cancel</Button>
                         <SubmitButton className="grow">Save</SubmitButton>
                     </div>
                 </form>

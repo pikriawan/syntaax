@@ -1,8 +1,6 @@
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import ProjectOption from "./project-option";
-import ModalProvider from "./ui/modal-provider";
-import ModalTrigger from "./ui/modal-trigger";
 import { listProjects } from "@/data/project"
 import { timeAgo } from "@/lib/utils";
 
@@ -19,14 +17,7 @@ export default async function ProjectList() {
                 <h2 className="text-2xl font-bold">{project.name}</h2>
                 <p>{timeAgo(project.updated_at)}</p>
             </Link>
-            <ModalProvider>
-                <ModalTrigger className="absolute top-4 right-4">
-                    <button>
-                        <EllipsisHorizontalIcon className="w-6 h-6" />
-                    </button>
-                </ModalTrigger>
-                <ProjectOption publicId={project.public_id} name={project.name} />
-            </ModalProvider>
+            <ProjectOption publicId={project.public_id} name={project.name} />
         </div>
     )) : (
         <p>You don't have any projects yet.</p>
