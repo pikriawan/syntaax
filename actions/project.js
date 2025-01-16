@@ -9,12 +9,14 @@ import { ProjectFormSchema } from "@/lib/definitions";
 import sql from "@/lib/sql";
 import { parseFormData } from "@/lib/utils";
 
-export async function createProject(state, formData) {
+export async function createProject(formData) {
     const user = await getUser();
 
     if (!user) {
         return {
-            message: "Unauthenticated."
+            success: false,
+            message: "Unauthenticated.",
+            errors: null
         };
     }
 
@@ -23,8 +25,9 @@ export async function createProject(state, formData) {
 
     if (!validatedFields.success) {
         return {
+            success: false,
+            message: null,
             errors: validatedFields.error.flatten().fieldErrors,
-            inputs: rawData
         };
     }
 
@@ -41,9 +44,10 @@ export async function createProject(state, formData) {
 
     if (exists) {
         return {
+            success: false,
+            message: null,
             errors: {
-                name: ["Name already used."],
-                inputs: rawData
+                name: ["Name already used."]
             }
         };
     }
@@ -98,12 +102,14 @@ export async function createProject(state, formData) {
     redirect(`/project/${publicId}`);
 }
 
-export async function editProjectMetadata(state, formData) {
+export async function editProjectMetadata(formData) {
     const user = await getUser();
 
     if (!user) {
         return {
-            message: "Unauthenticated."
+            success: false,
+            message: "Unauthenticated.",
+            errors: null
         };
     }
 
@@ -112,8 +118,9 @@ export async function editProjectMetadata(state, formData) {
 
     if (!validatedFields.success) {
         return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            inputs: rawData
+            success: false,
+            message: null,
+            errors: validatedFields.error.flatten().fieldErrors
         };
     }
 
@@ -130,10 +137,9 @@ export async function editProjectMetadata(state, formData) {
 
     if (!existingProject) {
         return {
-            errors: {
-                name: ["Project not found."],
-                inputs: rawData
-            }
+            success: false,
+            message: "Project not found.",
+            errors: null
         };
     }
 
@@ -150,9 +156,10 @@ export async function editProjectMetadata(state, formData) {
 
     if (nameExists) {
         return {
+            success: false,
+            message: null,
             errors: {
-                name: ["Name already used."],
-                inputs: rawData
+                name: ["Name already used."]
             }
         };
     }
@@ -165,15 +172,21 @@ export async function editProjectMetadata(state, formData) {
 
     revalidatePath("/");
 
-    return { success: true };
+    return {
+        success: true,
+        message: null,
+        errors: null
+    };
 }
 
-export async function deleteProject(state, formData) {
+export async function deleteProject(formData) {
     const user = await getUser();
 
     if (!user) {
         return {
-            message: "Unauthenticated."
+            success: false,
+            message: "Unauthenticated.",
+            errors: null
         };
     }
 
@@ -192,10 +205,9 @@ export async function deleteProject(state, formData) {
 
     if (!existingProject) {
         return {
-            errors: {
-                name: ["Project not found."],
-                inputs: rawData
-            }
+            success: false,
+            message: "Project not found.",
+            errors: null
         };
     }
 
@@ -214,5 +226,9 @@ export async function deleteProject(state, formData) {
 
     revalidatePath("/");
 
-    return { success: true };
+    return {
+        success: true,
+        message: null,
+        errors: null
+    };
 }
