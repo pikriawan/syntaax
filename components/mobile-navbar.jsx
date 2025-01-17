@@ -2,7 +2,7 @@
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import SyntaaxIcon from "./icons/syntaax-icon";
 import NavbarMenu from "./navbar-menu";
@@ -12,6 +12,10 @@ import { cn } from "@/lib/utils";
 export default function MobileNavbar() {
     const mounted = useMounted();
     const [open, setOpen] = useState(false);
+
+    const close = useCallback(() => {
+        setOpen(false);
+    }, []);
 
     return (
         <>
@@ -29,7 +33,7 @@ export default function MobileNavbar() {
                         </button>
                     </div>
                     <div className="h-[calc(100%-3.5rem)] overflow-y-auto">
-                        <NavbarMenu onNavigate={() => setOpen(false)} />
+                        <NavbarMenu onNavigate={close} />
                     </div>
                 </nav>,
                 document.body
