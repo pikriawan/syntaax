@@ -2,25 +2,18 @@
 
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useActionState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
 import { create } from "@/actions/project";
 
-const initialState = {
-    success: null,
-    message: null,
-    errors: null
-};
-
 export default function CreateProjectForm() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
-    const [state, action] = useActionState(create, initialState);
-    const [errors, setErrors] = useState(state.errors);
+    const [errors, setErrors] = useState(null);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -32,9 +25,17 @@ export default function CreateProjectForm() {
         }
     }, [open]);
 
-    useEffect(() => {
-        setErrors(state.errors);
-    }, [state]);
+    async function onSubmit(event) {
+        event.preventDefault();
+        setErrors(null);
+        const response = await create(new FormData(event.target));
+
+        if (response.success) {
+            setOpen(false);
+        } else {
+            setErrors(response.errors);
+        }
+    }
 
     return pathname === "/projects" && (
         <>
@@ -44,7 +45,7 @@ export default function CreateProjectForm() {
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div className="flex flex-col gap-4">
                     <h2 className="text-2xl font-bold">New Project</h2>
-                    <form action={action} className="flex flex-col gap-4">
+                    <form onSubmit={onSubmit} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
                             <Input
                                 autoComplete="off"

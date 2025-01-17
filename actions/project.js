@@ -9,7 +9,7 @@ import { ProjectFormSchema } from "@/lib/definitions";
 import sql from "@/lib/sql";
 import { parseFormData } from "@/lib/utils";
 
-export async function create(state, formData) {
+export async function create(formData) {
     const user = await getUser();
 
     if (!user) {
@@ -102,7 +102,7 @@ export async function create(state, formData) {
     redirect(`/project/${publicId}/edit`);
 }
 
-export async function editMetadata(state, formData) {
+export async function editMetadata(formData) {
     const user = await getUser();
 
     if (!user) {
@@ -179,7 +179,7 @@ export async function editMetadata(state, formData) {
     };
 }
 
-export async function del(state, formData) {
+export async function del(formData) {
     const user = await getUser();
 
     if (!user) {

@@ -1,27 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useActionState, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
 import { editMetadata } from "@/actions/project";
 
-const initialState = {
-    success: null,
-    message: null,
-    errors: null
-};
-
 export default function EditProjectForm({
     publicId,
     name: oldName,
     open,
-    onClose = () => {},
+    onClose
 }) {
     const [name, setName] = useState(oldName);
-    const [state, action] = useActionState(editMetadata, initialState);
-    const [errors, setErrors] = useState(state.errors);
+    const [errors, setErrors] = useState(null);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -34,19 +27,23 @@ export default function EditProjectForm({
         }
     }, [open, oldName]);
 
-    useEffect(() => {
-        setErrors(state.errors);
+    async function onSubmit(event) {
+        event.preventDefault();
+        setErrors(null);
+        const response = await editMetadata(new FormData(event.target));
 
-        if (state.success) {
-            onClose();
+        if (response.success) {
+            typeof onClose === "function" && onClose();
+        } else {
+            setErrors(response.errors);
         }
-    }, [state, onClose]);
+    }
 
     return (
         <Modal open={open} onClose={onClose}>
             <div className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold">Edit Project</h2>
-                <form action={action} className="flex flex-col gap-4">
+                <form onSubmit={onSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                         <input type="hidden" name="public_id" value={publicId} />
                         <Input

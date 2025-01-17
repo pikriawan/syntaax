@@ -6,15 +6,22 @@ import DeleteProjectForm from "./delete-project-form";
 import EditProjectForm from "./edit-project-form";
 import OptionButton from "./ui/option-button";
 import OptionModal from "./ui/option-modal";
+import { cn } from "@/lib/utils";
 
-export default function ProjectOption({ publicId, name }) {
+export default function ProjectOption({
+    publicId,
+    name,
+    className,
+    editCallback,
+    deleteCallback
+}) {
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
 
     return (
         <>
-            <button className="absolute top-4 right-4" onClick={() => setOpen(true)}>
+            <button className={cn("absolute top-4 right-4", className)} onClick={() => setOpen(true)}>
                 <EllipsisHorizontalIcon className="w-6 h-6" />
             </button>
             <OptionModal open={open} onClose={() => setOpen(false)} className="p-[0.0625rem] top-1/2 -translate-y-1/2">
