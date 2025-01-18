@@ -9,7 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.18.4",
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.9",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/language": "^6.10.8",
+    "@codemirror/view": "^6.36.2",
     "@heroicons/react": "^2.2.0",
+    "@lezer/highlight": "^1.2.1",
     "@neondatabase/serverless": "^0.10.4",
     "@vercel/blob": "^0.27.0",
     "clsx": "^2.1.1",

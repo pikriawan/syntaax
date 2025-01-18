@@ -1,7 +1,7 @@
 import { getUser } from "./user";
 import sql from "@/lib/sql";
 
-export async function listProjects() {
+export async function list() {
     const user = await getUser();
 
     if (!user) {
@@ -22,7 +22,7 @@ export async function listProjects() {
     return projects;
 }
 
-export async function getProject(public_id) {
+export async function getMetadata(public_id) {
     const user = await getUser();
 
     if (!user) {
@@ -42,3 +42,5 @@ export async function getProject(public_id) {
 
     return project[0] || null;
 }
+
+export async function getData(public_id, file) {}

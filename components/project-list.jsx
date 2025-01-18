@@ -1,10 +1,10 @@
 import Link from "next/link";
 import ProjectOption from "./project-option";
-import { listProjects } from "@/data/project"
+import { list } from "@/data/project"
 import { timeAgo } from "@/lib/utils";
 
 export default async function ProjectList() {
-    const projects = await listProjects();
+    const projects = await list();
 
     return projects?.length ? projects.map((project) => (
         <div key={project.public_id} className="bg-zinc-950 shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg relative hover:bg-zinc-900">

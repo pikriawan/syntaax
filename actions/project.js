@@ -212,7 +212,7 @@ export async function editFile(formData) {
         };
     }
 
-    const fileUrl = `${rawData.public_id}/${file}`;
+    const fileUrl = `${rawData.public_id}/${rawData.file}`;
 
     try {
         await head(fileUrl);
@@ -224,7 +224,11 @@ export async function editFile(formData) {
         };
     }
 
-    await put(fileUrl, data, { access: "public" });
+    await put(fileUrl, data, {
+        access: "public",
+        addRandomSuffix: false,
+        cacheControlMaxAge: 0
+    });
 
     await sql`
         UPDATE projects
