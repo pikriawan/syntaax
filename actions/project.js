@@ -1,6 +1,6 @@
 "use server";
 
-import { put, del as delBlob } from "@vercel/blob";
+import { put, del as delBlob, head } from "@vercel/blob";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -171,6 +171,66 @@ export async function editMetadata(formData) {
     `;
 
     revalidatePath("/");
+
+    return {
+        success: true,
+        message: null,
+        errors: null
+    };
+}
+
+export async function editFile(formData) {
+    const user = await getUser();
+
+    if (!user) {
+        return {
+            success: false,
+            message: "Unauthenticated.",
+            errors: null
+        };
+    }
+
+    const rawData = parseFormData(formData);
+    const data = rawData.data || "\n";
+
+    const exists = (await sql`
+        SELECT
+        FROM projects
+        WHERE public_id = ${rawData.public_id}
+        AND user_id = (
+            SELECT id
+            FROM users
+            WHERE public_id = ${user.public_id}
+        );
+    `).length !== 0;
+
+    if (!exists) {
+        return {
+            success: false,
+            message: "Project not found.",
+            errors: null
+        };
+    }
+
+    const fileUrl = `${rawData.public_id}/${file}`;
+
+    try {
+        await head(fileUrl);
+    } catch (error) {
+        return {
+            success: false,
+            message: "File not found.",
+            errors: null
+        };
+    }
+
+    await put(fileUrl, data, { access: "public" });
+
+    await sql`
+        UPDATE projects
+        SET updated_at = CURRENT_TIMESTAMP
+        WHERE public_id = ${rawData.public_id}
+    `;
 
     return {
         success: true,
