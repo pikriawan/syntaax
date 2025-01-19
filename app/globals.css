@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .styled-scrollbar {
+        scrollbar-color: #27272A #09090B;
+    }
+}
