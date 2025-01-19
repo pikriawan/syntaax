@@ -6,7 +6,6 @@ import { indentUnit } from "@codemirror/language";
 import { EditorView, lineNumbers, highlightSpecialChars, drawSelection, keymap } from "@codemirror/view";
 import { useEffect, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
-import { cn } from "@/lib/utils";
 
 export default function Editor({
     className,
@@ -47,5 +46,5 @@ export default function Editor({
         return () => view.destroy();
     }, []);
 
-    return <div className={cn("w-full h-full", className)} ref={parentRef} />;
+    return <div className={className} ref={parentRef} />;
 }

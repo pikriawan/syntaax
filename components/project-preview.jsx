@@ -19,50 +19,51 @@ function LoadingPlaceholder() {
     );
 }
 
-function ProjectPreviewPanel({ children }) {
+export default function ProjectPreview() {
     const mobile = useMobile();
-    const { mobilePreviewOpen, setMobilePreviewOpen } = useContext(ProjectEditorContext);
+    const {
+        project,
+        fetching,
+        pushing,
+        mobilePreviewOpen,
+        setMobilePreviewOpen,
+        previewIFrameRef
+    } = useContext(ProjectEditorContext);
 
     if (mobile === null) {
         return;
     }
 
     if (mobile) {
-        if (!fetching) {
-            return createPortal(
-                <div className={cn("flex-col fixed top-0 left-0 w-full h-full hidden", mobilePreviewOpen && "flex")}>
-                    <div className="px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 bg-zinc-950 flex justify-end items-center gap-4">
-                        <ProjectPreviewLink />
-                        <button onClick={() => setMobilePreviewOpen(false)}>
-                            <XMarkIcon className="w-6 h-6" />
-                        </button>
-                    </div>
-                    <div className="w-full h-[calc(100%-3.5rem)] bg-zinc-50 overflow-auto relative">
-                        {children}
-                    </div>
-                </div>,
-                document.body
+        return createPortal(
+            <div className={cn("flex-col fixed top-0 left-0 w-full h-full hidden", mobilePreviewOpen && "flex")}>
+                <div className="px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 bg-zinc-950 flex justify-end items-center gap-4">
+                    <ProjectPreviewLink />
+                    <button onClick={() => setMobilePreviewOpen(false)}>
+                        <XMarkIcon className="w-6 h-6" />
+                    </button>
+                </div>
+                <div className="w-full h-[calc(100%-3.5rem)] bg-zinc-50 overflow-auto relative">
+                    <iframe
+                        className="w-full h-full"
+                        src={`/project/${project.public_id}/files/index.html`}
+                        ref={previewIFrameRef}
+                    />
+                    {(fetching || pushing) && <LoadingPlaceholder />}
+                </div>
+            </div>,
+            document.body
         );
     }
 
     return (
         <div className="bg-zinc-50 overflow-auto relative">
-            {children}
-        </div>
-    );
-}
-
-export default function ProjectPreview() {
-    const { project, loaded, pending, previewIFrameRef } = useContext(ProjectEditorContext);
-
-    return (
-        <ProjectPreviewPanel>
             <iframe
                 className="w-full h-full"
                 src={`/project/${project.public_id}/files/index.html`}
                 ref={previewIFrameRef}
             />
-            {(!loaded || pending) && <LoadingPlaceholder />}
-        </ProjectPreviewPanel>
+            {(fetching || pushing) && <LoadingPlaceholder />}
+        </div>
     );
 }
