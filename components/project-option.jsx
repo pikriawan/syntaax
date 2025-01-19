@@ -8,13 +8,7 @@ import OptionButton from "./ui/option-button";
 import OptionModal from "./ui/option-modal";
 import { cn } from "@/lib/utils";
 
-export default function ProjectOption({
-    publicId,
-    name,
-    className,
-    editCallback,
-    deleteCallback
-}) {
+export default function ProjectOption({ project, className }) {
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
@@ -32,12 +26,7 @@ export default function ProjectOption({
                     }}>
                         Edit
                     </OptionButton>
-                    <EditProjectForm
-                        open={editOpen}
-                        onClose={() => setEditOpen(false)}
-                        publicId={publicId}
-                        name={name}
-                    />
+                    <EditProjectForm open={editOpen} onClose={() => setEditOpen(false)} project={project} />
                     <div className="w-full h-[0.0625rem] bg-zinc-800" />
                     <OptionButton className="text-red-500" onClick={() => {
                         setOpen(false);
@@ -45,11 +34,7 @@ export default function ProjectOption({
                     }}>
                         Delete
                     </OptionButton>
-                    <DeleteProjectForm
-                        open={deleteOpen}
-                        onClose={() => setDeleteOpen(false)}
-                        publicId={publicId}
-                    />
+                    <DeleteProjectForm open={deleteOpen} onClose={() => setDeleteOpen(false)} project={project} />
                     <div className="w-full h-[0.0625rem] bg-zinc-800" />
                     <OptionButton onClick={() => setOpen(false)}>Cancel</OptionButton>
                 </div>

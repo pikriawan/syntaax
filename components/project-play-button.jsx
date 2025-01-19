@@ -1,49 +1,61 @@
 "use client";
 
 import { PlayIcon } from "@heroicons/react/24/outline";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { editFile } from "@/actions/project";
 import ProjectEditorContext from "@/contexts/project-editor-context";
 
 export default function ProjectPlayButton() {
     const {
         project,
-        setSrc,
+        fetching,
+        pushing,
+        setPushing,
+        setMobilePreviewOpen,
         html,
         css,
         js,
-        setPending,
-        setPreviewOpen
+        previewIFrameRef,
+        reloadPreviewIFrame
     } = useContext(ProjectEditorContext);
 
     async function onClick() {
-        setPreviewOpen(true);
-        setPending(true);
+        setMobilePreviewOpen(true);
+        setPushing(true);
 
         const htmlFormData = new FormData();
         htmlFormData.append("public_id", project.public_id);
         htmlFormData.append("file", "index.html");
         htmlFormData.append("data", html);
-        await editFile(htmlFormData);
 
         const cssFormData = new FormData();
-        htmlFormData.append("public_id", project.public_id);
-        htmlFormData.append("file", "style.css");
-        htmlFormData.append("data", css);
-        await editFile(cssFormData);
+        cssFormData.append("public_id", project.public_id);
+        cssFormData.append("file", "style.css");
+        cssFormData.append("data", css);
 
         const jsFormData = new FormData();
-        htmlFormData.append("public_id", project.public_id);
-        htmlFormData.append("file", "script.js");
-        htmlFormData.append("data", js);
-        await editFile(jsFormData);
+        jsFormData.append("public_id", project.public_id);
+        jsFormData.append("file", "script.js");
+        jsFormData.append("data", js);
 
-        setPending(false);
-        setSrc(`/project/${project.public_id}/files/index.html`);
+        await Promise.all([
+            editFile(htmlFormData),
+            editFile(cssFormData),
+            editFile(jsFormData)
+        ]);
+
+        reloadPreviewIFrame();
+
+        function onReload() {
+            setPushing(false);
+            previewIFrameRef.current.removeEventListener("load", onReload);
+        }
+
+        previewIFrameRef.current.addEventListener("load", onReload);
     }
 
     return (
-        <button onClick={onClick}>
+        <button onClick={onClick} disabled={fetching || pushing}>
             <PlayIcon className="w-6 h-6" />
         </button>
     );

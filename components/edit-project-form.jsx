@@ -7,13 +7,8 @@ import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
 import { editMetadata } from "@/actions/project";
 
-export default function EditProjectForm({
-    publicId,
-    name: oldName,
-    open,
-    onClose
-}) {
-    const [name, setName] = useState(oldName);
+export default function EditProjectForm({ project, open, onClose }) {
+    const [name, setName] = useState(project.name);
     const [errors, setErrors] = useState(null);
     const inputRef = useRef(null);
 
@@ -22,10 +17,10 @@ export default function EditProjectForm({
             inputRef.current.focus();
             inputRef.current.select();
         } else {
-            setName(oldName);
+            setName(project.name);
             setErrors(null);
         }
-    }, [open, oldName]);
+    }, [open, project]);
 
     async function onSubmit(event) {
         event.preventDefault();
@@ -45,7 +40,7 @@ export default function EditProjectForm({
                 <h2 className="text-2xl font-bold">Edit Project</h2>
                 <form onSubmit={onSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
-                        <input type="hidden" name="public_id" value={publicId} />
+                        <input type="hidden" name="public_id" value={project.public_id} />
                         <Input
                             autoComplete="off"
                             label="Name"

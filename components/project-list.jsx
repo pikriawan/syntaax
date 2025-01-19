@@ -12,7 +12,7 @@ export default async function ProjectList() {
                 <h2 className="text-2xl font-bold">{project.name}</h2>
                 <p>{timeAgo(project.updated_at)}</p>
             </Link>
-            <ProjectOption publicId={project.public_id} name={project.name} />
+            <ProjectOption project={project} />
         </div>
     )) : (
         <p>You don&apos;t have any projects yet.</p>

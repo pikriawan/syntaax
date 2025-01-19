@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
-import { defaultKeymap } from "@codemirror/commands";
+import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { indentUnit } from "@codemirror/language";
-import { EditorView, lineNumbers, keymap } from "@codemirror/view";
+import { EditorView, lineNumbers, highlightSpecialChars, drawSelection, keymap } from "@codemirror/view";
+import { useEffect, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
 import { cn } from "@/lib/utils";
 
@@ -20,11 +20,16 @@ export default function Editor({
         const view = new EditorView({
             extensions: [
                 lineNumbers(),
+                highlightSpecialChars(),
+                history(),
+                drawSelection(),
                 closeBrackets(),
                 indentUnit.of("    "),
                 keymap.of([
                     ...closeBracketsKeymap,
-                    ...defaultKeymap
+                    ...defaultKeymap,
+                    ...historyKeymap,
+                    indentWithTab
                 ]),
                 EditorView.lineWrapping,
                 EditorView.updateListener.of((viewUpdate) => {
@@ -42,5 +47,5 @@ export default function Editor({
         return () => view.destroy();
     }, []);
 
-    return <div className={cn("h-full", className)} ref={parentRef}></div>;
+    return <div className={cn("w-full h-full", className)} ref={parentRef} />;
 }

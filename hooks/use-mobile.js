@@ -8,14 +8,15 @@ export default function useMobile() {
     const [mobile, setMobile] = useState(null);
 
     useEffect(() => {
-        setMobile(innerWidth < MOBILE_BREAKPOINT);
+        const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+        setMobile(mql.matches);
 
-        function onResize() {
-            setMobile(innerWidth < MOBILE_BREAKPOINT);
+        function onChange() {
+            setMobile(mql.matches);
         }
 
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
+        mql.addEventListener("change", onChange);
+        return () => mql.removeEventListener("change", onChange);
     }, []);
 
     return mobile;

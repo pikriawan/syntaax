@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProjectEditorContext from "@/contexts/project-editor-context";
 
 export default function ProjectEditorProvider({ project, children }) {
-    const [src, setSrc] = useState();
-    const [loaded, setLoaded] = useState(false);
-    const [pending, setPending] = useState(false);
-    const [previewOpen, setPreviewOpen] = useState(false);
+    const [fetching, setFetching] = useState(true);
+    const [pushing, setPushing] = useState(false);
+    const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
     const [html, setHtml] = useState("");
     const [css, setCss] = useState("");
     const [js, setJs] = useState("");
+    const previewIFrameRef = useRef(null);
+
+    function reloadPreviewIFrame() {
+        previewIFrameRef.current.contentWindow.location.reload();
+    }
 
     useEffect(() => {
         async function fetchFiles() {
@@ -26,7 +30,7 @@ export default function ProjectEditorProvider({ project, children }) {
             setCss(datas[1]);
             setJs(datas[2]);
 
-            setLoaded(true);
+            setFetching(false);
         }
 
         fetchFiles();
@@ -35,19 +39,19 @@ export default function ProjectEditorProvider({ project, children }) {
     return (
         <ProjectEditorContext.Provider value={{
             project,
-            src,
-            setSrc,
-            loaded,
-            pending,
-            setPending,
-            previewOpen,
-            setPreviewOpen,
+            fetching,
+            pushing,
+            setPushing,
+            mobilePreviewOpen,
+            setMobilePreviewOpen,
             html,
             setHtml,
             css,
             setCss,
             js,
-            setJs
+            setJs,
+            previewIFrameRef,
+            reloadPreviewIFrame
         }}>
             {children}
         </ProjectEditorContext.Provider>
