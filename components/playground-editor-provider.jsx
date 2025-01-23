@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ProjectEditorContext from "@/contexts/project-editor-context";
+import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
-export default function ProjectEditorProvider({ project, children }) {
+export default function PlaygroundEditorProvider({ playground, children }) {
     const [fetching, setFetching] = useState(true);
     const [pushing, setPushing] = useState(false);
     const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
@@ -19,9 +19,9 @@ export default function ProjectEditorProvider({ project, children }) {
     useEffect(() => {
         async function fetchFiles() {
             const responses = await Promise.all([
-                fetch(`/project/${project.public_id}/files/index.html`),
-                fetch(`/project/${project.public_id}/files/style.css`),
-                fetch(`/project/${project.public_id}/files/script.js`)
+                fetch(`/playground/${playground.id}/files/index.html`),
+                fetch(`/playground/${playground.id}/files/style.css`),
+                fetch(`/playground/${playground.id}/files/script.js`)
             ]);
 
             const datas = await Promise.all(responses.map((response) => response.text()));
@@ -37,8 +37,8 @@ export default function ProjectEditorProvider({ project, children }) {
     }, []);
 
     return (
-        <ProjectEditorContext.Provider value={{
-            project,
+        <PlaygroundEditorContext.Provider value={{
+            playground,
             fetching,
             pushing,
             setPushing,
@@ -54,6 +54,6 @@ export default function ProjectEditorProvider({ project, children }) {
             reloadPreviewIFrame
         }}>
             {children}
-        </ProjectEditorContext.Provider>
+        </PlaygroundEditorContext.Provider>
     );
 }

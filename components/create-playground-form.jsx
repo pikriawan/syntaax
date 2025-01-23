@@ -7,9 +7,9 @@ import Button from "./ui/button";
 import Input from "./ui/input";
 import Modal from "./ui/modal";
 import SubmitButton from "./ui/submit-button";
-import { create } from "@/actions/project";
+import { create } from "@/actions/playground";
 
-export default function CreateProjectForm() {
+export default function CreatePlaygroundForm() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
@@ -37,14 +37,14 @@ export default function CreateProjectForm() {
         }
     }
 
-    return pathname === "/projects" && (
+    return pathname === "/playgrounds" && (
         <>
             <button onClick={() => setOpen(true)}>
                 <PlusIcon className="w-6 h-6" />
             </button>
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div className="flex flex-col gap-4">
-                    <h2 className="text-2xl font-bold">New Project</h2>
+                    <h2 className="text-2xl font-bold">New Playground</h2>
                     <form onSubmit={onSubmit} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
                             <Input

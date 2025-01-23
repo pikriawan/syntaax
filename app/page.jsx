@@ -7,7 +7,7 @@ export default async function LandingPage() {
     const user = await getUser();
 
     if (user) {
-        redirect("/projects");
+        redirect("/playgrounds");
     }
 
     return (

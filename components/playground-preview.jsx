@@ -4,8 +4,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
 import SpinnerIcon from "./icons/spinner-icon";
-import ProjectPreviewLink from "./project-preview-link";
-import ProjectEditorContext from "@/contexts/project-editor-context";
+import PlaygroundLink from "./playground-link";
+import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 import useMobile from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
@@ -19,16 +19,16 @@ function LoadingPlaceholder() {
     );
 }
 
-export default function ProjectPreview() {
+export default function PlaygroundPreview() {
     const mobile = useMobile();
     const {
-        project,
+        playground,
         fetching,
         pushing,
         mobilePreviewOpen,
         setMobilePreviewOpen,
         previewIFrameRef
-    } = useContext(ProjectEditorContext);
+    } = useContext(PlaygroundEditorContext);
 
     if (mobile === null) {
         return;
@@ -38,7 +38,7 @@ export default function ProjectPreview() {
         return createPortal(
             <div className={cn("flex-col fixed top-0 left-0 w-full h-full hidden", mobilePreviewOpen && "flex")}>
                 <div className="px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 bg-zinc-950 flex justify-end items-center gap-4">
-                    <ProjectPreviewLink />
+                    <PlaygroundLink />
                     <button onClick={() => setMobilePreviewOpen(false)}>
                         <XMarkIcon className="w-6 h-6" />
                     </button>
@@ -46,7 +46,7 @@ export default function ProjectPreview() {
                 <div className="w-full h-[calc(100%-3.5rem)] bg-zinc-50 overflow-auto relative">
                     <iframe
                         className="w-full h-full"
-                        src={`/project/${project.public_id}/files/index.html`}
+                        src={`/playground/${playground.id}/files/index.html`}
                         ref={previewIFrameRef}
                     />
                     {(fetching || pushing) && <LoadingPlaceholder />}
@@ -60,7 +60,7 @@ export default function ProjectPreview() {
         <div className="bg-zinc-50 overflow-auto relative">
             <iframe
                 className="w-full h-full"
-                src={`/project/${project.public_id}/files/index.html`}
+                src={`/playground/${playground.id}/files/index.html`}
                 ref={previewIFrameRef}
             />
             {(fetching || pushing) && <LoadingPlaceholder />}

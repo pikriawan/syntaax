@@ -16,9 +16,9 @@ export default function NavbarMenu({ onNavigate }) {
     return (
         <ul className="flex flex-col gap-3 p-4">
             <li>
-                <Link href="/projects" className={cn("flex items-center gap-2 p-2 rounded-lg transition-colors", pathname === "/projects" ? "bg-zinc-50 text-zinc-950 hover:bg-zinc-300" : "hover:bg-zinc-800")}>
+                <Link href="/playgrounds" className={cn("flex items-center gap-2 p-2 rounded-lg transition-colors", pathname === "/playgrounds" ? "bg-zinc-50 text-zinc-950 hover:bg-zinc-300" : "hover:bg-zinc-800")}>
                     <DocumentIcon className="w-6 h-6" />
-                    Projects
+                    Playgrounds
                 </Link>
             </li>
             <li>

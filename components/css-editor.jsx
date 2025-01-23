@@ -3,10 +3,10 @@
 import { css as cssLang } from "@codemirror/lang-css";
 import { useContext } from "react";
 import Editor from "./editor";
-import ProjectEditorContext from "@/contexts/project-editor-context";
+import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
 export default function CSSEditor({ className }) {
-    const { css, setCss } = useContext(ProjectEditorContext);
+    const { css, setCss } = useContext(PlaygroundEditorContext);
 
     return (
         <Editor

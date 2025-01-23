@@ -1,4 +1,4 @@
-import CreateProjectForm from "@/components/create-project-form";
+import CreatePlaygroundForm from "@/components/create-playground-form";
 import DesktopNavbar from "@/components/desktop-navbar";
 import SyntaaxIcon from "@/components/icons/syntaax-icon";
 import MobileNavbar from "@/components/mobile-navbar";
@@ -14,11 +14,13 @@ export default function DashboardLayout({ children }) {
                         <p className="font-brand font-bold">syntaax</p>
                     </div>
                 </div>
-                <CreateProjectForm />
+                <CreatePlaygroundForm />
             </div>
             <div className="w-full h-[calc(100%-3.5rem)] flex">
                 <DesktopNavbar />
-                <main className="w-full h-full overflow-y-auto md:w-[calc(100%-15rem)]">{children}</main>
+                <main className="w-full h-full overflow-y-auto md:w-[calc(100%-15rem)]">
+                    {children}
+                </main>
             </div>
         </div>
     );

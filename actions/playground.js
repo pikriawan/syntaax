@@ -1,11 +1,10 @@
 "use server";
 
-import { put, del as delBlob, head } from "@vercel/blob";
-import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getUser } from "@/data/user";
-import { ProjectFormSchema } from "@/lib/definitions";
+import { PlaygroundFormSchema } from "@/lib/definitions";
+import redis from "@/lib/redis";
 import sql from "@/lib/sql";
 import { parseFormData } from "@/lib/utils";
 
@@ -15,13 +14,13 @@ export async function create(formData) {
     if (!user) {
         return {
             success: false,
-            message: "Unauthenticated.",
+            message: "Unauthorized",
             errors: null
         };
     }
 
     const rawData = parseFormData(formData);
-    const validatedFields = ProjectFormSchema.safeParse(rawData);
+    const validatedFields = PlaygroundFormSchema.safeParse(rawData);
 
     if (!validatedFields.success) {
         return {
@@ -33,13 +32,9 @@ export async function create(formData) {
 
     const exists = (await sql`
         SELECT
-        FROM projects
+        FROM playgrounds
         WHERE name = ${rawData.name}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        );
+        AND user_id = ${user.id};
     `).length !== 0;
 
     if (exists) {
@@ -47,25 +42,19 @@ export async function create(formData) {
             success: false,
             message: null,
             errors: {
-                name: ["Name already used."]
+                name: ["Name already used"]
             }
         };
     }
 
-    const publicId = nanoid();
+    const id = (await sql`
+        INSERT INTO playgrounds(name, user_id)
+        VALUES(${rawData.name}, ${user.id})
+        RETURNING id;
+    `)[0].id;
 
-    const { url: cssUrl } = await put(`${publicId}/style.css`, "\n", {
-        access: "public",
-        addRandomSuffix: false
-    });
-
-    const { url: jsUrl } = await put(`${publicId}/script.js`, "\n", {
-        access: "public",
-        addRandomSuffix: false
-    });
-
-    const { url: htmlUrl } = await put(
-        `${publicId}/index.html`,
+    await redis.set(
+        `${id}/index.html`,
         "<!DOCTYPE html>\n" +
         "<html>\n" +
         "   <head>\n" +
@@ -75,31 +64,13 @@ export async function create(formData) {
         "   <body>\n" +
         "       <script src=\"script.js\"></script>\n" +
         "   </body>\n" +
-        "</html>",
-        {
-            access: "public",
-            addRandomSuffix: false
-        }
+        "</html>"
     );
-
-    await sql`
-        INSERT INTO projects(
-            public_id,
-            name,
-            html_url,
-            css_url,
-            js_url,
-            user_id
-        )
-        VALUES(${publicId}, ${rawData.name}, ${htmlUrl}, ${cssUrl}, ${jsUrl}, (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        ));
-    `;
+    await redis.set(`${id}/style.css`, "");
+    await redis.set(`${id}/script.js`, "");
 
     revalidatePath("/");
-    redirect(`/project/${publicId}/edit`);
+    redirect(`/playground/${id}/edit`);
 }
 
 export async function editMetadata(formData) {
@@ -108,13 +79,13 @@ export async function editMetadata(formData) {
     if (!user) {
         return {
             success: false,
-            message: "Unauthenticated.",
+            message: "Unauthorized",
             errors: null
         };
     }
 
     const rawData = parseFormData(formData);
-    const validatedFields = ProjectFormSchema.safeParse(rawData);
+    const validatedFields = PlaygroundFormSchema.safeParse(rawData);
 
     if (!validatedFields.success) {
         return {
@@ -126,32 +97,24 @@ export async function editMetadata(formData) {
 
     const exists = (await sql`
         SELECT
-        FROM projects
-        WHERE public_id = ${rawData.public_id}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        );
+        FROM playgrounds
+        WHERE id = ${rawData.id}
+        AND user_id = ${user.id};
     `).length !== 0;
 
     if (!exists) {
         return {
             success: false,
-            message: "Project not found.",
+            message: "Playground not found",
             errors: null
         };
     }
 
     const nameExists = (await sql`
         SELECT
-        FROM projects
+        FROM playgrounds
         WHERE name = ${rawData.name}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        );
+        AND user_id = ${user.id};
     `).length !== 0;
 
     if (nameExists) {
@@ -159,15 +122,15 @@ export async function editMetadata(formData) {
             success: false,
             message: null,
             errors: {
-                name: ["Name already used."]
+                name: ["Name already used"]
             }
         };
     }
 
     await sql`
-        UPDATE projects
+        UPDATE playgrounds
         SET name = ${rawData.name}, updated_at = CURRENT_TIMESTAMP
-        WHERE public_id = ${rawData.public_id}
+        WHERE id = ${rawData.id};
     `;
 
     revalidatePath("/");
@@ -185,55 +148,45 @@ export async function editFile(formData) {
     if (!user) {
         return {
             success: false,
-            message: "Unauthenticated.",
+            message: "Unauthorized",
             errors: null
         };
     }
 
     const rawData = parseFormData(formData);
-    const data = rawData.data || "\n";
 
     const exists = (await sql`
         SELECT
-        FROM projects
-        WHERE public_id = ${rawData.public_id}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        );
+        FROM playgrounds
+        WHERE id = ${rawData.id}
+        AND user_id = ${user.id};
     `).length !== 0;
 
     if (!exists) {
         return {
             success: false,
-            message: "Project not found.",
+            message: "Playground not found",
             errors: null
         };
     }
 
-    const fileUrl = `${rawData.public_id}/${rawData.file}`;
+    const filePath = `${rawData.id}/${rawData.file}`;
+    const fileExists = await redis.exists(filePath) !== 0;
 
-    try {
-        await head(fileUrl);
-    } catch (error) {
+    if (!fileExists) {
         return {
             success: false,
-            message: "File not found.",
+            message: "File not found",
             errors: null
         };
     }
 
-    await put(fileUrl, data, {
-        access: "public",
-        addRandomSuffix: false,
-        cacheControlMaxAge: 0
-    });
+    await redis.set(filePath, rawData.data);
 
     await sql`
-        UPDATE projects
+        UPDATE playgrounds
         SET updated_at = CURRENT_TIMESTAMP
-        WHERE public_id = ${rawData.public_id}
+        WHERE id = ${rawData.id};
     `;
 
     return {
@@ -249,43 +202,38 @@ export async function del(formData) {
     if (!user) {
         return {
             success: false,
-            message: "Unauthenticated.",
+            message: "Unauthorized",
             errors: null
         };
     }
 
     const rawData = parseFormData(formData);
 
-    const existingProject = (await sql`
-        SELECT public_id, html_url, css_url, js_url
-        FROM projects
-        WHERE public_id = ${rawData.public_id}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE public_id = ${user.public_id}
-        );
+    const existingPlayground = (await sql`
+        SELECT id
+        FROM playgrounds
+        WHERE id = ${rawData.id}
+        AND user_id = ${user.id};
     `)[0];
 
-    if (!existingProject) {
+    if (!existingPlayground) {
         return {
             success: false,
-            message: "Project not found.",
+            message: "Playground not found",
             errors: null
         };
     }
 
-    await delBlob([
-        existingProject.html_url,
-        existingProject.css_url,
-        existingProject.js_url,
-        rawData.public_id
+    await redis.del([
+        `${existingPlayground.id}/index.html`,
+        `${existingPlayground.id}/style.css`,
+        `${existingPlayground.id}/script.js`
     ]);
 
     await sql`
         DELETE
-        FROM projects
-        WHERE public_id = ${rawData.public_id};
+        FROM playgrounds
+        WHERE id = ${rawData.id};
     `;
 
     revalidatePath("/");

@@ -2,12 +2,12 @@
 
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { editFile } from "@/actions/project";
-import ProjectEditorContext from "@/contexts/project-editor-context";
+import { editFile } from "@/actions/playground";
+import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
-export default function ProjectPlayButton() {
+export default function PlaygroundRun() {
     const {
-        project,
+        playground,
         fetching,
         pushing,
         setPushing,
@@ -17,24 +17,24 @@ export default function ProjectPlayButton() {
         js,
         previewIFrameRef,
         reloadPreviewIFrame
-    } = useContext(ProjectEditorContext);
+    } = useContext(PlaygroundEditorContext);
 
     async function onClick() {
         setMobilePreviewOpen(true);
         setPushing(true);
 
         const htmlFormData = new FormData();
-        htmlFormData.append("public_id", project.public_id);
+        htmlFormData.append("id", playground.id);
         htmlFormData.append("file", "index.html");
         htmlFormData.append("data", html);
 
         const cssFormData = new FormData();
-        cssFormData.append("public_id", project.public_id);
+        cssFormData.append("id", playground.id);
         cssFormData.append("file", "style.css");
         cssFormData.append("data", css);
 
         const jsFormData = new FormData();
-        jsFormData.append("public_id", project.public_id);
+        jsFormData.append("id", playground.id);
         jsFormData.append("file", "script.js");
         jsFormData.append("data", js);
 

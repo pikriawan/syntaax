@@ -6,10 +6,10 @@ import HTMLEditor from "./html-editor";
 import SpinnerIcon from "./icons/spinner-icon";
 import JSEditor from "./js-editor";
 import Button from "./ui/button";
-import ProjectEditorContext from "@/contexts/project-editor-context";
+import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
-export default function ProjectEditor() {
-    const { fetching } = useContext(ProjectEditorContext);
+export default function PlaygroundEditor() {
+    const { fetching } = useContext(PlaygroundEditorContext);
     const [openIndex, setOpenIndex] = useState(0);
 
     return (
