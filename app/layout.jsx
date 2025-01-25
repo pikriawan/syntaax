@@ -4,7 +4,7 @@ import { inter, geist_mono, poppins } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata = {
-    title: "Syntaax"
+    title: "Syntaax",
 };
 
 export const viewport = {
@@ -12,7 +12,8 @@ export const viewport = {
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
-    interactiveWidget: "resizes-content"
+    interactiveWidget: "resizes-content",
+    themeColor: "#09090B"
 };
 
 export default function RootLayout({ children }) {
