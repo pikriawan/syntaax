@@ -7,6 +7,7 @@ import SpinnerIcon from "./icons/spinner-icon";
 import JSEditor from "./js-editor";
 import Button from "./ui/button";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
+import { cn } from "@/lib/utils";
 
 export default function PlaygroundEditor() {
     const { fetching } = useContext(PlaygroundEditorContext);
@@ -37,16 +38,16 @@ export default function PlaygroundEditor() {
                     JS
                 </Button>
             </div>
-            <div className="w-full overflow-y-auto styled-scrollbar">
+            <div className="w-full overflow-y-auto">
                 {fetching ? (
                     <div className="w-full h-full bg-zinc-950 flex justify-center items-center">
                         <SpinnerIcon className="animate-spin" />
                     </div>
                 ) : (
                     <>
-                        <HTMLEditor className={openIndex === 0 ? "block" : "hidden"} />
-                        <CSSEditor className={openIndex === 1 ? "block" : "hidden"} />
-                        <JSEditor className={openIndex === 2 ? "block" : "hidden"} />
+                        <HTMLEditor className={cn("w-full h-full", openIndex !== 0 && "hidden")} />
+                        <CSSEditor className={cn("w-full h-full", openIndex !== 1 && "hidden")} />
+                        <JSEditor className={cn("w-full h-full", openIndex !== 2 && "hidden")} />
                     </>
                 )}
             </div>

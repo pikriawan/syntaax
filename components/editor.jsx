@@ -3,7 +3,7 @@
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { indentUnit } from "@codemirror/language";
-import { EditorView, lineNumbers, highlightSpecialChars, drawSelection, keymap } from "@codemirror/view";
+import { EditorView, lineNumbers, highlightSpecialChars, drawSelection, scrollPastEnd, keymap } from "@codemirror/view";
 import { useEffect, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
 
@@ -24,6 +24,7 @@ export default function Editor({
                 drawSelection(),
                 closeBrackets(),
                 indentUnit.of("    "),
+                scrollPastEnd(),
                 keymap.of([
                     ...closeBracketsKeymap,
                     ...defaultKeymap,
