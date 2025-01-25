@@ -9,6 +9,7 @@ import { editMetadata } from "@/actions/playground";
 
 export default function EditProjectForm({ playground, open, onClose }) {
     const [name, setName] = useState(playground.name);
+    const [pending, setPending] = useState(false);
     const [errors, setErrors] = useState(null);
     const inputRef = useRef(null);
 
@@ -24,18 +25,29 @@ export default function EditProjectForm({ playground, open, onClose }) {
 
     async function onSubmit(event) {
         event.preventDefault();
+        setPending(true);
         setErrors(null);
         const response = await editMetadata(new FormData(event.target));
+        setPending(false);
 
         if (response.success) {
-            typeof onClose === "function" && onClose();
+            if (typeof onClose === "function") {
+                onClose();
+            }
         } else {
             setErrors(response.errors);
         }
     }
 
     return (
-        <Modal open={open} onClose={onClose}>
+        <Modal
+            open={open}
+            onClose={() => {
+                if (!pending && typeof onClose === "function") {
+                    onClose();
+                }
+            }}
+        >
             <div className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold">Edit Playground</h2>
                 <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -57,9 +69,16 @@ export default function EditProjectForm({ playground, open, onClose }) {
                             </p>
                         )}
                     </div>
-                    <div className="flex gap-3">
-                        <Button className="grow" type="button" color="secondary" onClick={onClose}>Cancel</Button>
-                        <SubmitButton className="grow">Save</SubmitButton>
+                    <div className="grid grid-cols-2 gap-3">
+                        <Button
+                            type="button"
+                            color="secondary"
+                            disabled={pending}
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </Button>
+                        <SubmitButton>Save</SubmitButton>
                     </div>
                 </form>
             </div>

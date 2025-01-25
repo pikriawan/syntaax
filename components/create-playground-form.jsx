@@ -13,6 +13,7 @@ export default function CreatePlaygroundForm() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
+    const [pending, setPending] = useState(false);
     const [errors, setErrors] = useState(null);
     const inputRef = useRef(null);
 
@@ -27,8 +28,10 @@ export default function CreatePlaygroundForm() {
 
     async function onSubmit(event) {
         event.preventDefault();
+        setPending(true);
         setErrors(null);
         const response = await create(new FormData(event.target));
+        setPending(false);
 
         if (response.success) {
             setOpen(false);
@@ -42,7 +45,14 @@ export default function CreatePlaygroundForm() {
             <button onClick={() => setOpen(true)}>
                 <PlusIcon className="w-6 h-6" />
             </button>
-            <Modal open={open} onClose={() => setOpen(false)}>
+            <Modal
+                open={open}
+                onClose={() => {
+                    if (!pending) {
+                        setOpen(false);
+                    }
+                }}
+            >
                 <div className="flex flex-col gap-4">
                     <h2 className="text-2xl font-bold">New Playground</h2>
                     <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -63,9 +73,16 @@ export default function CreatePlaygroundForm() {
                                 </p>
                             )}
                         </div>
-                        <div className="flex gap-3">
-                            <Button className="grow" type="button" color="secondary" onClick={() => setOpen(false)}>Cancel</Button>
-                            <SubmitButton className="grow">Create</SubmitButton>
+                        <div className="grid grid-cols-2 gap-3">
+                            <Button
+                                type="button"
+                                color="secondary"
+                                disabled={pending}
+                                onClick={() => setOpen(false)}
+                            >
+                                Cancel
+                            </Button>
+                            <SubmitButton>Create</SubmitButton>
                         </div>
                     </form>
                 </div>
