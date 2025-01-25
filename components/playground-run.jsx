@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayIcon } from "@heroicons/react/24/outline";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { editFile, updateTimestamp } from "@/actions/playground";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
@@ -19,7 +19,22 @@ export default function PlaygroundRun() {
         reloadPreviewIFrame
     } = useContext(PlaygroundEditorContext);
 
-    async function onClick() {
+    useEffect(() => {
+        async function onKeyDown(event) {
+            if (event.key === "r" && event.ctrlKey) {
+                event.preventDefault();
+
+                if (!fetching && !pushing) {
+                    await run();
+                }
+            }
+        }
+
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [run]);
+
+    async function run() {
         setMobilePreviewOpen(true);
         setPushing(true);
 
@@ -59,7 +74,7 @@ export default function PlaygroundRun() {
     }
 
     return (
-        <button onClick={onClick} disabled={fetching || pushing}>
+        <button onClick={run} disabled={fetching || pushing}>
             <PlayIcon className="w-6 h-6" />
         </button>
     );

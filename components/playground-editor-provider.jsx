@@ -34,7 +34,7 @@ export default function PlaygroundEditorProvider({ playground, children }) {
         }
 
         fetchFiles();
-    }, []);
+    }, [playground.id]);
 
     return (
         <PlaygroundEditorContext.Provider value={{
