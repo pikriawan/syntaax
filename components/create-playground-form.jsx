@@ -62,8 +62,10 @@ export default function CreatePlaygroundForm() {
                                 label="Name"
                                 id="name"
                                 name="name"
+                                placeholder="My Playground"
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
+                                disabled={pending}
                                 ref={inputRef}
                                 required
                             />
