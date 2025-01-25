@@ -13,7 +13,9 @@ export default async function LandingPage() {
     return (
         <>
             <div className="w-full h-14 flex justify-between items-center px-4 fixed top-0 left-0">
-                <SyntaaxIcon />
+                <Link href="/">
+                    <SyntaaxIcon />
+                </Link>
                 <Link href="/signin">
                     <span>Sign in</span>
                 </Link>
