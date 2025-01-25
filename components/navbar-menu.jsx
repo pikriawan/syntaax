@@ -1,4 +1,4 @@
-import { DocumentIcon, UserIcon } from "@heroicons/react/24/outline";
+import { CubeIcon, UserIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ export default function NavbarMenu({ onNavigate }) {
         <ul className="flex flex-col gap-3 p-4">
             <li>
                 <Link href="/playgrounds" className={cn("flex items-center gap-2 p-2 rounded-lg transition-colors", pathname === "/playgrounds" ? "bg-zinc-50 text-zinc-950 hover:bg-zinc-300" : "hover:bg-zinc-800")}>
-                    <DocumentIcon className="w-6 h-6" />
+                    <CubeIcon className="w-6 h-6" />
                     Playgrounds
                 </Link>
             </li>

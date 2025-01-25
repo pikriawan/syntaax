@@ -183,6 +183,41 @@ export async function editFile(formData) {
 
     await redis.set(filePath, rawData.data);
 
+    return {
+        success: true,
+        message: null,
+        errors: null
+    };
+}
+
+export async function updateTimestamp(formData) {
+    const user = await getUser();
+
+    if (!user) {
+        return {
+            success: false,
+            message: "Unauthorized",
+            errors: null
+        };
+    }
+
+    const rawData = parseFormData(formData);
+
+    const exists = (await sql`
+        SELECT
+        FROM playgrounds
+        WHERE id = ${rawData.id}
+        AND user_id = ${user.id};
+    `).length !== 0;
+
+    if (!exists) {
+        return {
+            success: false,
+            message: "Playground not found",
+            errors: null
+        };
+    }
+
     await sql`
         UPDATE playgrounds
         SET updated_at = CURRENT_TIMESTAMP

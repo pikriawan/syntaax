@@ -2,7 +2,7 @@
 
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { editFile } from "@/actions/playground";
+import { editFile, updateTimestamp } from "@/actions/playground";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
 export default function PlaygroundRun() {
@@ -43,6 +43,10 @@ export default function PlaygroundRun() {
             editFile(cssFormData),
             editFile(jsFormData)
         ]);
+
+        const timestampFormData = new FormData();
+        timestampFormData.append("id", playground.id);
+        updateTimestamp(timestampFormData);
 
         reloadPreviewIFrame();
 
