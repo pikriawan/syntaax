@@ -57,13 +57,13 @@ export async function create(formData) {
         `${id}/index.html`,
         "<!DOCTYPE html>\n" +
         "<html>\n" +
-        "   <head>\n" +
-        "       <meta name=\"viewport\" content=\"width=device-width\">\n" +
-        "       <link rel=\"stylesheet\" href=\"style.css\">\n" +
-        "   </head>\n" +
-        "   <body>\n" +
-        "       <script src=\"script.js\"></script>\n" +
-        "   </body>\n" +
+        "    <head>\n" +
+        "        <meta name=\"viewport\" content=\"width=device-width\">\n" +
+        "        <link rel=\"stylesheet\" href=\"style.css\">\n" +
+        "    </head>\n" +
+        "    <body>\n" +
+        "        <script src=\"script.js\"></script>\n" +
+        "    </body>\n" +
         "</html>"
     );
     await redis.set(`${id}/style.css`, "");
