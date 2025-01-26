@@ -2,6 +2,7 @@ import { auth } from "./lib/auth";
 
 const publicRoutes = [
     "/",
+    "/landing",
     "/signin",
     /^\/playground\/[^/]+\/files\/[^/]+$/
 ];
