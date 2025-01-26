@@ -4,7 +4,7 @@ import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { indentUnit } from "@codemirror/language";
 import { EditorView, drawSelection, highlightSpecialChars, keymap, lineNumbers, scrollPastEnd } from "@codemirror/view";
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
 
 export default function Editor({
