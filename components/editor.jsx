@@ -3,49 +3,50 @@
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { indentUnit } from "@codemirror/language";
-import { EditorView, lineNumbers, highlightSpecialChars, drawSelection, scrollPastEnd, keymap } from "@codemirror/view";
-import { useEffect, useRef } from "react";
+import { EditorView, drawSelection, highlightSpecialChars, keymap, lineNumbers, scrollPastEnd } from "@codemirror/view";
+import { useEffect, useCallback, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
 
 export default function Editor({
     className,
-    extensions = [],
+    onChange,
     defaultValue = "",
-    onChange
+    extensions = []
 }) {
     const parentRef = useRef(null);
+    const extensionsRef = useRef(extensions);
 
     useEffect(() => {
         const view = new EditorView({
+            doc: defaultValue,
+            parent: parentRef.current,
             extensions: [
                 lineNumbers(),
                 highlightSpecialChars(),
                 history(),
                 drawSelection(),
                 closeBrackets(),
-                indentUnit.of("    "),
-                scrollPastEnd(),
                 keymap.of([
                     ...closeBracketsKeymap,
                     ...defaultKeymap,
                     ...historyKeymap,
                     indentWithTab
                 ]),
+                indentUnit.of("    "),
+                scrollPastEnd(),
                 EditorView.lineWrapping,
                 EditorView.updateListener.of((viewUpdate) => {
                     if (viewUpdate.docChanged) {
-                        typeof onChange === "function" && onChange(viewUpdate.view.state.doc.toString());
+                        onChange(viewUpdate.state.doc.toString());
                     }
                 }),
                 editorTheme,
-                ...extensions
-            ],
-            doc: defaultValue,
-            parent: parentRef.current,
+                ...extensionsRef.current
+            ]
         });
 
         return () => view.destroy();
-    }, []);
+    }, [onChange, defaultValue]);
 
-    return <div className={className} ref={parentRef} />;
+    return <div ref={parentRef} className={className} />;
 }

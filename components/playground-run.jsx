@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayIcon } from "@heroicons/react/24/outline";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import { editFile, updateTimestamp } from "@/actions/playground";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
 
@@ -19,22 +19,7 @@ export default function PlaygroundRun() {
         reloadPreviewIFrame
     } = useContext(PlaygroundEditorContext);
 
-    useEffect(() => {
-        async function onKeyDown(event) {
-            if (event.key === "r" && event.ctrlKey) {
-                event.preventDefault();
-
-                if (!fetching && !pushing) {
-                    await run();
-                }
-            }
-        }
-
-        document.addEventListener("keydown", onKeyDown);
-        return () => document.removeEventListener("keydown", onKeyDown);
-    }, [run]);
-
-    async function run() {
+    const run = useCallback(async () => {
         setMobilePreviewOpen(true);
         setPushing(true);
 
@@ -71,7 +56,31 @@ export default function PlaygroundRun() {
         }
 
         previewIFrameRef.current.addEventListener("load", onReload);
-    }
+    }, [
+        css,
+        html,
+        js,
+        playground.id,
+        previewIFrameRef,
+        reloadPreviewIFrame,
+        setMobilePreviewOpen,
+        setPushing
+    ]);
+
+    useEffect(() => {
+        async function onKeyDown(event) {
+            if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "r") {
+                event.preventDefault();
+
+                if (!fetching && !pushing) {
+                    await run();
+                }
+            }
+        }
+
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [fetching, pushing, run]);
 
     return (
         <button onClick={run} disabled={fetching || pushing}>
