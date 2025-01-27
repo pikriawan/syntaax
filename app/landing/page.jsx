@@ -13,7 +13,7 @@ export default async function LandingPage() {
                 </Link>
             </div>
             <div className="w-full h-full flex justify-center items-center overflow-hidden">
-                <p className="font-brand text-[2.5rem] md:text-[10rem]">syntaax</p>
+                <p className="font-['Poppins'] text-[2.5rem] md:text-[10rem]">syntaax</p>
             </div>
         </div>
     );
