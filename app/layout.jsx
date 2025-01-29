@@ -4,7 +4,8 @@ import { inter, poppins } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata = {
-    title: "Syntaax"
+    title: "Syntaax",
+    description: "Instant HTML, CSS, JS Playground"
 };
 
 export const viewport = {
