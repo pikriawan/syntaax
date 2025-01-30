@@ -36,7 +36,7 @@ export default function Editor({
                 scrollPastEnd(),
                 EditorView.lineWrapping,
                 EditorView.updateListener.of((viewUpdate) => {
-                    if (viewUpdate.docChanged) {
+                    if (viewUpdate.docChanged && typeof onChange === "function") {
                         onChange(viewUpdate.state.doc.toString());
                     }
                 }),
