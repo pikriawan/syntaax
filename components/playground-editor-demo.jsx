@@ -78,7 +78,7 @@ export default function PlaygroundEditorDemo() {
 
     return (
         <div className="w-full p-4 shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-2xl bg-transparent flex justify-center items-center backdrop-blur-xl">
-            <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg bg-zinc-950 opacity-80 relative">
+            <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg bg-zinc-950 relative">
                 <div className={cn("w-full h-full grid grid-rows-[auto_1fr] md:visible", (previewLoading || previewShow) && "invisible")}>
                     <div className="w-full h-14 px-4 flex items-center justify-between shadow-[0_-0.0625rem_#27272A_inset]">
                         <div className="flex items-center gap-4">
@@ -128,24 +128,26 @@ export default function PlaygroundEditorDemo() {
                         </div>
                     </div>
                 </div>
-                <div className="h-full w-full md:hidden absolute top-0 left-0">
-                    <div className={cn("px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 hidden justify-end items-center gap-4", (previewLoading || previewShow) && "flex")}>
-                        <ArrowTopRightOnSquareIcon className="w-6 h-6" />
-                        <XMarkIcon className="w-6 h-6" />
-                    </div>
-                    {previewLoading ? (
-                        <div className="w-full h-full absolute top-0 left-0">
-                            <div className="w-full h-full flex justify-center items-center">
-                                <SpinnerIcon className="animate-spin" />
+                {(previewLoading || previewShow) && (
+                    <div className="h-full w-full md:hidden absolute top-0 left-0">
+                        <div className="px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 flex justify-end items-center gap-4">
+                            <ArrowTopRightOnSquareIcon className="w-6 h-6" />
+                            <XMarkIcon className="w-6 h-6" />
+                        </div>
+                        {previewLoading ? (
+                            <div className="w-full h-full absolute top-0 left-0">
+                                <div className="w-full h-full flex justify-center items-center">
+                                    <SpinnerIcon className="animate-spin" />
+                                </div>
                             </div>
-                        </div>
-                    ) : previewShow && (
-                        <div className="p-4 flex-col gap-2 items-start">
-                            <h1 className="text-3xl font-bold">Hello, World!</h1>
-                            <p>Welcome to my playground!</p>
-                        </div>
-                    )}
-                </div>
+                        ) : (
+                            <div className="p-4 flex-col gap-2 items-start">
+                                <h1 className="text-3xl font-bold">Hello, World!</h1>
+                                <p>Welcome to my playground!</p>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );
