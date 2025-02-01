@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SyntaaxIcon from "@/components/icons/syntaax-icon";
 import PlaygroundEditorDemo from "@/components/playground-editor-demo";
+import PlaygroundEditorPlaceholder from "@/components/playground-editor-placeholder";
 import { getUser } from "@/data/user";
 
 export default async function LandingPage() {
@@ -27,6 +28,20 @@ export default async function LandingPage() {
                         </Link>
                     </div>
                     <PlaygroundEditorDemo />
+                </div>
+                <div className="w-full h-[0.0625rem] flex justify-center items-center px-4 md:px-16">
+                    <div className="w-full h-full bg-zinc-800" />
+                </div>
+                <div className="w-full flex flex-col items-center px-4 py-24 gap-16 md:px-16 bg-gradient-to-b from-zinc-950 via-[rgba(250,250,250,0.025)] to-zinc-950">
+                    <div className="flex flex-col items-center gap-4">
+                        <p className="text-center font-bold">Browser based</p>
+                        <h1 className="text-5xl font-semibold text-center">Code directly on your browser</h1>
+                        <div className="flex flex-col items-center">
+                            <p className="text-center">Use your favourite browser to open <span className="font-bold font-['Poppins']">syntaax</span></p>
+                            <p className="text-center">No need to install it on your browser</p>
+                        </div>
+                    </div>
+                    <PlaygroundEditorPlaceholder />
                 </div>
             </div>
         </div>

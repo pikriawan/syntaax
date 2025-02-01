@@ -3,23 +3,25 @@
 import { html } from "@codemirror/lang-html";
 import { EditorView, lineNumbers } from "@codemirror/view";
 import { ArrowTopRightOnSquareIcon, EllipsisHorizontalIcon, ChevronLeftIcon, PlayIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SpinnerIcon from "./icons/spinner-icon";
 import Button from "./ui/button";
 import editorTheme from "@/lib/editor-theme";
 import { cn } from "@/lib/utils";
 
 function EditorDemo({ onCodeFinished }) {
-    const code = "<!DOCTYPE html>\n" +
+    const codeRef = useRef("<!DOCTYPE html>\n" +
         "<html>\n" +
         "    <head>\n" +
         "        <title>My Playground</title>\n" +
+        "        <link rel=\"stylesheet\" href=\"style.css\">\n" +
         "    </head>\n" +
         "    <body>\n" +
         "        <h1>Hello, World!</h1>\n" +
         "        <p>Welcome to my playground!</p>\n" +
+        "        <script src=\"script.js\"></script>\n" +
         "    </body>\n" +
-        "</html>";
+        "</html>");
     const parentRef = useRef(null);
     const viewRef = useRef(null);
     const intervalRef = useRef(null);
@@ -45,7 +47,7 @@ function EditorDemo({ onCodeFinished }) {
         });
 
         intervalRef.current = setInterval(() => {
-            if (visibleCharsRef.current.length <= code.length) {
+            if (visibleCharsRef.current.length <= codeRef.current.length) {
                 viewRef.current.dispatch({
                     changes: {
                         from: 0,
@@ -53,7 +55,7 @@ function EditorDemo({ onCodeFinished }) {
                         insert: visibleCharsRef.current
                     }
                 });
-                visibleCharsRef.current += code[visibleCharsRef.current.length];
+                visibleCharsRef.current += codeRef.current[visibleCharsRef.current.length];
             } else {
                 clearInterval(intervalRef.current);
 
@@ -67,7 +69,7 @@ function EditorDemo({ onCodeFinished }) {
             viewRef.current.destroy();
             clearInterval(intervalRef.current);
         }
-    }, []);
+    }, [onCodeFinished]);
 
     return <div ref={parentRef} className="w-full h-full" />;
 }
@@ -75,6 +77,15 @@ function EditorDemo({ onCodeFinished }) {
 export default function PlaygroundEditorDemo() {
     const [previewLoading, setPreviewLoading] = useState(false);
     const [previewShow, setPreviewShow] = useState(false);
+
+    const onCodeFinished = useCallback(() => {
+        setPreviewLoading(true);
+
+        setTimeout(() => {
+            setPreviewLoading(false);
+            setPreviewShow(true);
+        }, 3000);
+    }, [setPreviewLoading, setPreviewShow]);
 
     return (
         <div className="w-full p-4 shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-2xl bg-transparent flex justify-center items-center backdrop-blur-xl">
@@ -100,14 +111,7 @@ export default function PlaygroundEditorDemo() {
                             </div>
                             <div className="p-[0.0625rem] pe-4 w-full h-full overflow-x-auto">
                                 <EditorDemo
-                                    onCodeFinished={() => {
-                                        setPreviewLoading(true);
-
-                                        setTimeout(() => {
-                                            setPreviewLoading(false);
-                                            setPreviewShow(true);
-                                        }, 3000);
-                                    }}
+                                    onCodeFinished={onCodeFinished}
                                 />
                             </div>
                         </div>
