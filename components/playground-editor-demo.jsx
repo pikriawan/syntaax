@@ -34,14 +34,6 @@ function EditorDemo({ onCodeFinished }) {
                 lineNumbers(),
                 html(),
                 EditorView.editable.of(false),
-                EditorView.theme({
-                    "&": {
-                        background: "transparent"
-                    },
-                    ".cm-gutters": {
-                        background: "transparent"
-                    }
-                }),
                 editorTheme,
             ]
         });
