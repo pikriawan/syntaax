@@ -20,7 +20,7 @@ export default function SignoutButton({ className, disabled, ...props }) {
             disabled={disabled || pending}
             {...props}
         >
-            <ArrowRightStartOnRectangleIcon className="w-6 h-6" />
+            <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
             Sign out
         </Button>
     );

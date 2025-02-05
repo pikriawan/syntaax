@@ -43,7 +43,7 @@ export default function CreatePlaygroundForm() {
     return pathname === "/playgrounds" && (
         <>
             <button onClick={() => setOpen(true)} title="Create playground">
-                <PlusIcon className="w-6 h-6" />
+                <PlusIcon className="w-5 h-5" />
             </button>
             <Modal
                 open={open}

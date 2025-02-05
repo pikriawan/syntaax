@@ -10,7 +10,7 @@ export default function PlaygroundLink({ className }) {
 
     return (
         <Link href={`/playground/${playground.id}/files/index.html`} target="_blank" className={className} title="Preview">
-            <ArrowTopRightOnSquareIcon className="w-6 h-6" />
+            <ArrowTopRightOnSquareIcon className="w-5 h-5" />
         </Link>
     );
 }
