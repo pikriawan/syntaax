@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SignoutForm from "@/components/signout-form";
+import SignoutButton from "@/components/signout-button";
 import { getUser } from "@/data/user";
 
 export default async function ProfilePage() {
@@ -13,7 +13,7 @@ export default async function ProfilePage() {
                 <h2 className="text-2xl font-bold">{user?.name}</h2>
                 <p>{user?.email}</p>
             </div>
-            <SignoutForm />
+            <SignoutButton />
         </div>
     );
 }
