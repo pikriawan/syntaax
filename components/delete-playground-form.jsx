@@ -50,7 +50,7 @@ export default function DeletePlaygroundForm({ playground, open, onClose }) {
                         >
                             Cancel
                         </Button>
-                        <SubmitButton className="grow" color="danger">Yes</SubmitButton>
+                        <SubmitButton className="grow" color="danger">Yes, Delete</SubmitButton>
                     </div>
                 </form>
             </div>

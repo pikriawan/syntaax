@@ -28,7 +28,7 @@ export default async function PlaygroundPage({ params }) {
                         <Link href="/playgrounds">
                             <ChevronLeft size={20} />
                         </Link>
-                        <h1 className="font-bold text-2xl">{playground.name}</h1>
+                        <h1 className="font-medium text-2xl">{playground.name}</h1>
                     </div>
                     <div className="flex items-center gap-4">
                         <PlaygroundRun />

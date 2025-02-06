@@ -11,8 +11,8 @@ export default function DashboardLayout({ children }) {
                 <div className="flex items-center gap-4">
                     <MobileNavbar />
                     <Link href="/" className="flex items-center gap-2">
-                        <SyntaaxIcon />
-                        <p className="font-['Poppins'] font-bold">syntaax</p>
+                        <SyntaaxIcon width={12} height={12} />
+                        <p className="font-['Poppins'] font-medium">syntaax</p>
                     </Link>
                 </div>
                 <CreatePlaygroundForm />

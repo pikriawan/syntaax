@@ -1,6 +1,6 @@
 "use client";
 
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { X } from "lucide-react";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
 import SpinnerIcon from "./icons/spinner-icon";
@@ -40,7 +40,7 @@ export default function PlaygroundPreview() {
                 <div className="px-4 shadow-[0_-0.0625rem_#27272A_inset] w-full h-14 bg-zinc-950 flex justify-end items-center gap-4">
                     <PlaygroundLink />
                     <button onClick={() => setMobilePreviewOpen(false)}>
-                        <XMarkIcon className="w-5 h-5" />
+                        <X size={20} />
                     </button>
                 </div>
                 <div className="w-full h-[calc(100%-3.5rem)] bg-zinc-50 overflow-auto relative">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
@@ -20,16 +20,16 @@ export default function MobileNavbar() {
     return (
         <>
             <button className="md:hidden" onClick={() => setOpen(true)}>
-                <Bars3Icon className="w-6 h-6" />
+                <Menu size={20} />
             </button>
             {mounted && createPortal(
                 <nav className={cn("w-full h-full fixed top-0 bg-zinc-950 transition-[left] md:hidden", open ? "left-0" : "-left-full")}>
                     <div className="w-full h-14 px-4 flex items-center justify-between shadow-[0_-0.0625rem_#27272A_inset]">
                         <Link href="/">
-                            <SyntaaxIcon />
+                            <SyntaaxIcon width={12} height={12} />
                         </Link>
                         <button onClick={() => setOpen(false)}>
-                            <XMarkIcon className="w-6 h-6" />
+                            <X size={20} />
                         </button>
                     </div>
                     <div className="h-[calc(100%-3.5rem)] overflow-y-auto">
