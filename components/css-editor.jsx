@@ -1,6 +1,7 @@
 "use client";
 
 import { css as cssLang } from "@codemirror/lang-css";
+import { EditorView } from "@codemirror/view";
 import { useContext, useRef, useCallback } from "react";
 import Editor from "./editor";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
@@ -16,7 +17,17 @@ export default function CSSEditor({ className }) {
     return (
         <Editor
             className={className}
-            extensions={[cssLang()]}
+            extensions={[
+                EditorView.theme({
+                    "&": {
+                        height: "100%"
+                    },
+                    ".cm-scroller": {
+                        overflow: "auto"
+                    }
+                }),
+                cssLang()
+            ]}
             defaultValue={defaultValueRef.current}
             onChange={onChange}
         />

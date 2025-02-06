@@ -8,10 +8,6 @@ import PlaygroundPreview from "@/components/playground-preview";
 import PlaygroundLink from "@/components/playground-link";
 import { get } from "@/data/playground";
 
-export const viewport = {
-    interactiveWidget: "overlays-content"
-};
-
 export default async function PlaygroundPage({ params }) {
     const id = (await params).id;
     const playground = await get(id);

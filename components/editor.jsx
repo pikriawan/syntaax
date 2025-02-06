@@ -1,9 +1,9 @@
 "use client";
 
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
-import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
+import { indentWithTab } from "@codemirror/commands";
 import { indentUnit } from "@codemirror/language";
-import { EditorView, drawSelection, highlightSpecialChars, keymap, lineNumbers, scrollPastEnd } from "@codemirror/view";
+import { EditorView, keymap, scrollPastEnd } from "@codemirror/view";
+import { basicSetup } from "codemirror";
 import { useEffect, useRef } from "react";
 import editorTheme from "@/lib/editor-theme";
 
@@ -21,17 +21,8 @@ export default function Editor({
             doc: defaultValue,
             parent: parentRef.current,
             extensions: [
-                lineNumbers(),
-                highlightSpecialChars(),
-                history(),
-                drawSelection(),
-                closeBrackets(),
-                keymap.of([
-                    ...closeBracketsKeymap,
-                    ...defaultKeymap,
-                    ...historyKeymap,
-                    indentWithTab
-                ]),
+                basicSetup,
+                keymap.of([indentWithTab]),
                 indentUnit.of("    "),
                 scrollPastEnd(),
                 EditorView.lineWrapping,
@@ -40,7 +31,7 @@ export default function Editor({
                         onChange(viewUpdate.state.doc.toString());
                     }
                 }),
-                editorTheme,
+                editorTheme, 
                 ...extensionsRef.current
             ]
         });
