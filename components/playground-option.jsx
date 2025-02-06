@@ -1,6 +1,6 @@
 "use client";
 
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
+import { Ellipsis } from "lucide-react";
 import { useState } from "react";
 import DeletePlaygroundForm from "./delete-playground-form";
 import EditPlaygroundForm from "./edit-playground-form";
@@ -15,7 +15,7 @@ export default function PlaygroundOption({ playground, className }) {
     return (
         <>
             <button className={className} onClick={() => setOpen(true)} title="Options">
-                <EllipsisHorizontalIcon className="w-5 h-5" />
+                <Ellipsis size={20} />
             </button>
             <OptionModal open={open} onClose={() => setOpen(false)} className="p-[0.0625rem] top-1/2 -translate-y-1/2">
                 <div className="p-0 flex flex-col items-center">

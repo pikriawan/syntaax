@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import PlaygroundEditor from "@/components/playground-editor";
 import PlaygroundEditorProvider from "@/components/playground-editor-provider";
@@ -26,7 +26,7 @@ export default async function PlaygroundPage({ params }) {
                 <div className="w-full h-14 px-4 flex items-center justify-between shadow-[0_-0.0625rem_#27272A_inset]">
                     <div className="flex items-center gap-4">
                         <Link href="/playgrounds">
-                            <ChevronLeftIcon className="w-5 h-5" />
+                            <ChevronLeft size={20} />
                         </Link>
                         <h1 className="font-bold text-2xl">{playground.name}</h1>
                     </div>

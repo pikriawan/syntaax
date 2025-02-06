@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import Button from "./ui/button";
@@ -20,7 +20,7 @@ export default function SignoutButton({ className, disabled, ...props }) {
             disabled={disabled || pending}
             {...props}
         >
-            <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+            <LogOut size={20} />
             Sign out
         </Button>
     );

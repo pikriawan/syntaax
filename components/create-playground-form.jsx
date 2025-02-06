@@ -1,6 +1,6 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { Plus } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import Button from "./ui/button";
@@ -43,7 +43,7 @@ export default function CreatePlaygroundForm() {
     return pathname === "/playgrounds" && (
         <>
             <button onClick={() => setOpen(true)} title="Create playground">
-                <PlusIcon className="w-5 h-5" />
+                <Plus size={20} />
             </button>
             <Modal
                 open={open}

@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayIcon } from "@heroicons/react/24/outline";
+import { Play } from "lucide-react";
 import { useContext, useEffect, useCallback } from "react";
 import { editFile, updateTimestamp } from "@/actions/playground";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
@@ -84,7 +84,7 @@ export default function PlaygroundRun() {
 
     return (
         <button onClick={run} disabled={fetching || pushing} title="Run [Ctrl + Shift + R]">
-            <PlayIcon className="w-5 h-5" />
+            <Play size={20} />
         </button>
     );
 }
