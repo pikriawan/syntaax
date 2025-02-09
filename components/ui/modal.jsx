@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 export default function Modal({
     children,
     className,
+    onClose,
     open,
-    onClose = () => {},
     ...props
 }) {
     const mounted = useMounted();

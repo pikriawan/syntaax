@@ -7,6 +7,6 @@ export default async function PlaygroundList() {
     return playgrounds?.length ? playgrounds.map((playground) => (
         <PlaygroundCard key={playground.id} playground={playground} />
     )) : (
-        <p>Nothing here. Start creating something amazing!</p>
+        <p>Nothing here. Start create something amazing!</p>
     );
 }
