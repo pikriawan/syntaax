@@ -1,30 +1,30 @@
-"use client";
-
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
+import { html } from "@codemirror/lang-html";
 import { HighlightStyle, indentUnit, syntaxHighlighting } from "@codemirror/language";
 import { EditorView, keymap, lineNumbers, scrollPastEnd } from "@codemirror/view";
 import { tags as t } from "@lezer/highlight";
-import { useEffect, useRef } from "react";
 
 const theme = EditorView.theme({
     "&": {
+        height: "100%",
         backgroundColor: "#09090B",
         color: "#FAFAFA"
     },
     "&.cm-focused": {
         outline: "none"
     },
+    ".cm-scroller": {
+        overflow: "auto"
+    },
     ".cm-gutters": {
         backgroundColor: "#09090B",
         color: "#FAFAFA",
-        borderRight: "none"
+        borderRight: "none",
+        boxShadow: "-0.0625rem 0 #27272A inset"
     },
     ".cm-lineNumbers .cm-gutterElement": {
         paddingLeft: "1rem",
-        paddingRight: "1rem"
-    },
-    ".cm-line": {
         paddingRight: "1rem"
     }
 }, { dark: true });
@@ -48,39 +48,9 @@ const setup = [
         ...historyKeymap,
         indentWithTab
     ]),
+    html(),
     indentUnit.of("    "),
     scrollPastEnd(),
     EditorView.lineWrapping,
-    theme,
     syntaxHighlighting(highlightStyle)
 ];
-
-export default function Editor({
-    className,
-    onChange,
-    defaultValue = "",
-    extensions = []
-}) {
-    const parentRef = useRef(null);
-    const extensionsRef = useRef(extensions);
-
-    useEffect(() => {
-        const view = new EditorView({
-            doc: defaultValue,
-            parent: parentRef.current,
-            extensions: [
-                setup,
-                EditorView.updateListener.of((viewUpdate) => {
-                    if (viewUpdate.docChanged && typeof onChange === "function") {
-                        onChange(viewUpdate.state.doc.toString());
-                    }
-                }),
-                ...extensionsRef.current
-            ]
-        });
-
-        return () => view.destroy();
-    }, [onChange, defaultValue]);
-
-    return <div ref={parentRef} className={className} />;
-}

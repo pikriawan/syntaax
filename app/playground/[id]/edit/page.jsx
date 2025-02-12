@@ -8,6 +8,10 @@ import PlaygroundPreview from "@/components/playground-preview";
 import PlaygroundLink from "@/components/playground-link";
 import { get } from "@/data/playground";
 
+export const viewport = {
+    interactiveWidget: "overlays-content"
+};
+
 export default async function PlaygroundPage({ params }) {
     const id = (await params).id;
     const playground = await get(id);
@@ -19,12 +23,12 @@ export default async function PlaygroundPage({ params }) {
     return (
         <div className="w-full h-full flex flex-col">
             <PlaygroundEditorProvider playground={playground}>
-                <div className="w-full h-14 px-4 flex items-center justify-between shadow-[0_-0.0625rem_#27272A_inset]">
-                    <div className="flex items-center gap-4">
+                <div className="w-full h-14 px-4 flex items-center justify-between gap-4 shadow-[0_-0.0625rem_#27272A_inset]">
+                    <div className="grid grid-cols-[auto_auto] items-center gap-4">
                         <Link href="/playgrounds">
                             <ChevronLeft size={20} />
                         </Link>
-                        <h1 className="font-medium text-2xl">{playground.name}</h1>
+                        <h1 className="font-medium text-2xl truncate">{playground.name}</h1>
                     </div>
                     <div className="flex items-center gap-4">
                         <PlaygroundRun />

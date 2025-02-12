@@ -1,14 +1,100 @@
 "use client";
 
-import { useContext } from "react";
-import CSSEditor from "./css-editor";
-import HTMLEditor from "./html-editor";
+import { css as cssLang } from "@codemirror/lang-css";
+import { html as htmlLang } from "@codemirror/lang-html";
+import { javascript as jsLang } from "@codemirror/lang-javascript";
+import { EditorView } from "@codemirror/view";
+import { useCallback, useContext, useRef } from "react";
+import Editor from "./editor";
 import SpinnerIcon from "./icons/spinner-icon";
-import JSEditor from "./js-editor";
 import Tab from "./ui/tab";
 import TabPanel from "./ui/tab-panel";
 import TabProvider from "./ui/tab-provider";
 import PlaygroundEditorContext from "@/contexts/playground-editor-context";
+
+function HTMLEditor({ className }) {
+    const { html, setHtml } = useContext(PlaygroundEditorContext);
+    const defaultValueRef = useRef(html);
+
+    const onChange = useCallback((value) => {
+        setHtml(value);
+    }, [setHtml]);
+
+    return (
+        <Editor
+            className={className}
+            extensions={[
+                EditorView.theme({
+                    "&": {
+                        height: "100%"
+                    },
+                    ".cm-scroller": {
+                        overflow: "auto"
+                    }
+                }),
+                htmlLang()
+            ]}
+            defaultValue={defaultValueRef.current}
+            onChange={onChange}
+        />
+    );
+}
+
+function CSSEditor({ className }) {
+    const { css, setCss } = useContext(PlaygroundEditorContext);
+    const defaultValueRef = useRef(css);
+
+    const onChange = useCallback((value) => {
+        setCss(value);
+    }, [setCss]);
+
+    return (
+        <Editor
+            className={className}
+            extensions={[
+                EditorView.theme({
+                    "&": {
+                        height: "100%"
+                    },
+                    ".cm-scroller": {
+                        overflow: "auto"
+                    }
+                }),
+                cssLang()
+            ]}
+            defaultValue={defaultValueRef.current}
+            onChange={onChange}
+        />
+    );
+}
+
+function JSEditor({ className }) {
+    const { js, setJs } = useContext(PlaygroundEditorContext);
+    const defaultValueRef = useRef(js);
+
+    const onChange = useCallback((value) => {
+        setJs(value);
+    }, [setJs]);
+
+    return (
+        <Editor
+            className={className}
+            extensions={[
+                EditorView.theme({
+                    "&": {
+                        height: "100%"
+                    },
+                    ".cm-scroller": {
+                        overflow: "auto"
+                    }
+                }),
+                jsLang()
+            ]}
+            defaultValue={defaultValueRef.current}
+            onChange={onChange}
+        />
+    );
+}
 
 export default function PlaygroundEditor() {
     const { fetching } = useContext(PlaygroundEditorContext);
