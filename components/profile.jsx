@@ -21,10 +21,16 @@ export default function Profile({ user }) {
             </button>
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div className="flex flex-col items-center gap-4">
-                    <Image width={128} height={128} src={user?.image} alt="Profile picture" className="rounded-full" />
-                    <div className="flex flex-col gap-2 text-center">
-                        <h2 className="text-2xl font-bold">{user?.name}</h2>
-                        <p>{user?.email}</p>
+                    <Image
+                        width={80}
+                        height={80}
+                        src={user?.image}
+                        alt="Profile picture"
+                        className="rounded-full"
+                    />
+                    <div className="flex flex-col text-center">
+                        <h2 className="text-xl font-bold">{user?.name}</h2>
+                        <p className="text-sm">{user?.email}</p>
                     </div>
                     <SignoutButton className="w-full" />
                 </div>

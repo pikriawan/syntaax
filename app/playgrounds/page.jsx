@@ -1,10 +1,11 @@
 import Link from "next/link";
 import CreatePlaygroundForm from "@/components/create-playground-form";
 import SyntaaxIcon from "@/components/icons/syntaax-icon";
-import { getUser } from "@/data/user";
+import PlaygroundList from "@/components/playground-list";
 import Profile from "@/components/profile";
+import { getUser } from "@/data/user";
 
-export default async function DashboardLayout({ children }) {
+export default async function PlaygroundsPage() {
     const user = await getUser();
 
     return (
@@ -21,7 +22,10 @@ export default async function DashboardLayout({ children }) {
             </div>
             <div className="w-full h-[calc(100%-3.5rem)] flex">
                 <main className="w-full h-full overflow-y-auto">
-                    {children}
+                    <div className="px-4 py-6 flex flex-col items-start gap-4">
+                        <h1 className="text-3xl font-bold">Playgrounds</h1>
+                        <PlaygroundList />
+                    </div>
                 </main>
             </div>
         </div>
