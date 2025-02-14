@@ -5,7 +5,7 @@ export default function SigninPage() {
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-6">
             <SyntaaxIcon width={24} height={24} />
-            <h1 className="text-2xl font-medium">Sign in to Syntaax</h1>
+            <h1 className="text-2xl font-bold">Sign in to Syntaax</h1>
             <GoogleSigninButton />
         </div>
     );

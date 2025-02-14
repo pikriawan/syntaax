@@ -1,7 +1,6 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import Button from "./ui/button";
 import Input from "./ui/input";
@@ -10,7 +9,6 @@ import SubmitButton from "./ui/submit-button";
 import { create } from "@/actions/playground";
 
 export default function CreatePlaygroundForm() {
-    const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
     const [pending, setPending] = useState(false);
@@ -40,7 +38,7 @@ export default function CreatePlaygroundForm() {
         }
     }
 
-    return pathname === "/playgrounds" && (
+    return (
         <>
             <button onClick={() => setOpen(true)} title="Create playground">
                 <Plus size={20} />
