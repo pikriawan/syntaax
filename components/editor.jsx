@@ -29,6 +29,7 @@ const theme = EditorView.theme({
         paddingRight: "1rem"
     },
     ".cm-line": {
+        paddingLeft: "0",
         paddingRight: "1rem"
     }
 }, { dark: true });
