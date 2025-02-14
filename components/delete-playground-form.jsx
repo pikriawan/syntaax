@@ -37,7 +37,7 @@ export default function DeletePlaygroundForm({ playground, open, onClose }) {
             }}
         >
             <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-bold">Delete Playground</h2>
+                <h2 className="text-2xl font-bold">Delete Playground?</h2>
                 <p>Are you sure you want to delete this playground?</p>
                 <form onSubmit={onSubmit}>
                     <input type="hidden" name="id" value={playground.id} />

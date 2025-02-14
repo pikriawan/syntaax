@@ -15,6 +15,10 @@ const theme = EditorView.theme({
     "&.cm-focused": {
         outline: "none"
     },
+    ".cm-scroller": {
+        overflow: "auto",
+        scrollbarColor: "#27272A #09090B"
+    },
     ".cm-gutters": {
         backgroundColor: "#09090B",
         color: "#FAFAFA",
