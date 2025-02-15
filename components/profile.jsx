@@ -12,8 +12,8 @@ export default function Profile({ user }) {
         <>
             <button onClick={() => setOpen(true)}>
                 <Image
-                    width={32}
-                    height={32}
+                    width={24}
+                    height={24}
                     src={user?.image}
                     alt="Profile picture"
                     className="rounded-full"

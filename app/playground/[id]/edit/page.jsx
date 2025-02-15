@@ -12,6 +12,21 @@ export const viewport = {
     interactiveWidget: "overlays-content"
 };
 
+export async function generateMetadata({ params }) {
+    const id = (await params).id;
+    const playground = await get(id);
+
+    if (!playground) {
+        return {
+            title: "Not Found"
+        };
+    }
+
+    return {
+        title: playground.name
+    };
+}
+
 export default async function PlaygroundPage({ params }) {
     const id = (await params).id;
     const playground = await get(id);
