@@ -11,11 +11,12 @@ export default function Tab({
     ...props
 }) {
     const { openIndex, setOpenIndex } = useTab();
+    const active = index === openIndex;
 
     return (
         <Button
-            className={cn("hover:bg-zinc-50", className)}
-            color={index === openIndex ? "primary" : "secondary"}
+            className={cn(active ? "hover:bg-zinc-50" : "hover:bg-zinc-900", className)}
+            color={active ? "primary" : "secondary"}
             onClick={() => setOpenIndex(index)}
             {...props}
         >
