@@ -8,6 +8,7 @@ import { getUser } from "@/data/user";
 export default async function LandingPage() {
     const user = await getUser();
 
+    // TODO: Make the header position fixed.
     return (
         <div className="w-full h-full overflow-y-auto scrollbar">
             <header className="w-full h-14 flex justify-between items-center px-4 md:px-16">
