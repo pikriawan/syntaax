@@ -13,7 +13,7 @@ export default async function PlaygroundsPage() {
             <div className="w-full h-14 px-4 flex justify-between items-center shadow-[0_-0.0625rem_#27272A_inset]">
                 <Link href="/" className="flex items-center gap-2">
                     <SyntaaxIcon width={14} height={14} />
-                    <p className="font-['Poppins'] font-medium text-lg">syntaax</p>
+                    <span className="font-['Poppins'] font-medium text-lg">syntaax</span>
                 </Link>
                 <div className="flex items-center gap-4">
                     <CreatePlaygroundForm />
