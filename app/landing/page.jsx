@@ -8,9 +8,8 @@ import { getUser } from "@/data/user";
 export default async function LandingPage() {
     const user = await getUser();
 
-    // TODO: Make the header position fixed.
     return (
-        <div className="w-full h-full overflow-y-auto scrollbar">
+        <div className="w-full h-full flex flex-col">
             <header className="w-full h-14 flex justify-between items-center px-4 md:px-16">
                 <Link href="/" className="flex items-center gap-2">
                     <SyntaaxIcon width={14} height={14} />
@@ -22,7 +21,7 @@ export default async function LandingPage() {
                     <Link href="/signin">Sign in</Link>
                 )}
             </header>
-            <div className="flex flex-col gap-16 px-4 md:px-16 py-16">
+            <div className="w-full h-[calc(100%-3.5rem)] grid grid-cols-1 overflow-y-auto scrollbar gap-16 px-4 md:px-16 py-16">
                 <section className="w-full flex flex-col items-center gap-16">
                     <div className="flex flex-col items-center gap-8">
                         <h1 className="font-bold text-5xl text-center">Instant HTML, CSS, JS playground</h1>
