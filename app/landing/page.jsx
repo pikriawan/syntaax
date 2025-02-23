@@ -25,7 +25,7 @@ export default async function LandingPage() {
                 <section className="w-full flex flex-col items-center gap-16">
                     <div className="flex flex-col items-center gap-8">
                         <h1 className="font-bold text-5xl text-center">Instant HTML, CSS, JS playground</h1>
-                        <Link href="/" className="bg-zinc-50 text-zinc-950 px-4 py-2 rounded-lg transition-colors hover:bg-zinc-400 disabled:bg-zinc-800 disabled:text-zinc-50 disabled:opacity-40 text-sm">Start creating</Link>
+                        <Link href={user ? "/playgrounds" : "/signin"} className="bg-zinc-50 text-zinc-950 px-4 py-2 rounded-lg transition-colors hover:bg-zinc-400 disabled:bg-zinc-800 disabled:text-zinc-50 disabled:opacity-40 text-sm">Start creating</Link>
                     </div>
                     <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] p-3 rounded-[1.25rem]">
                         <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg">
