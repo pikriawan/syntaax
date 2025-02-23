@@ -119,13 +119,13 @@ export default async function LandingPage() {
                 </section>
                 <footer className="w-full flex flex-col items-center gap-8">
                     <div className="flex gap-8">
-                        <Link href="https://github.com/pikriawan">
+                        <Link href="https://github.com/pikriawan" target="_blank">
                             <SiGithub size={20} />
                         </Link>
-                        <Link href="https://github.com/pikriawan">
+                        <Link href="https://instagram.com/pikriawan_" target="_blank">
                             <SiInstagram size={20} />
                         </Link>
-                        <Link href="https://github.com/pikriawan">
+                        <Link href="https://x.com/pikriawan_" target="_blank">
                             <SiX size={20} />
                         </Link>
                     </div>
