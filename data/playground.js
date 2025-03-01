@@ -29,16 +29,21 @@ export async function get(id) {
         return null;
     }
 
-    const playgrounds = await sql`
-        SELECT id, name, created_at, updated_at
-        FROM playgrounds
-        WHERE id = ${id}
-        AND user_id = (
-            SELECT id
-            FROM users
-            WHERE id = ${user.id}
-        );
-    `;
+    try {
+        const playgrounds = await sql`
+            SELECT id, name, created_at, updated_at
+            FROM playgrounds
+            WHERE id = ${id}
+            AND user_id = (
+                SELECT id
+                FROM users
+                WHERE id = ${user.id}
+            );
+        `;
 
-    return playgrounds[0] || null;
+        return playgrounds[0] || null;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 }

@@ -27,12 +27,26 @@ export async function generateMetadata({ params }) {
     };
 }
 
+function NotFound() {
+    return (
+        <div className="w-full h-full flex flex-col justify-center items-center gap-4">
+            <div className="flex gap-4 text-2xl font-bold">
+                <h1>404</h1>
+                <p>Not Found</p>
+            </div>
+            <Link className="bg-zinc-50 text-zinc-950 px-4 py-2 rounded-lg transition-colors hover:bg-zinc-400 disabled:bg-zinc-800 disabled:text-zinc-50 disabled:opacity-40 text-sm" href="/">
+                Return home
+            </Link>
+        </div>
+    );
+}
+
 export default async function PlaygroundPage({ params }) {
     const id = (await params).id;
     const playground = await get(id);
 
     if (!playground) {
-        return <p>Playground not found</p>;
+        return <NotFound />;
     }
 
     return (
