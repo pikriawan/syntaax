@@ -22,15 +22,17 @@ export default async function LandingPage() {
                     <Link href="/signin">Sign in</Link>
                 )}
             </header>
-            <div className="w-full h-[calc(100%-3.5rem)] grid grid-cols-1 overflow-y-auto scrollbar gap-16 px-4 md:px-16 py-16">
+            <div className="w-full h-[calc(100%-3.5rem)] grid grid-cols-1 overflow-y-auto overflow-x-hidden scrollbar gap-16 px-4 md:px-16 py-16">
                 <section className="w-full flex flex-col items-center gap-16">
                     <div className="flex flex-col items-center gap-8">
                         <h1 className="font-bold text-5xl text-center">Instant HTML, CSS, JS playground</h1>
                         <Link href={user ? "/playgrounds" : "/signin"} className="bg-zinc-50 text-zinc-950 px-4 py-2 rounded-lg transition-colors hover:bg-zinc-400 disabled:bg-zinc-800 disabled:text-zinc-50 disabled:opacity-40 text-sm">Start creating</Link>
                     </div>
-                    <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] p-2 md:p-3 rounded-[calc(0.5rem+0.5rem+0.0625rem)] md:rounded-[calc(0.75rem+0.5rem+0.0625rem)]">
-                        <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-[calc(0.5rem+0.0625rem)] p-[0.0625rem]">
-                            <Image alt="Editor" className="rounded-lg" src={editor} />
+                    <div className="w-full">
+                        <div className="w-[50rem] md:w-full shadow-[0_0_0_0.0625rem_#27272A_inset] p-2 md:p-3 rounded-[calc(0.5rem+0.5rem+0.0625rem)] md:rounded-[calc(0.75rem+0.5rem+0.0625rem)]">
+                            <div className="w-full shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-[calc(0.5rem+0.0625rem)] p-[0.0625rem]">
+                                <Image alt="Editor" className="rounded-lg" src={editor} />
+                            </div>
                         </div>
                     </div>
                 </section>
