@@ -55,7 +55,7 @@ export default async function LandingPage() {
                 </section>
                 <footer className="w-full flex flex-col items-center gap-8">
                     <div className="flex gap-8">
-                        <Link href="https://github.com/pikriawan" target="_blank">
+                        <Link href="https://github.com/pikriawan/syntaax" target="_blank">
                             <SiGithub size={20} />
                         </Link>
                         <Link href="https://instagram.com/pikriawan_" target="_blank">
