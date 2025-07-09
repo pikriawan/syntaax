@@ -69,7 +69,7 @@ export default function PlaygroundRun() {
 
     useEffect(() => {
         async function onKeyDown(event) {
-            if (event.ctrlKey && event.key === "Enter") {
+            if (event.ctrlKey && event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
 
                 if (!fetching && !pushing) {
