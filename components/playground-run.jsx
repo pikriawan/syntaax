@@ -69,7 +69,7 @@ export default function PlaygroundRun() {
 
     useEffect(() => {
         async function onKeyDown(event) {
-            if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "r") {
+            if (event.ctrlKey && event.key === "Enter") {
                 event.preventDefault();
 
                 if (!fetching && !pushing) {
@@ -83,7 +83,7 @@ export default function PlaygroundRun() {
     }, [fetching, pushing, run]);
 
     return (
-        <button onClick={run} disabled={fetching || pushing} title="Run [Ctrl + Shift + R]">
+        <button onClick={run} disabled={fetching || pushing} title="Run [Ctrl + Enter]">
             <Play size={20} />
         </button>
     );
