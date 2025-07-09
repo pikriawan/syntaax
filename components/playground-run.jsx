@@ -83,7 +83,7 @@ export default function PlaygroundRun() {
     }, [fetching, pushing, run]);
 
     return (
-        <button onClick={run} disabled={fetching || pushing} title="Run [Ctrl + Enter]">
+        <button onClick={run} disabled={fetching || pushing} title="Run [Ctrl + Shift + Enter]">
             <Play size={20} />
         </button>
     );
