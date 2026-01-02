@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme inline {
+    --font-sans: var(--font-inter);
+}
+
 @utility scrollbar {
     scrollbar-color: #27272A #09090B;
 }
