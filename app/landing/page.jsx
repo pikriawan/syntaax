@@ -45,12 +45,12 @@ export default async function LandingPage() {
                     <div className="shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg px-4 py-8 flex flex-col gap-4">
                         <Smartphone size={20} />
                         <h2 className="text-xl font-bold">Mobile friendly</h2>
-                        <p>Designed with responsiveness in mind. Ease to use even on mobile.</p>
+                        <p>Designed with responsiveness in mind. Enjoy a seamless experience on any device.</p>
                     </div>
                     <div className="shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg px-4 py-8 flex flex-col gap-4">
                         <Zap size={20} />
                         <h2 className="text-xl font-bold">Performant</h2>
-                        <p>Made with modern technology. Ensuring optimal website performance.</p>
+                        <p>Made with modern technology. Enjoy a smooth code editing experience.</p>
                     </div>
                 </section>
                 <footer className="w-full flex flex-col items-center gap-8">
