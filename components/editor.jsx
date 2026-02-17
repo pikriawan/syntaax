@@ -1,6 +1,6 @@
 "use client";
 
-import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from "@codemirror/autocomplete";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { HighlightStyle, indentUnit, syntaxHighlighting } from "@codemirror/language";
 import { EditorView, keymap, lineNumbers, scrollPastEnd } from "@codemirror/view";
@@ -47,12 +47,10 @@ const setup = [
     lineNumbers(),
     history(),
     closeBrackets(),
-    autocompletion(),
     keymap.of([
         ...closeBracketsKeymap,
         ...defaultKeymap,
         ...historyKeymap,
-        ...completionKeymap,
         indentWithTab
     ]),
     indentUnit.of("    "),
