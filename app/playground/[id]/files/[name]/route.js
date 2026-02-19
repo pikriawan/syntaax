@@ -40,6 +40,11 @@ export async function GET(req, { params }) {
                 FROM playgrounds
                 WHERE id = ${id};
             `)[0].js;
+            break;
+        default:
+            return new Response(null, {
+                status: 404
+            });
     }
 
     return new Response(data, {
