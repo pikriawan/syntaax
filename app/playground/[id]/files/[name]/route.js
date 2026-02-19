@@ -5,6 +5,18 @@ export async function GET(req, { params }) {
     const id = (await params).id;
     const name = (await params).name;
 
+    const exists = (await sql`
+        SELECT
+        FROM playgrounds
+        WHERE id = ${id};
+    `).length !== 0;
+
+    if (!exists) {
+        return new Response(null, {
+            status: 404
+        });
+    }
+
     let data;
 
     switch (name) {
@@ -28,14 +40,6 @@ export async function GET(req, { params }) {
                 FROM playgrounds
                 WHERE id = ${id};
             `)[0].js;
-    }
-
-    console.log(data);
-
-    if (data === null) {
-        return new Response(null, {
-            status: 404
-        });
     }
 
     return new Response(data, {
