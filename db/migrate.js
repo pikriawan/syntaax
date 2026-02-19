@@ -18,6 +18,9 @@ async function migrate() {
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             user_id UUID NOT NULL REFERENCES users(id),
             name VARCHAR NOT NULL,
+            html TEXT,
+            css TEXT,
+            js TEXT,
             created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
         );

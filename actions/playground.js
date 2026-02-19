@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getUser } from "@/data/user";
 import { PlaygroundFormSchema } from "@/lib/definitions";
-import redis from "@/lib/redis";
 import sql from "@/lib/sql";
 import { parseFormData } from "@/lib/utils";
 
@@ -47,15 +46,7 @@ export async function create(formData) {
         };
     }
 
-    const id = (await sql`
-        INSERT INTO playgrounds(name, user_id)
-        VALUES(${rawData.name}, ${user.id})
-        RETURNING id;
-    `)[0].id;
-
-    await redis.set(
-        `${id}/index.html`,
-        "<!DOCTYPE html>\n" +
+    const html = "<!DOCTYPE html>\n" +
         "<html>\n" +
         "    <head>\n" +
         "        <meta name=\"viewport\" content=\"width=device-width\">\n" +
@@ -64,10 +55,15 @@ export async function create(formData) {
         "    <body>\n" +
         "        <script src=\"script.js\"></script>\n" +
         "    </body>\n" +
-        "</html>"
-    );
-    await redis.set(`${id}/style.css`, "");
-    await redis.set(`${id}/script.js`, "");
+        "</html>";
+    const css = "";
+    const js = "";
+
+    const id = (await sql`
+        INSERT INTO playgrounds(name, user_id, html, css, js)
+        VALUES(${rawData.name}, ${user.id}, ${html}, ${css}, ${js})
+        RETURNING id;
+    `)[0].id;
 
     revalidatePath("/");
     redirect(`/playground/${id}/edit`);
@@ -170,18 +166,31 @@ export async function editFile(formData) {
         };
     }
 
-    const filePath = `${rawData.id}/${rawData.file}`;
-    const fileExists = await redis.exists(filePath) !== 0;
-
-    if (!fileExists) {
-        return {
-            success: false,
-            message: "File not found",
-            errors: null
-        };
+    switch (rawData.file) {
+        case "index.html":
+            await sql`
+                UPDATE playgrounds
+                SET html = ${rawData.data}
+                WHERE id = ${rawData.id}
+                AND user_id = ${user.id};
+            `;
+            break;
+        case "style.css":
+            await sql`
+                UPDATE playgrounds
+                SET css = ${rawData.data}
+                WHERE id = ${rawData.id}
+                AND user_id = ${user.id};
+            `;
+            break;
+        case "script.js":
+            await sql`
+                UPDATE playgrounds
+                SET js = ${rawData.data}
+                WHERE id = ${rawData.id}
+                AND user_id = ${user.id};
+            `;
     }
-
-    await redis.set(filePath, rawData.data);
 
     return {
         success: true,
@@ -258,12 +267,6 @@ export async function del(formData) {
             errors: null
         };
     }
-
-    await redis.del([
-        `${existingPlayground.id}/index.html`,
-        `${existingPlayground.id}/style.css`,
-        `${existingPlayground.id}/script.js`
-    ]);
 
     await sql`
         DELETE
