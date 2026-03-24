@@ -56,7 +56,7 @@ export default function EditProjectForm({ playground, open, onClose }) {
                         <Input
                             autoComplete="off"
                             label="Name"
-                            id="name"
+                            id={`edit-playground-form-name-${playground.id}`}
                             name="name"
                             placeholder="My Playground"
                             value={name}

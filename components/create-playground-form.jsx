@@ -58,7 +58,7 @@ export default function CreatePlaygroundForm() {
                             <Input
                                 autoComplete="off"
                                 label="Name"
-                                id="name"
+                                id="create-playground-form-name"
                                 name="name"
                                 placeholder="My Playground"
                                 value={name}
