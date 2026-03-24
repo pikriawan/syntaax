@@ -55,9 +55,9 @@ export async function create(formData) {
         "    <body>\n" +
         "        <script src=\"script.js\"></script>\n" +
         "    </body>\n" +
-        "</html>";
-    const css = "";
-    const js = "";
+        "</html>\n";
+    const css = "\n";
+    const js = "\n";
 
     const id = (await sql`
         INSERT INTO playgrounds(name, user_id, html, css, js)
