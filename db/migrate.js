@@ -1,7 +1,7 @@
-const { neon } = require("@neondatabase/serverless");
+const postgres = require("postgres");
 require("dotenv").config();
 
-const sql = neon(process.env.DATABASE_URL);
+const sql = postgres(process.env.DATABASE_URL);
 
 async function migrate() {
     await sql`
@@ -27,6 +27,8 @@ async function migrate() {
     `;
 
     console.log("Migration successful");
+
+    process.exit(0);
 }
 
 migrate();
