@@ -7,7 +7,7 @@ export async function getUser() {
     const user = (await sql`
         SELECT id, name, email, image
         FROM users
-        WHERE email = ${session?.user?.email};
+        WHERE email = ${session?.user?.email || ""};
     `)[0];
 
     return user || null;
