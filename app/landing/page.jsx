@@ -23,7 +23,7 @@ export default async function LandingPage() {
                 )}
             </header>
             <div className="w-full h-[calc(100%-3.5rem)] grid grid-cols-1 overflow-y-auto overflow-x-hidden scrollbar gap-16 px-4 md:px-16 py-16">
-                <section className="w-full flex flex-col items-center gap-16">
+                <main className="w-full flex flex-col items-center gap-16">
                     <div className="flex flex-col items-center gap-8">
                         <h1 className="font-bold text-5xl text-center">Instant HTML, CSS, JS playground</h1>
                         <Link href={user ? "/playgrounds" : "/signin"} className="bg-zinc-50 text-zinc-950 px-4 py-2 rounded-lg transition-colors hover:bg-zinc-400 disabled:bg-zinc-800 disabled:text-zinc-50 disabled:opacity-40 text-sm">Start creating</Link>
@@ -35,7 +35,7 @@ export default async function LandingPage() {
                             </div>
                         </div>
                     </div>
-                </section>
+                </main>
                 <section className="w-full flex flex-col md:grid md:grid-cols-3 gap-8">
                     <div className="shadow-[0_0_0_0.0625rem_#27272A_inset] rounded-lg px-4 py-8 flex flex-col gap-4">
                         <Globe size={20} />
